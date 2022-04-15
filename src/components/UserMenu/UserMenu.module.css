@@ -1,0 +1,13 @@
+.UserMenu {
+  display: flex;
+  align-items: center;
+}
+.name {
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px;
+  font-weight: 500;
+  color: '#2A363B';
+  font-size: 14px;
+  margin: 0;
+}
