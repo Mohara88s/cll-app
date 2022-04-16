@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'http://127.0.0.1:3000/api';
+// axios.defaults.baseURL = 'http://127.0.0.1:3000/api';
+axios.defaults.baseURL = 'https://cll-server.herokuapp.com/api';
 
 const token = {
   set(token) {
@@ -12,40 +13,38 @@ const token = {
   },
 };
 
-const signup = createAsyncThunk('auth/signup', async credentials => {
-  try {
-    const { data } = await axios.post('/auth/signup', credentials);
-    token.set(data.token);
-    return data;
-  } catch (error) {
-    console.log('rejected', error);
-  }
-});
+const signup = createAsyncThunk(
+  'auth/signup',
+  async (credentials, thunkAPI) => {
+    try {
+      const { data } = await axios.post('/auth/signup', credentials);
+      token.set(data.token);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
 
 const signin = createAsyncThunk(
   'auth/signin',
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.post('/auth/signin', credentials);
-      // console.log(data)
-      // if (!data.token) {
-      //   thunkAPI.rejectWithValue();
-      //   return {user: { name: null, email: null }}}
-
       token.set(data.token);
       return data;
     } catch (error) {
-      console.log('rejected', error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   },
 );
 
-const signout = createAsyncThunk('/auth/signout', async () => {
+const signout = createAsyncThunk('/auth/signout', async (_, thunkAPI) => {
   try {
     await axios.get('/auth/signout');
     token.unset();
   } catch (error) {
-    console.log('rejected', error);
+    return thunkAPI.rejectWithValue(error.message);
   }
 });
 
@@ -56,8 +55,7 @@ const fetchCurrentUser = createAsyncThunk(
     const persistedToken = state.auth.token;
 
     if (persistedToken === null) {
-      console.log('None token');
-      return thunkAPI.rejectWithValue();
+      return thunkAPI.rejectWithValue('None token');
     }
 
     token.set(persistedToken);
@@ -65,7 +63,7 @@ const fetchCurrentUser = createAsyncThunk(
       const { data } = await axios.get('/users/current');
       return data;
     } catch (error) {
-      console.log('rejected', error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   },
 );

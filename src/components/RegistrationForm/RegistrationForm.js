@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { authOperations } from '../../redux/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { authOperations, authSelectors } from '../../redux/auth';
 import { Button, Form } from 'react-bootstrap';
 import styles from './RegistrationForm.module.css';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 export default function RegistrationForm() {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const regError = useSelector(authSelectors.getRegError);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -76,6 +78,10 @@ export default function RegistrationForm() {
           Registration
         </Button>
       </Form>
+
+      {regError && (
+        <ErrorMessage message="Wrong registration data. Try again with another data!" />
+      )}
     </div>
   );
 }

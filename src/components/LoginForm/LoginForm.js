@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { authOperations } from '../../redux/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { authOperations, authSelectors } from '../../redux/auth';
 import { Button, Form } from 'react-bootstrap';
 import styles from './LoginForm.module.css';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 export default function LoginForm() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const authError = useSelector(authSelectors.getAuthError);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -57,6 +59,10 @@ export default function LoginForm() {
           Login
         </Button>
       </Form>
+
+      {authError && (
+        <ErrorMessage message="Email or password wrong. Try again!" />
+      )}
     </div>
   );
 }
