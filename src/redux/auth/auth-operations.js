@@ -21,7 +21,8 @@ const signup = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      console.dir(error.response.data.message);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   },
 );
@@ -34,7 +35,7 @@ const signin = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   },
 );
@@ -44,7 +45,7 @@ const signout = createAsyncThunk('/auth/signout', async (_, thunkAPI) => {
     await axios.get('/auth/signout');
     token.unset();
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 });
 
@@ -63,7 +64,7 @@ const fetchCurrentUser = createAsyncThunk(
       const { data } = await axios.get('/users/current');
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   },
 );

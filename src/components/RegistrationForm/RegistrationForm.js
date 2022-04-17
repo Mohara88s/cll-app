@@ -79,9 +79,7 @@ export default function RegistrationForm() {
         </Button>
       </Form>
 
-      {regError && (
-        <ErrorMessage message="Wrong registration data. Try again with another data!" />
-      )}
+      {regError && <ErrorMessage message={regError} />}
     </div>
   );
 }

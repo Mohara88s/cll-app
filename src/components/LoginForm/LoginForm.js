@@ -60,9 +60,7 @@ export default function LoginForm() {
         </Button>
       </Form>
 
-      {authError && (
-        <ErrorMessage message="Email or password wrong. Try again!" />
-      )}
+      {authError && <ErrorMessage message={authError} />}
     </div>
   );
 }
