@@ -37,11 +37,21 @@ const Navigation = () => (
       <li className={styles.NavigationList__item}>
         <NavLink
           exact
-          to="/transcription-trainings"
+          to="/q-transcription-trainings"
           className={styles.link}
           activeClassName={styles.activeLink}
         >
-          Transcription trainings
+          Q-transcription trainings
+        </NavLink>
+      </li>
+      <li className={styles.NavigationList__item}>
+        <NavLink
+          exact
+          to="/u-transcription-trainings"
+          className={styles.link}
+          activeClassName={styles.activeLink}
+        >
+          U-transcription trainings
         </NavLink>
       </li>
       <li className={styles.NavigationList__item}>

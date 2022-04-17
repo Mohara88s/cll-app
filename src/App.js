@@ -31,11 +31,17 @@ const SentencesTrainingsPageView = lazy(
       './views/SentencesTrainingsPageView/SentencesTrainingsPageView.js'
     ) /* webpackChunkName:"SentencesTrainingsPage" */,
 );
-const TranscriptionTrainingsPageView = lazy(
+const QTranscriptionTrainingsPageView = lazy(
   () =>
     import(
-      './views/TranscriptionTrainingsPageView/TranscriptionTrainingsPageView.js'
-    ) /* webpackChunkName:"TranscriptionTrainingsPage" */,
+      './views/QTranscriptionTrainingsPageView/QTranscriptionTrainingsPageView.js'
+    ) /* webpackChunkName:"QTranscriptionTrainingsPage" */,
+);
+const UTranscriptionTrainingsPageView = lazy(
+  () =>
+    import(
+      './views/UTranscriptionTrainingsPageView/UTranscriptionTrainingsPageView.js'
+    ) /* webpackChunkName:"UTranscriptionTrainingsPage" */,
 );
 const InfoView = lazy(() => import('./views/InfoView/InfoView'));
 const NotFoundView = lazy(() => import('./views/NotFoundView/NotFoundView'));
@@ -76,8 +82,12 @@ function App() {
                 <SentencesTrainingsPageView />
               </Route>
 
-              <Route exact path="/transcription-trainings">
-                <TranscriptionTrainingsPageView />
+              <Route exact path="/q-transcription-trainings">
+                <QTranscriptionTrainingsPageView />
+              </Route>
+
+              <Route exact path="/u-transcription-trainings">
+                <UTranscriptionTrainingsPageView />
               </Route>
 
               <Route path="/info">

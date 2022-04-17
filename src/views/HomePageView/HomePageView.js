@@ -1,5 +1,5 @@
 import HomePage from '../../components/HomePage/HomePage';
-export default function InfoView() {
+export default function HomePageView() {
   return (
     <>
       <HomePage />

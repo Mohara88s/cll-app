@@ -1,6 +1,6 @@
 import data from '../../database/matrix.json';
-import TranscriptionTrainings from '../../components/TranscriptionTrainings/TranscriptionTrainings';
-import styles from './TranscriptionTrainingsPage.module.css';
+import QTranscriptionTrainings from '../QTranscriptionTrainings/QTranscriptionTrainings';
+import styles from './QTranscriptionTrainingsPage.module.css';
 
 const list = [...data]
   .filter(e => e.hasOwnProperty('Eng') && e.hasOwnProperty('Qt'))
@@ -15,15 +15,15 @@ const list = [...data]
     return 0.5 - Math.random();
   });
 
-export default function TranscriptionTrainingsPage() {
+export default function QTranscriptionTrainingsPage() {
   const wordsArr = [...list];
   return (
     <div>
-      <h2>Transcription trainings</h2>
+      <h2>Q-transcription trainings</h2>
       {!wordsArr.length && (
         <h3 className={styles.warning}>words are missing from the database</h3>
       )}
-      {wordsArr.length && <TranscriptionTrainings wordsArr={wordsArr} />}
+      {wordsArr.length && <QTranscriptionTrainings wordsArr={wordsArr} />}
     </div>
   );
 }

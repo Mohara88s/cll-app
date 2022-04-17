@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
-import styles from './TranscriptionTrainings.module.css';
+import styles from './QTranscriptionTrainings.module.css';
 import PropTypes from 'prop-types';
 // import { throttle } from 'lodash';
 
-export default function TranscriptionTrainings({ wordsArr }) {
+export default function QTranscriptionTrainings({ wordsArr }) {
   const [actualId, setActualId] = useState(0);
   const [losts, setLosts] = useState(0);
   const [attempts, setAttempts] = useState(0);
@@ -155,7 +155,7 @@ export default function TranscriptionTrainings({ wordsArr }) {
   );
 }
 
-TranscriptionTrainings.propTypes = {
+QTranscriptionTrainings.propTypes = {
   wordsArr: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
