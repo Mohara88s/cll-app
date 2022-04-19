@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-// axios.defaults.baseURL = 'http://127.0.0.1:3000/api';
-axios.defaults.baseURL = 'https://cll-server.herokuapp.com/api';
+axios.defaults.baseURL = 'http://127.0.0.1:3000/api';
+// axios.defaults.baseURL = 'https://cll-server.herokuapp.com/api';
 
 const token = {
   set(token) {

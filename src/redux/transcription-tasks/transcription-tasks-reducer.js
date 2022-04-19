@@ -2,11 +2,12 @@ import {
   fetchTranscriptionTasksSuccess,
   fetchTranscriptionTasksRequest,
   fetchTranscriptionTasksError,
+  changeFilter,
 } from './transcription-tasks-actions';
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 
-const items = createReducer([], {
+const tasks = createReducer([], {
   [fetchTranscriptionTasksSuccess]: (_, { payload }) => payload,
 });
 
@@ -21,8 +22,13 @@ const error = createReducer(null, {
   [fetchTranscriptionTasksRequest]: () => null,
 });
 
+const filter = createReducer('', {
+  [changeFilter]: (_, { payload }) => payload,
+});
+
 export default combineReducers({
-  items,
+  tasks,
   loading,
   error,
+  filter,
 });
