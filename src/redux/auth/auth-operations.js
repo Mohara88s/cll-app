@@ -21,7 +21,6 @@ const signup = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
-      console.dir(error.response.data.message);
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   },

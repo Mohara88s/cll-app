@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authOperations, authSelectors } from '../../redux/auth';
 import { Button, Form } from 'react-bootstrap';
-import styles from './LoginForm.module.css';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import styles from './LoginForm.module.css';
 
 export default function LoginForm() {
   const dispatch = useDispatch();

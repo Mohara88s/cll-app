@@ -10,7 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import transcriptionTasksReducer from './transcription-tasks/transcription-tasks-reducer';
+import uTranscriptionTasksReducer from './u-transcription-tasks/u-transcription-tasks-reducer';
 import { authReducer } from './auth';
 
 const middleware = [
@@ -29,7 +29,7 @@ const authPersistConfig = {
 
 export const store = configureStore({
   reducer: {
-    transcriptionTasks: transcriptionTasksReducer,
+    uTranscriptionTasks: uTranscriptionTasksReducer,
     auth: persistReducer(authPersistConfig, authReducer),
   },
   middleware,

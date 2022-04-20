@@ -1,18 +1,24 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Table } from 'react-bootstrap';
-import { changeFilter } from '../../redux/transcription-tasks/transcription-tasks-actions';
-import transcriptionTasksSelectors from '../../redux/transcription-tasks/transcription-tasks-selectors';
-import { fetchTranscriptionTasks } from '../../redux/transcription-tasks/transcription-tasks-operaions';
+import { changeFilter } from '../../redux/u-transcription-tasks/u-transcription-tasks-actions';
+import uTranscriptionTasksSelectors from '../../redux/u-transcription-tasks/u-transcription-tasks-selectors';
+import { fetchUTranscriptionTasks } from '../../redux/u-transcription-tasks/u-transcription-tasks-operaions';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './UTranscriptionTrainings.module.css';
 
 export default function UTranscriptionTrainings({ wordsArr }) {
   const dispatch = useDispatch();
   const [wordsSet, setWordsSet] = useState([]);
   const [wordsSearch, setWordsSearch] = useState('');
-  const filter = useSelector(transcriptionTasksSelectors.getFilter);
+  const filter = useSelector(
+    uTranscriptionTasksSelectors.getUTranscriptionTasksFilter,
+  );
   const filtredTasks = useSelector(
-    transcriptionTasksSelectors.getTranscriptionTasks,
+    uTranscriptionTasksSelectors.getUTranscriptionTasks,
+  );
+  const error = useSelector(
+    uTranscriptionTasksSelectors.getUTranscriptionTasksError,
   );
 
   const handleChange = ({ target: { name, value } }) => {
@@ -44,12 +50,12 @@ export default function UTranscriptionTrainings({ wordsArr }) {
 
   useEffect(() => {
     if (filter) {
-      dispatch(fetchTranscriptionTasks(filter));
+      dispatch(fetchUTranscriptionTasks(filter));
     }
   }, [dispatch, filter]);
 
   return (
-    <div className={styles.TranscriptionTrainings}>
+    <div className={styles.UTranscriptionTrainings}>
       <h3>Let's gather a set of words for training</h3>
       <div className={styles.box}>
         <div className={styles.formsBox}>
@@ -87,12 +93,14 @@ export default function UTranscriptionTrainings({ wordsArr }) {
             </Form.Group>
           </Form>
 
+          {error && <ErrorMessage message={error} />}
+
           <Table striped bordered hover>
             <tbody>
-              {filtredTasks.map(({ _id, eng, qtrn, rus }) => (
+              {filtredTasks.map(({ _id, eng, utrn, rus }) => (
                 <tr key={_id}>
                   <td>{eng}</td>
-                  <td>{qtrn}</td>
+                  <td>{utrn}</td>
                   <td>{rus}</td>
                   <td>
                     <Button
