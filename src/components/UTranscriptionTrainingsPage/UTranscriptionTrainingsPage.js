@@ -22,7 +22,7 @@ export default function UTranscriptionTrainingsPage() {
       <h2>U-transcription trainings</h2>
       <UTranscriptionDictionary />
       {ownUDictionary.length && (
-        <UTranscriptionTrainings wordsArr={ownUDictionary} />
+        <UTranscriptionTrainings tasksArr={ownUDictionary} />
       )}
     </div>
   );

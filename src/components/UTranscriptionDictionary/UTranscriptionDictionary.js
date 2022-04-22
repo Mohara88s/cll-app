@@ -12,7 +12,7 @@ import styles from './UTranscriptionDictionary.module.css';
 export default function UTranscriptionDictionary() {
   const dispatch = useDispatch();
   const [wordsSet, setWordsSet] = useState([]);
-  const [wordsSearch, setWordsSearch] = useState('');
+  // const [wordsSearch, setWordsSearch] = useState('');
   const filter = useSelector(
     uTranscriptionTasksSelectors.getUTranscriptionTasksFilter,
   );
@@ -25,8 +25,8 @@ export default function UTranscriptionDictionary() {
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
-      case 'words-search':
-        return setWordsSearch(value);
+      // case 'words-search':
+      //   return setWordsSearch(value);
       case 'filter':
         return dispatch(changeFilter(value));
       default:
@@ -41,14 +41,14 @@ export default function UTranscriptionDictionary() {
     }
   };
 
-  const wordsSearchButtonHandleSubmit = e => {
-    e.preventDefault();
-    console.log(wordsSearch);
+  // const wordsSearchButtonHandleSubmit = e => {
+  //   e.preventDefault();
+  //   console.log(wordsSearch);
 
-    const arr = wordsSearch.split(' ').filter(e => e.length);
-    console.log(arr);
-    setWordsSearch('');
-  };
+  //   const arr = wordsSearch.split(' ').filter(e => e.length);
+  //   console.log(arr);
+  //   setWordsSearch('');
+  // };
   const onAddSetToOwnDictionaryClick = () => {
     const a = wordsSet.map(e => {
       return { _id: e._id };
@@ -68,7 +68,7 @@ export default function UTranscriptionDictionary() {
       <h3>Let's gather a set of words for training</h3>
       <div className={styles.box}>
         <div className={styles.formsBox}>
-          <Form
+          {/* <Form
             onSubmit={wordsSearchButtonHandleSubmit}
             className={styles.form}
             autoComplete="off"
@@ -85,9 +85,9 @@ export default function UTranscriptionDictionary() {
             </Form.Group>
 
             <Button className={styles.button} type="submit">
-              Search
+              Add words
             </Button>
-          </Form>
+          </Form> */}
 
           <Form className={styles.form} autoComplete="off">
             <Form.Group className="mb-3" controlId="filter">
@@ -127,17 +127,14 @@ export default function UTranscriptionDictionary() {
         </div>
 
         <div className={styles.wordsTableBox}>
+          <h4>Words set:</h4>
           <Table striped bordered hover className={styles.wordsTable}>
-            <thead>
-              <tr>
-                <th>Words set</th>
-              </tr>
-            </thead>
             <tbody>
               {wordsSet &&
-                wordsSet.map(({ _id, eng }) => (
+                wordsSet.map(({ _id, eng, utrn }) => (
                   <tr key={_id}>
                     <td>{eng}</td>
+                    <td>{utrn}</td>
                   </tr>
                 ))}
             </tbody>

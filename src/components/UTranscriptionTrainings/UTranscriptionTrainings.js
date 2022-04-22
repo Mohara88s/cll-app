@@ -1,24 +1,22 @@
 import { useState, useEffect } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+// import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './UTranscriptionTrainings.module.css';
 
-export default function UTranscriptionTrainings({ wordsArr }) {
+export default function UTranscriptionTrainings({ tasksArr }) {
   const [actualId, setActualId] = useState(0);
   const [losts, setLosts] = useState(0);
   const [attempts, setAttempts] = useState(0);
   const [resolved, setResolved] = useState(false);
-  const [wordId, setWordId] = useState(0);
+  const [taskId, setTaskId] = useState(0);
   const [originalArray, setOriginalArray] = useState([]);
   const [mixedArray, setMixedArray] = useState([]);
   const [resolvedArray, setResolvedArray] = useState([]);
-  const [qTranscriptionOn, setQTranscriptionOn] = useState(false);
 
   useEffect(() => {
-    setOriginalArray([...wordsArr[wordId].utrn]);
-  }, [wordsArr]);
+    setOriginalArray([...tasksArr[taskId].utrn]);
+  }, [taskId, tasksArr]);
 
   useEffect(() => {
     setMixedArray([
@@ -72,10 +70,10 @@ export default function UTranscriptionTrainings({ wordsArr }) {
   };
 
   const onClickButtonNext = () => {
-    if (wordId >= wordsArr.length - 1) {
-      setWordId(0);
+    if (taskId >= tasksArr.length - 1) {
+      setTaskId(0);
     } else {
-      setWordId(prevState => prevState + 1);
+      setTaskId(prevState => prevState + 1);
     }
     setActualId(0);
     setLosts(0);
@@ -87,21 +85,21 @@ export default function UTranscriptionTrainings({ wordsArr }) {
   return (
     <div className={styles.UTranscriptionTrainings}>
       <h3>English word:</h3>
-      {!wordsArr[wordId].eng && (
+      {!tasksArr[taskId].eng && (
         <h3 className={styles.warning}>no available</h3>
       )}
-      <p className={styles.trainingWord}>{wordsArr[wordId].eng}</p>
+      <p className={styles.trainingWord}>{tasksArr[taskId].eng}</p>
       <h3>Translation:</h3>
-      {!wordsArr[wordId].rus && (
+      {!tasksArr[taskId].rus && (
         <h3 className={styles.warning}>no available</h3>
       )}
-      <p className={styles.trainslation}>{wordsArr[wordId].rus}</p>
+      <p className={styles.trainslation}>{tasksArr[taskId].rus}</p>
 
       <h3>Select U-transcription for the following english word:</h3>
       <ul className={styles.fealdsList}>
         <li className={styles.fealdsList__item}>
           <h4 className={styles.fealdHeader}>Unresolved field</h4>
-          {!wordsArr[wordId].utrn && (
+          {!tasksArr[taskId].utrn && (
             <h3 className={styles.warning}>no available</h3>
           )}
           <ul className={styles.listTags}>
