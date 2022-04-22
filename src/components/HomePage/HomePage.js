@@ -1,4 +1,6 @@
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
+import { authSelectors } from '../../redux/auth';
+import { useSelector } from 'react-redux';
 import styles from './HomePage.module.css';
 import anecdotTrainingsImg from '../../public/pictures/anecdot_trainings.jpg';
 import sentencesTrainingsImg from '../../public/pictures/sentences_trainings.jpg';
@@ -7,6 +9,8 @@ import utranscription__trainingsImg from '../../public/pictures/utranscription__
 import plug__trainingsImg from '../../public/pictures/plug__trainings.jpg';
 
 export default function HomePage() {
+  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
+
   const { url } = useRouteMatch();
   const location = useLocation();
 
@@ -61,38 +65,44 @@ export default function HomePage() {
             />
           </Link>
         </li>
-        <li className={styles.LinksList__item}>
-          <Link
-            to={{
-              pathname: `${url}u-transcription-trainings/`,
-              state: { from: location },
-            }}
-          >
-            <h3 className={styles.LinksList__name}>
-              U-transcription trainings
-            </h3>
-            <img
-              src={utranscription__trainingsImg}
-              alt="U-transcription trainings"
-              className={styles.LinksList__picture}
-            />
-          </Link>
-        </li>
-        <li className={styles.LinksList__item}>
-          <Link
-            to={{
-              pathname: `${url}plug/`,
-              state: { from: location },
-            }}
-          >
-            <h3 className={styles.LinksList__name}>PLUG trainings</h3>
-            <img
-              src={plug__trainingsImg}
-              alt="PLUG trainings"
-              className={styles.LinksList__picture}
-            />
-          </Link>
-        </li>
+        {isLoggedIn && (
+          <li className={styles.LinksList__item}>
+            <Link
+              to={{
+                pathname: `${url}u-transcription-trainings/`,
+                state: { from: location },
+              }}
+            >
+              <h3 className={styles.LinksList__name}>
+                U-transcription trainings
+              </h3>
+              <img
+                src={utranscription__trainingsImg}
+                alt="U-transcription trainings"
+                className={styles.LinksList__picture}
+              />
+            </Link>
+          </li>
+        )}
+        {!isLoggedIn && (
+          <li className={styles.LinksList__item}>
+            <Link
+              to={{
+                pathname: `${url}login/`,
+                state: { from: location },
+              }}
+            >
+              <h3 className={styles.LinksList__name}>
+                Login for more trainings
+              </h3>
+              <img
+                src={plug__trainingsImg}
+                alt="Login for more trainings"
+                className={styles.LinksList__picture}
+              />
+            </Link>
+          </li>
+        )}
       </ul>
     </div>
   );

@@ -10,6 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import userReducer from './user/user-reducer';
 import uTranscriptionTasksReducer from './u-transcription-tasks/u-transcription-tasks-reducer';
 import { authReducer } from './auth';
 
@@ -29,6 +30,7 @@ const authPersistConfig = {
 
 export const store = configureStore({
   reducer: {
+    user: userReducer,
     uTranscriptionTasks: uTranscriptionTasksReducer,
     auth: persistReducer(authPersistConfig, authReducer),
   },

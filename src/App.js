@@ -2,7 +2,7 @@ import { useEffect, Suspense, lazy } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
-// import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PublicRoute from './components/PublicRoute/PublicRoute';
 
 import Container from './components/Container/Container';
@@ -49,11 +49,11 @@ const NotFoundView = lazy(() => import('./views/NotFoundView/NotFoundView'));
 function App() {
   const dispatch = useDispatch();
 
-  const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
-
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
   }, [dispatch]);
+
+  const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
 
   return (
     !isFetchingCurrentUser && (
@@ -86,9 +86,9 @@ function App() {
                 <QTranscriptionTrainingsPageView />
               </Route>
 
-              <Route exact path="/u-transcription-trainings">
+              <PrivateRoute exact path="/u-transcription-trainings">
                 <UTranscriptionTrainingsPageView />
-              </Route>
+              </PrivateRoute>
 
               <Route path="/info">
                 <InfoView />

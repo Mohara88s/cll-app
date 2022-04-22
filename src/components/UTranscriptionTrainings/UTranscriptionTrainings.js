@@ -1,141 +1,164 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form, Table } from 'react-bootstrap';
-import { changeFilter } from '../../redux/u-transcription-tasks/u-transcription-tasks-actions';
-import uTranscriptionTasksSelectors from '../../redux/u-transcription-tasks/u-transcription-tasks-selectors';
-import { fetchUTranscriptionTasks } from '../../redux/u-transcription-tasks/u-transcription-tasks-operaions';
+import { Button, Form } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './UTranscriptionTrainings.module.css';
 
 export default function UTranscriptionTrainings({ wordsArr }) {
-  const dispatch = useDispatch();
-  const [wordsSet, setWordsSet] = useState([]);
-  const [wordsSearch, setWordsSearch] = useState('');
-  const filter = useSelector(
-    uTranscriptionTasksSelectors.getUTranscriptionTasksFilter,
-  );
-  const filtredTasks = useSelector(
-    uTranscriptionTasksSelectors.getUTranscriptionTasks,
-  );
-  const error = useSelector(
-    uTranscriptionTasksSelectors.getUTranscriptionTasksError,
-  );
-
-  const handleChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case 'words-search':
-        return setWordsSearch(value);
-      case 'filter':
-        return dispatch(changeFilter(value));
-      default:
-        return;
-    }
-  };
-
-  const addWordToSet = ({ target: { name } }) => {
-    if (wordsSet.findIndex(e => e._id === name) === -1) {
-      const task = filtredTasks.find(e => e._id === name);
-      setWordsSet(prevState => [...prevState, task]);
-    }
-  };
-
-  const wordsSearchButtonHandleSubmit = e => {
-    e.preventDefault();
-    console.log(wordsSearch);
-
-    const arr = wordsSearch.split(' ').filter(e => e.length);
-    console.log(arr);
-    setWordsSearch('');
-  };
+  const [actualId, setActualId] = useState(0);
+  const [losts, setLosts] = useState(0);
+  const [attempts, setAttempts] = useState(0);
+  const [resolved, setResolved] = useState(false);
+  const [wordId, setWordId] = useState(0);
+  const [originalArray, setOriginalArray] = useState([]);
+  const [mixedArray, setMixedArray] = useState([]);
+  const [resolvedArray, setResolvedArray] = useState([]);
+  const [qTranscriptionOn, setQTranscriptionOn] = useState(false);
 
   useEffect(() => {
-    if (filter) {
-      dispatch(fetchUTranscriptionTasks(filter));
+    setOriginalArray([...wordsArr[wordId].utrn]);
+  }, [wordsArr]);
+
+  useEffect(() => {
+    setMixedArray([
+      ...[...originalArray].sort(() => {
+        return 0.5 - Math.random();
+      }),
+    ]);
+  }, [originalArray]);
+
+  const onClickCharButton = e => {
+    const buttonValue = e.currentTarget.getAttribute('value');
+    const id = Number.parseInt(e.currentTarget.getAttribute('data-id'));
+
+    if (buttonValue === originalArray[actualId]) {
+      onRightButtonClick(e.currentTarget, id, buttonValue);
+    } else {
+      onWrongButtonClick(e.currentTarget);
     }
-  }, [dispatch, filter]);
+    setAttempts(prevState => prevState + 1);
+    if (actualId >= originalArray.length - 1) {
+      onPositiveTrainingResult();
+    }
+  };
+
+  const onWrongButtonClick = button => {
+    setLosts(prevState => prevState + 1);
+    button.classList.remove('btn-primary');
+    button.classList.add('btn-danger');
+    setTimeout(() => {
+      button.classList.remove('btn-danger');
+      button.classList.add('btn-primary');
+    }, 300);
+  };
+
+  const onRightButtonClick = (button, id, value) => {
+    button.classList.remove('btn-primary');
+    button.classList.add('btn-success');
+    setTimeout(() => {
+      mixedArray.splice(id, 1);
+      resolvedArray.push(value);
+      button.classList.remove('btn-success');
+      button.classList.add('btn-primary');
+      setActualId(prevState => prevState + 1);
+    }, 300);
+  };
+
+  const onPositiveTrainingResult = () => {
+    setTimeout(() => {
+      setResolved(true);
+    }, 300);
+  };
+
+  const onClickButtonNext = () => {
+    if (wordId >= wordsArr.length - 1) {
+      setWordId(0);
+    } else {
+      setWordId(prevState => prevState + 1);
+    }
+    setActualId(0);
+    setLosts(0);
+    setAttempts(0);
+    setResolved(false);
+    setResolvedArray([]);
+  };
 
   return (
     <div className={styles.UTranscriptionTrainings}>
-      <h3>Let's gather a set of words for training</h3>
-      <div className={styles.box}>
-        <div className={styles.formsBox}>
-          <Form
-            onSubmit={wordsSearchButtonHandleSubmit}
-            className={styles.form}
-            autoComplete="off"
-          >
-            <Form.Group className="mb-3" controlId="words-search">
-              <Form.Label>Words for search</Form.Label>
-              <Form.Control
-                type="text"
-                name="words-search"
-                placeholder="Enter words with a space"
-                value={wordsSearch}
-                onChange={handleChange}
-              />
-            </Form.Group>
+      <h3>English word:</h3>
+      {!wordsArr[wordId].eng && (
+        <h3 className={styles.warning}>no available</h3>
+      )}
+      <p className={styles.trainingWord}>{wordsArr[wordId].eng}</p>
+      <h3>Translation:</h3>
+      {!wordsArr[wordId].rus && (
+        <h3 className={styles.warning}>no available</h3>
+      )}
+      <p className={styles.trainslation}>{wordsArr[wordId].rus}</p>
 
-            <Button className={styles.button} type="submit">
-              Search
-            </Button>
-          </Form>
-
-          <Form className={styles.form} autoComplete="off">
-            <Form.Group className="mb-3" controlId="filter">
-              <Form.Label>Word search</Form.Label>
-              <Form.Control
-                type="text"
-                name="filter"
-                placeholder="Enter letters for word search"
-                value={filter}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Form>
-
-          {error && <ErrorMessage message={error} />}
-
-          <Table striped bordered hover>
-            <tbody>
-              {filtredTasks.map(({ _id, eng, utrn, rus }) => (
-                <tr key={_id}>
-                  <td>{eng}</td>
-                  <td>{utrn}</td>
-                  <td>{rus}</td>
-                  <td>
-                    <Button
-                      className={styles.button}
-                      name={_id}
-                      onClick={addWordToSet}
-                    >
-                      Add
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
-
-        <div className={styles.wordsTableBox}>
-          <Table striped bordered hover className={styles.wordsTable}>
-            <thead>
-              <tr>
-                <th>Words set</th>
-              </tr>
-            </thead>
-            <tbody>
-              {wordsSet &&
-                wordsSet.map(({ _id, eng }) => (
-                  <tr key={_id}>
-                    <td>{eng}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </Table>
-          <Button className={styles.wordsTable__button}>Let's train</Button>
-        </div>
-      </div>
+      <h3>Select U-transcription for the following english word:</h3>
+      <ul className={styles.fealdsList}>
+        <li className={styles.fealdsList__item}>
+          <h4 className={styles.fealdHeader}>Unresolved field</h4>
+          {!wordsArr[wordId].utrn && (
+            <h3 className={styles.warning}>no available</h3>
+          )}
+          <ul className={styles.listTags}>
+            {mixedArray.map((elem, id) => (
+              <li key={id} className={styles.listTags__item}>
+                <Button
+                  variant="primary"
+                  data-id={id}
+                  onClick={onClickCharButton}
+                  value={elem}
+                  className={styles.listTags__button}
+                >
+                  {elem}
+                </Button>
+              </li>
+            ))}
+          </ul>
+          {resolved && (
+            <div className={styles.congratulations}>
+              <h3>Congratulations, you're great!!!</h3>
+              <p>Are you ready for a new test?</p>
+              <p>Then press NEXT!</p>
+              <Button variant="warning" onClick={onClickButtonNext}>
+                NEXT
+              </Button>
+              <div className={styles.statistics}>
+                <h5>Сurrent statistics:</h5>
+                <p>Attempts: {attempts}</p>
+                <p>Losts: {losts}</p>
+              </div>
+            </div>
+          )}
+        </li>
+        <li className={styles.fealdsList__item}>
+          <h4 className={styles.fealdHeader}>Resolved field</h4>
+          <ul className={styles.listTags}>
+            {resolvedArray.map((elem, id) => (
+              <li key={id} className={styles.listTags__item}>
+                <Button variant="primary" className={styles.listTags__button}>
+                  {elem}
+                </Button>
+              </li>
+            ))}
+          </ul>
+        </li>
+      </ul>
     </div>
   );
 }
+
+UTranscriptionTrainings.propTypes = {
+  wordsArr: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.number.isRequired,
+      eng: PropTypes.string.isRequired,
+      utrn: PropTypes.string.isRequired,
+      rus: PropTypes.string.isRequired,
+    }),
+  ),
+};
