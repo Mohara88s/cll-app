@@ -44,10 +44,7 @@ const UTranscriptionTrainingsPageView = lazy(
     ) /* webpackChunkName:"UTranscriptionTrainingsPage" */,
 );
 const UserView = lazy(
-  () =>
-    import(
-      './views/UserView/UserView.js'
-    ) /* webpackChunkName:"UTranscriptionTrainingsPage" */,
+  () => import('./views/UserView/UserView.js') /* webpackChunkName:"User" */,
 );
 const InfoView = lazy(() => import('./views/InfoView/InfoView'));
 const NotFoundView = lazy(() => import('./views/NotFoundView/NotFoundView'));

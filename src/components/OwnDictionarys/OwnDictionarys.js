@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Button, Card } from 'react-bootstrap';
 import userSelectors from '../../redux/user/user-selectors';
 import {
@@ -22,6 +23,14 @@ export default function OwnDictionarys() {
 
   return (
     <div>
+      {ownDictionarys.length === 0 && (
+        <Link to="/user/">
+          <Button variant="primary" className={styles.Button__noDictionarys}>
+            You don't have your own dictionaries yet. Go to the user page to
+            create a dictionary.
+          </Button>
+        </Link>
+      )}
       <ul className={styles.Card__list}>
         {ownDictionarys.map(
           ({ _id, ownDictionaryName, ownDictionaryTasks }) => (

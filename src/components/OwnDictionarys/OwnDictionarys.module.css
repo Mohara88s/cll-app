@@ -1,3 +1,6 @@
+.Button__noDictionarys {
+  width: 100%;
+}
 .Card__list {
   display: flex;
   flex-wrap: wrap;
