@@ -9,6 +9,8 @@ import utranscription__trainingsImg from '../../public/pictures/utranscription__
 import plug__trainingsImg from '../../public/pictures/plug__trainings.jpg';
 
 export default function HomePage() {
+  window.scrollBy(0, -1000);
+
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
 
   const { url } = useRouteMatch();

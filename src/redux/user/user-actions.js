@@ -1,21 +1,29 @@
 import { createAction } from '@reduxjs/toolkit';
 
-export const fetchOwnUDictionaryRequest = createAction(
-  'user/fetchOwnUDictionaryRequest',
+export const fetchOwnDictionarysRequest = createAction(
+  'user/fetchOwnDictionarysRequest',
 );
-export const fetchOwnUDictionarySuccess = createAction(
-  'user/fetchOwnUDictionarySuccess',
+export const fetchOwnDictionarysSuccess = createAction(
+  'user/fetchOwnDictionarysSuccess',
 );
-export const fetchOwnUDictionaryError = createAction(
-  'user/fetchOwnUDictionaryError',
+export const fetchOwnDictionarysError = createAction(
+  'user/fetchOwnDictionarysError',
 );
 
-export const addToOwnUDictionaryRequest = createAction(
-  'user/addToOwnUDictionaryRequest',
+export const addOwnDictionaryRequest = createAction(
+  'user/addOwnDictionaryRequest',
 );
-export const addToOwnUDictionarySuccess = createAction(
-  'user/addToOwnUDictionarySuccess',
+export const addOwnDictionarySuccess = createAction(
+  'user/addOwnDictionarySuccess',
 );
-export const addToOwnUDictionaryError = createAction(
-  'user/addToOwnUDictionaryError',
+export const addOwnDictionaryError = createAction('user/addOwnDictionaryError');
+
+export const fetchOwnDictionaryRequest = createAction(
+  'user/fetchOwnDictionaryRequest',
+);
+export const fetchOwnDictionarySuccess = createAction(
+  'user/fetchOwnDictionarySuccess',
+);
+export const fetchOwnDictionaryError = createAction(
+  'user/fetchOwnDictionaryError',
 );

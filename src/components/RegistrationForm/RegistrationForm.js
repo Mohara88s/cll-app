@@ -6,6 +6,8 @@ import styles from './RegistrationForm.module.css';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 export default function RegistrationForm() {
+  window.scrollBy(0, -1000);
+
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

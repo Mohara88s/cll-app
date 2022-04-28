@@ -1,28 +1,43 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import OwnDictionarys from '../OwnDictionarys/OwnDictionarys';
 import UTranscriptionTrainings from '../UTranscriptionTrainings/UTranscriptionTrainings';
-import UTranscriptionDictionary from '../UTranscriptionDictionary/UTranscriptionDictionary';
-import ownUDictionarySelectors from '../../redux/user/user-selectors';
-import { fetchOwnUDictionary } from '../../redux/user/user-operaions';
+import { Button } from 'react-bootstrap';
 
-// import styles from './UTranscriptionTrainingsPage.module.css';
+import userSelectors from '../../redux/user/user-selectors';
 
 export default function UTranscriptionTrainingsPage() {
-  const dispatch = useDispatch();
-  const ownUDictionary = useSelector(ownUDictionarySelectors.getOwnUDictionary);
   useEffect(() => {
-    dispatch(fetchOwnUDictionary());
-  }, [dispatch]);
+    window.scrollBy(0, -1000);
+  }, []);
+  const [ownDictionarysIsOpen, setOwnDictionarysIsOpen] = useState(true);
+  const currentDictionary = useSelector(userSelectors.getCurrentDictionary);
 
   useEffect(() => {
-    console.log(ownUDictionary);
-  }, [ownUDictionary]);
+    if (currentDictionary.ownDictionaryName) setOwnDictionarysIsOpen(false);
+  }, [currentDictionary]);
+
+  const onChooseBtnClick = () => {
+    setOwnDictionarysIsOpen(true);
+  };
   return (
     <div>
       <h2>U-transcription trainings</h2>
-      <UTranscriptionDictionary />
-      {ownUDictionary.length && (
-        <UTranscriptionTrainings tasksArr={ownUDictionary} />
+      {!ownDictionarysIsOpen && (
+        <Button name="chooseBtn" onClick={onChooseBtnClick} variant="primary">
+          Choose another dictionary for training
+        </Button>
+      )}
+      {ownDictionarysIsOpen && (
+        <>
+          <h3>Choose own dictionary for training:</h3>
+          <OwnDictionarys />
+        </>
+      )}
+      {currentDictionary.ownDictionaryName && (
+        <UTranscriptionTrainings
+          tasksArr={currentDictionary.ownDictionaryTasks}
+        />
       )}
     </div>
   );

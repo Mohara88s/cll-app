@@ -43,6 +43,12 @@ const UTranscriptionTrainingsPageView = lazy(
       './views/UTranscriptionTrainingsPageView/UTranscriptionTrainingsPageView.js'
     ) /* webpackChunkName:"UTranscriptionTrainingsPage" */,
 );
+const UserView = lazy(
+  () =>
+    import(
+      './views/UserView/UserView.js'
+    ) /* webpackChunkName:"UTranscriptionTrainingsPage" */,
+);
 const InfoView = lazy(() => import('./views/InfoView/InfoView'));
 const NotFoundView = lazy(() => import('./views/NotFoundView/NotFoundView'));
 
@@ -88,6 +94,10 @@ function App() {
 
               <PrivateRoute exact path="/u-transcription-trainings">
                 <UTranscriptionTrainingsPageView />
+              </PrivateRoute>
+
+              <PrivateRoute exact path="/user">
+                <UserView />
               </PrivateRoute>
 
               <Route path="/info">

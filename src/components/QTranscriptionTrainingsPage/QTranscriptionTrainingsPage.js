@@ -16,6 +16,8 @@ const list = [...data]
   });
 
 export default function QTranscriptionTrainingsPage() {
+  window.scrollBy(0, -1000);
+
   const wordsArr = [...list];
   return (
     <div>

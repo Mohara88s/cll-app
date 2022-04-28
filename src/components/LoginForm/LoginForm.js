@@ -6,6 +6,8 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './LoginForm.module.css';
 
 export default function LoginForm() {
+  window.scrollBy(0, -1000);
+
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

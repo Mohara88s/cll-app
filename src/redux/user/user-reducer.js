@@ -1,42 +1,59 @@
 import {
-  fetchOwnUDictionarySuccess,
-  fetchOwnUDictionaryRequest,
-  fetchOwnUDictionaryError,
-  addToOwnUDictionaryRequest,
-  addToOwnUDictionarySuccess,
-  addToOwnUDictionaryError,
+  fetchOwnDictionarysSuccess,
+  fetchOwnDictionarysRequest,
+  fetchOwnDictionarysError,
+  addOwnDictionaryRequest,
+  addOwnDictionarySuccess,
+  addOwnDictionaryError,
+  fetchOwnDictionarySuccess,
+  fetchOwnDictionaryRequest,
+  fetchOwnDictionaryError,
 } from './user-actions';
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 
-const ownUDictionary = createReducer([], {
-  [fetchOwnUDictionarySuccess]: (_, { payload }) => {
+const ownDictionarys = createReducer([], {
+  [fetchOwnDictionarysSuccess]: (_, { payload }) => {
     return [...payload];
   },
-  [fetchOwnUDictionaryError]: () => [],
-  [addToOwnUDictionarySuccess]: (_, { payload }) => {
+  [fetchOwnDictionarysError]: () => [],
+  [addOwnDictionarySuccess]: (_, { payload }) => {
     return [...payload];
   },
 });
 
+const currentDictionary = createReducer(
+  {},
+  {
+    [fetchOwnDictionarySuccess]: (_, { payload }) => payload,
+    [fetchOwnDictionaryError]: () => {},
+  },
+);
+
 const loading = createReducer(false, {
-  [fetchOwnUDictionaryRequest]: () => true,
-  [fetchOwnUDictionarySuccess]: () => false,
-  [fetchOwnUDictionaryError]: () => false,
-  [addToOwnUDictionaryRequest]: () => true,
-  [addToOwnUDictionarySuccess]: () => false,
-  [addToOwnUDictionaryError]: () => false,
+  [fetchOwnDictionarysRequest]: () => true,
+  [fetchOwnDictionarysSuccess]: () => false,
+  [fetchOwnDictionarysError]: () => false,
+  [addOwnDictionaryRequest]: () => true,
+  [addOwnDictionarySuccess]: () => false,
+  [addOwnDictionaryError]: () => false,
+  [fetchOwnDictionaryRequest]: () => true,
+  [fetchOwnDictionarySuccess]: () => false,
+  [fetchOwnDictionaryError]: () => false,
 });
 
 const error = createReducer(null, {
-  [fetchOwnUDictionaryError]: (_, { payload }) => payload,
-  [fetchOwnUDictionaryRequest]: () => null,
-  [addToOwnUDictionaryError]: (_, { payload }) => payload,
-  [addToOwnUDictionaryRequest]: () => null,
+  [fetchOwnDictionarysError]: (_, { payload }) => payload,
+  [fetchOwnDictionarysRequest]: () => null,
+  [addOwnDictionaryError]: (_, { payload }) => payload,
+  [addOwnDictionaryRequest]: () => null,
+  [fetchOwnDictionarysError]: (_, { payload }) => payload,
+  [fetchOwnDictionaryRequest]: () => null,
 });
 
 export default combineReducers({
-  ownUDictionary,
+  ownDictionarys,
+  currentDictionary,
   loading,
   error,
 });

@@ -1,6 +1,8 @@
 import styles from './Info.module.css';
 
 export default function Info() {
+  window.scrollBy(0, -1000);
+
   return (
     <div className={styles.Info}>
       <h2>Developed by</h2>

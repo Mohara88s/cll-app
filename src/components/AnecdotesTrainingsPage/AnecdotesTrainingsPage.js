@@ -5,6 +5,8 @@ import ChooseLanguages from '../ChooseLanguages/ChooseLanguages';
 import styles from './AnecdotesTrainingsPage.module.css';
 
 export default function AnecdotesTrainingsPage() {
+  window.scrollBy(0, -1000);
+
   const languages = ['english', 'ukrainian', 'russian'];
   const [anecdotesList, setAnecdotesList] = useState([]);
 

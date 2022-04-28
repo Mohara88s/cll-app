@@ -1,0 +1,18 @@
+.box {
+  display: flex;
+  justify-content: space-between;
+}
+.formsBox {
+  width: 70%;
+}
+.wordsTableBox {
+  width: 28%;
+}
+.wordsTable {
+  border: 1px solid;
+  height: fit-content;
+}
+
+.wordsTable__button {
+  width: 100%;
+}

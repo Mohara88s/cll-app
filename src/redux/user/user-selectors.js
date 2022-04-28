@@ -1,10 +1,12 @@
-const getOwnUDictionaryError = state => state.user.error;
-const getOwnUDictionaryLoading = state => state.user.loading;
-const getOwnUDictionary = state => state.user.ownUDictionary;
+const getUserError = state => state.user.error;
+const getUserLoading = state => state.user.loading;
+const getUserOwnDictionarys = state => state.user.ownDictionarys;
+const getCurrentDictionary = state => state.user.currentDictionary;
 
-const ownUDictionarySelectors = {
-  getOwnUDictionaryError,
-  getOwnUDictionaryLoading,
-  getOwnUDictionary,
+const userSelectors = {
+  getUserError,
+  getUserLoading,
+  getUserOwnDictionarys,
+  getCurrentDictionary,
 };
-export default ownUDictionarySelectors;
+export default userSelectors;

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authSelectors, authOperations } from '../../redux/auth';
 import { Button } from 'react-bootstrap';
@@ -9,7 +10,16 @@ export default function UserMenu() {
 
   return (
     <div className={styles.UserMenu}>
-      <p className={styles.name}>Hallo {name}</p>
+      <p className={styles.greating}>
+        Hallo
+        <Link
+          to={{
+            pathname: `/user/`,
+          }}
+        >
+          <span className={styles.userName}>{name}</span>
+        </Link>
+      </p>
       <Button type="button" onClick={() => dispatch(authOperations.signout())}>
         Logout
       </Button>
