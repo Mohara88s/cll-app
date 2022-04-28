@@ -8,11 +8,15 @@
   padding: 0px;
 }
 .Card__item {
-  width: 22%;
+  width: 30%;
   box-sizing: border-box;
   margin-right: 10px;
   margin-left: 10px;
   margin-bottom: 20px;
+}
+.Card__Title {
+  overflow: hidden;
+  height: 25px;
 }
 .Battons__list {
   display: flex;
