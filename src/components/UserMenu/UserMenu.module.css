@@ -1,11 +1,12 @@
 .UserMenu {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: end;
 }
 .greating {
   text-decoration: none;
   display: inline-block;
-  padding: 10px;
   font-weight: 500;
   color: '#2A363B';
   font-size: 20px;
@@ -14,7 +15,10 @@
 }
 .userName {
   text-decoration: none;
-  padding: 10px;
+  margin-left: 5px;
   font-size: 20px;
   font-weight: 900;
+}
+.Button {
+  margin-left: 10px;
 }

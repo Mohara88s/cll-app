@@ -20,7 +20,11 @@ export default function UserMenu() {
           <span className={styles.userName}>{name}</span>
         </Link>
       </p>
-      <Button type="button" onClick={() => dispatch(authOperations.signout())}>
+      <Button
+        className={styles.Button}
+        type="button"
+        onClick={() => dispatch(authOperations.signout())}
+      >
         Logout
       </Button>
     </div>
