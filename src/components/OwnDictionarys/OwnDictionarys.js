@@ -9,7 +9,7 @@ import {
 } from '../../redux/user/user-operaions';
 import styles from './OwnDictionarys.module.css';
 
-export default function OwnDictionarys() {
+export default function OwnDictionarys({ advancedMode = false }) {
   const dispatch = useDispatch();
   const ownDictionarys = useSelector(userSelectors.getUserOwnDictionarys);
 
@@ -40,21 +40,27 @@ export default function OwnDictionarys() {
                   <Card.Title>{ownDictionaryName}</Card.Title>
                   <Card.Text>words: {ownDictionaryTasks.length}</Card.Text>
                   <ul className={styles.Battons__list}>
-                    <li>
-                      <Button
-                        name={_id}
-                        onClick={onGoTrainingBtn}
-                        variant="primary"
-                      >
-                        Go training
-                      </Button>
-                    </li>
-                    <li>
-                      <Button variant="warning">Edit</Button>
-                    </li>
-                    <li>
-                      <Button variant="danger">Delete</Button>
-                    </li>
+                    {!advancedMode && (
+                      <li>
+                        <Button
+                          name={_id}
+                          onClick={onGoTrainingBtn}
+                          variant="primary"
+                        >
+                          Go training
+                        </Button>
+                      </li>
+                    )}
+                    {advancedMode && (
+                      <>
+                        <li>
+                          <Button variant="warning">Edit</Button>
+                        </li>
+                        <li>
+                          <Button variant="danger">Delete</Button>
+                        </li>
+                      </>
+                    )}
                   </ul>
                 </Card.Body>
               </Card>

@@ -7,7 +7,7 @@ export default function UserPage() {
     <div>
       <h2>User page</h2>
       <h3>Own dictionarys:</h3>
-      <OwnDictionarys />
+      <OwnDictionarys advancedMode={true} />
       <DictionaryForm />
     </div>
   );

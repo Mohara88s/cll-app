@@ -4,15 +4,15 @@
 .Card__list {
   display: flex;
   flex-wrap: wrap;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 0px;
+  justify-content: center;
+  padding: 0px;
 }
 .Card__item {
-  width: 32%;
-  margin-right: 5px;
-  margin-left: 5px;
-  margin-bottom: 10px;
+  width: 22%;
+  box-sizing: border-box;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 20px;
 }
 .Battons__list {
   display: flex;
