@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: center;
 }
 .greating {
   text-decoration: none;
@@ -21,4 +21,9 @@
 }
 .Button {
   margin-left: 10px;
+}
+@media screen and (min-width: 900px) {
+  .UserMenu {
+    justify-content: flex-end;
+  }
 }
