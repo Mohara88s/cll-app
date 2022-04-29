@@ -1,13 +1,8 @@
 .box {
   display: flex;
-  justify-content: space-between;
+  flex-flow: column-reverse;
 }
-.formsBox {
-  width: 70%;
-}
-.wordsTableBox {
-  width: 28%;
-}
+
 .wordsTable {
   border: 1px solid;
   height: fit-content;
@@ -15,4 +10,17 @@
 
 .wordsTable__button {
   width: 100%;
+}
+
+@media screen and (min-width: 900px) {
+  .box {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+  .formsBox {
+    width: 70%;
+  }
+  .wordsTableBox {
+    width: 28%;
+  }
 }
