@@ -30,7 +30,7 @@ export default function OwnDictionarys({ advancedMode = false }) {
   };
   return (
     <div>
-      {ownDictionarys.length === 0 && (
+      {ownDictionarys.length === 0 && !advancedMode && (
         <Link to="/user/">
           <Button variant="primary" className={styles.Button__noDictionarys}>
             You don't have your own dictionaries yet. Go to the user page to

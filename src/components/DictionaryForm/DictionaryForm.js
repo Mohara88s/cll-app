@@ -83,8 +83,8 @@ export default function DictionaryForm() {
               {filtredTasks.map(({ _id, eng, utrn, rus }) => (
                 <tr key={_id}>
                   <td>{eng}</td>
-                  <td>{utrn}</td>
-                  <td>{rus}</td>
+                  {/* <td>{utrn}</td> */}
+                  <td>{rus.split('/')[0]}</td>
                   <td>
                     <Button
                       className={styles.button}
@@ -115,6 +115,12 @@ export default function DictionaryForm() {
             </Form.Group>
           </Form>
           <Table striped bordered hover className={styles.wordsTable}>
+            <thead>
+              <tr>
+                <th>english</th>
+                <th>u-trancription</th>
+              </tr>
+            </thead>
             <tbody>
               {wordsSet &&
                 wordsSet.map(({ _id, eng, utrn }) => (
