@@ -1,6 +1,6 @@
 .header {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   padding: 20px;
   box-shadow: 2px 9px 8px 0px rgba(34, 60, 80, 0.2);
   margin-bottom: 10px;
@@ -11,8 +11,10 @@
     justify-content: space-between;
   }
   .MenuButton {
+    position: absolute;
     opacity: 0;
     width: 0px;
     height: 0px;
+    display: none;
   }
 }

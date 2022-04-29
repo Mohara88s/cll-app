@@ -3,6 +3,7 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 15px;
 }
 .greating {
   text-decoration: none;
@@ -25,5 +26,6 @@
 @media screen and (min-width: 900px) {
   .UserMenu {
     justify-content: flex-end;
+    margin-bottom: 0;
   }
 }

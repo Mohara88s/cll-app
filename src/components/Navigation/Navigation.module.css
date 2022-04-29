@@ -3,6 +3,7 @@
   flex-direction: column;
   margin-bottom: 0;
   align-items: center;
+  padding-left: 0;
 }
 .link {
   text-decoration: none;

@@ -20,15 +20,15 @@ export default function AppBar() {
 
   return (
     <header className={styles.header}>
-      <Button className={styles.MenuButton} onClick={onMenuButtonClick}>
-        Menu
-      </Button>
       {navigationIsOpen && (
         <>
           <Navigation />
           {isLoggedIn ? <UserMenu /> : <AuthNav />}
         </>
       )}
+      <Button className={styles.MenuButton} onClick={onMenuButtonClick}>
+        Menu
+      </Button>
     </header>
   );
 }
