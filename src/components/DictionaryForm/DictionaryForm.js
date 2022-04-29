@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Table } from 'react-bootstrap';
-import { changeFilter } from '../../redux/u-transcription-tasks/u-transcription-tasks-actions';
-import uTranscriptionTasksSelectors from '../../redux/u-transcription-tasks/u-transcription-tasks-selectors';
-import { fetchUTranscriptionTasks } from '../../redux/u-transcription-tasks/u-transcription-tasks-operaions';
+import { changeFilter } from '../../redux/transcription-tasks/transcription-tasks-actions';
+import transcriptionTasksSelectors from '../../redux/transcription-tasks/transcription-tasks-selectors';
+import { fetchTranscriptionTasks } from '../../redux/transcription-tasks/transcription-tasks-operaions';
 import { addOwnDictionary } from '../../redux/user/user-operaions';
 
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
@@ -14,13 +14,13 @@ export default function DictionaryForm() {
   const [wordsSet, setWordsSet] = useState([]);
   const [dictionaryName, setDictionaryName] = useState('');
   const filter = useSelector(
-    uTranscriptionTasksSelectors.getUTranscriptionTasksFilter,
+    transcriptionTasksSelectors.getTranscriptionTasksFilter,
   );
   const filtredTasks = useSelector(
-    uTranscriptionTasksSelectors.getUTranscriptionTasks,
+    transcriptionTasksSelectors.getTranscriptionTasks,
   );
   const error = useSelector(
-    uTranscriptionTasksSelectors.getUTranscriptionTasksError,
+    transcriptionTasksSelectors.getTranscriptionTasksError,
   );
 
   const handleChange = ({ target: { name, value } }) => {
@@ -54,7 +54,7 @@ export default function DictionaryForm() {
 
   useEffect(() => {
     if (filter) {
-      dispatch(fetchUTranscriptionTasks(filter));
+      dispatch(fetchTranscriptionTasks(filter));
     }
   }, [dispatch, filter]);
 

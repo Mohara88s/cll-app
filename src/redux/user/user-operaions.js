@@ -8,6 +8,9 @@ import {
   fetchOwnDictionaryRequest,
   fetchOwnDictionarySuccess,
   fetchOwnDictionaryError,
+  deleteOwnDictionaryRequest,
+  deleteOwnDictionarySuccess,
+  deleteOwnDictionaryError,
 } from './user-actions';
 import axios from 'axios';
 
@@ -38,5 +41,17 @@ export const fetchOwnDictionary = dictionaryId => async dispatch => {
     dispatch(fetchOwnDictionarySuccess(data.ownDictionary));
   } catch (error) {
     dispatch(fetchOwnDictionaryError(error.response.data.message));
+  }
+};
+
+export const deleteOwnDictionary = dictionaryId => async dispatch => {
+  dispatch(deleteOwnDictionaryRequest());
+  try {
+    const { data } = await axios.delete(
+      `/users/own-dictionarys/${dictionaryId}`,
+    );
+    dispatch(deleteOwnDictionarySuccess(data.ownDictionarys));
+  } catch (error) {
+    dispatch(deleteOwnDictionaryError(error.response.data.message));
   }
 };

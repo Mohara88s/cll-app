@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import data from '../../database/matrix.json';
 import QTranscriptionTrainings from '../QTranscriptionTrainings/QTranscriptionTrainings';
 import styles from './QTranscriptionTrainingsPage.module.css';
@@ -16,8 +17,9 @@ const list = [...data]
   });
 
 export default function QTranscriptionTrainingsPage() {
-  window.scrollBy(0, -1000);
-
+  useEffect(() => {
+    window.scrollBy(0, -1000);
+  }, []);
   const wordsArr = [...list];
   return (
     <div>

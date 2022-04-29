@@ -1,7 +1,11 @@
+import { useEffect } from 'react';
+
 import styles from './Info.module.css';
 
 export default function Info() {
-  window.scrollBy(0, -1000);
+  useEffect(() => {
+    window.scrollBy(0, -1000);
+  }, []);
 
   return (
     <div className={styles.Info}>

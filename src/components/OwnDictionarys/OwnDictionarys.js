@@ -6,6 +6,7 @@ import userSelectors from '../../redux/user/user-selectors';
 import {
   fetchOwnDictionarys,
   fetchOwnDictionary,
+  deleteOwnDictionary,
 } from '../../redux/user/user-operaions';
 import styles from './OwnDictionarys.module.css';
 
@@ -21,6 +22,12 @@ export default function OwnDictionarys({ advancedMode = false }) {
     dispatch(fetchOwnDictionary(name));
   };
 
+  // const onEditBtn = ({ target: { name } }) => {
+  // };
+
+  const onDeleteBtn = ({ target: { name } }) => {
+    dispatch(deleteOwnDictionary(name));
+  };
   return (
     <div>
       {ownDictionarys.length === 0 && (
@@ -55,11 +62,23 @@ export default function OwnDictionarys({ advancedMode = false }) {
                     )}
                     {advancedMode && (
                       <>
+                        {/* <li>
+                          <Button
+                            name={_id}
+                            onClick={onEditBtn}
+                            variant="warning"
+                          >
+                            Edit
+                          </Button>
+                        </li> */}
                         <li>
-                          <Button variant="warning">Edit</Button>
-                        </li>
-                        <li>
-                          <Button variant="danger">Delete</Button>
+                          <Button
+                            name={_id}
+                            onClick={onDeleteBtn}
+                            variant="danger"
+                          >
+                            Delete
+                          </Button>
                         </li>
                       </>
                     )}

@@ -8,6 +8,9 @@ import {
   fetchOwnDictionarySuccess,
   fetchOwnDictionaryRequest,
   fetchOwnDictionaryError,
+  deleteOwnDictionarySuccess,
+  deleteOwnDictionaryRequest,
+  deleteOwnDictionaryError,
 } from './user-actions';
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
@@ -18,6 +21,9 @@ const ownDictionarys = createReducer([], {
   },
   [fetchOwnDictionarysError]: () => [],
   [addOwnDictionarySuccess]: (_, { payload }) => {
+    return [...payload];
+  },
+  [deleteOwnDictionarySuccess]: (_, { payload }) => {
     return [...payload];
   },
 });
@@ -40,6 +46,9 @@ const loading = createReducer(false, {
   [fetchOwnDictionaryRequest]: () => true,
   [fetchOwnDictionarySuccess]: () => false,
   [fetchOwnDictionaryError]: () => false,
+  [deleteOwnDictionaryRequest]: () => true,
+  [deleteOwnDictionarySuccess]: () => false,
+  [deleteOwnDictionaryError]: () => false,
 });
 
 const error = createReducer(null, {
@@ -47,8 +56,10 @@ const error = createReducer(null, {
   [fetchOwnDictionarysRequest]: () => null,
   [addOwnDictionaryError]: (_, { payload }) => payload,
   [addOwnDictionaryRequest]: () => null,
-  [fetchOwnDictionarysError]: (_, { payload }) => payload,
+  [fetchOwnDictionaryError]: (_, { payload }) => payload,
   [fetchOwnDictionaryRequest]: () => null,
+  [deleteOwnDictionaryError]: (_, { payload }) => payload,
+  [deleteOwnDictionaryRequest]: () => null,
 });
 
 export default combineReducers({

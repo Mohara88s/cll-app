@@ -5,7 +5,9 @@ import ChooseLanguages from '../../components/ChooseLanguages/ChooseLanguages';
 import styles from './SentencesTrainingsPage.module.css';
 
 export default function SentencesTrainingsPage() {
-  window.scrollBy(0, -1000);
+  useEffect(() => {
+    window.scrollBy(0, -1000);
+  }, []);
 
   const languages = ['english', 'ukrainian', 'russian'];
   const [sentencesNoIdList, setSentencesNoIdList] = useState([]);

@@ -27,3 +27,13 @@ export const fetchOwnDictionarySuccess = createAction(
 export const fetchOwnDictionaryError = createAction(
   'user/fetchOwnDictionaryError',
 );
+
+export const deleteOwnDictionaryRequest = createAction(
+  'user/deleteOwnDictionaryRequest',
+);
+export const deleteOwnDictionarySuccess = createAction(
+  'userdeletehOwnDictionarySuccess',
+);
+export const deleteOwnDictionaryError = createAction(
+  'user/deleteOwnDictionaryError',
+);

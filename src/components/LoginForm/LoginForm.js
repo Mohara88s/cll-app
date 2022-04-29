@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authOperations, authSelectors } from '../../redux/auth';
 import { Button, Form } from 'react-bootstrap';
@@ -6,7 +6,9 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './LoginForm.module.css';
 
 export default function LoginForm() {
-  window.scrollBy(0, -1000);
+  useEffect(() => {
+    window.scrollBy(0, -1000);
+  }, []);
 
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authOperations, authSelectors } from '../../redux/auth';
 import { Button, Form } from 'react-bootstrap';
@@ -6,7 +6,9 @@ import styles from './RegistrationForm.module.css';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 export default function RegistrationForm() {
-  window.scrollBy(0, -1000);
+  useEffect(() => {
+    window.scrollBy(0, -1000);
+  }, []);
 
   const dispatch = useDispatch();
   const [name, setName] = useState('');

@@ -1,11 +1,13 @@
 import data from '../../database/anecdotes.json';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AnecdotesTrainings from '../AnecdotesTrainings/AnecdotesTrainings';
 import ChooseLanguages from '../ChooseLanguages/ChooseLanguages';
 import styles from './AnecdotesTrainingsPage.module.css';
 
 export default function AnecdotesTrainingsPage() {
-  window.scrollBy(0, -1000);
+  useEffect(() => {
+    window.scrollBy(0, -1000);
+  }, []);
 
   const languages = ['english', 'ukrainian', 'russian'];
   const [anecdotesList, setAnecdotesList] = useState([]);

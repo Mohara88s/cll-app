@@ -11,7 +11,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import userReducer from './user/user-reducer';
-import uTranscriptionTasksReducer from './u-transcription-tasks/u-transcription-tasks-reducer';
+import transcriptionTasksReducer from './transcription-tasks/transcription-tasks-reducer';
 import { authReducer } from './auth';
 
 const middleware = [
@@ -31,7 +31,7 @@ const authPersistConfig = {
 export const store = configureStore({
   reducer: {
     user: userReducer,
-    uTranscriptionTasks: uTranscriptionTasksReducer,
+    transcriptionTasks: transcriptionTasksReducer,
     auth: persistReducer(authPersistConfig, authReducer),
   },
   middleware,
