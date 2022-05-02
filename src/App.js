@@ -1,6 +1,7 @@
 import { useEffect, Suspense, lazy } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap';
 
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PublicRoute from './components/PublicRoute/PublicRoute';
@@ -63,7 +64,7 @@ function App() {
       <div>
         <AppBar />
         <Container>
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<Spinner animation="border" variant="primary" />}>
             <Switch>
               <Route exact path="/">
                 <HomePageView />

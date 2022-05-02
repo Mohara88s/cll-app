@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form, Table } from 'react-bootstrap';
+import { Button, Form, Table, Spinner } from 'react-bootstrap';
 import { changeFilter } from '../../redux/transcription-tasks/transcription-tasks-actions';
 import transcriptionTasksSelectors from '../../redux/transcription-tasks/transcription-tasks-selectors';
 import { fetchTranscriptionTasks } from '../../redux/transcription-tasks/transcription-tasks-operaions';
@@ -21,6 +21,9 @@ export default function DictionaryForm() {
   );
   const error = useSelector(
     transcriptionTasksSelectors.getTranscriptionTasksError,
+  );
+  const loading = useSelector(
+    transcriptionTasksSelectors.getTranscriptionTasksLoading,
   );
 
   const handleChange = ({ target: { name, value } }) => {
@@ -77,7 +80,7 @@ export default function DictionaryForm() {
           </Form>
 
           {error && <ErrorMessage message={error} />}
-
+          {loading && <Spinner animation="border" variant="primary" />}
           <Table striped bordered hover>
             <tbody>
               {filtredTasks.map(({ _id, eng, utrn, rus }) => (

@@ -1,5 +1,5 @@
-const getUserError = state => state.user.error;
-const getUserLoading = state => state.user.loading;
+const getUserError = state => state.user.userError;
+const getUserLoading = state => state.user.userLoading;
 const getUserOwnDictionarys = state => state.user.ownDictionarys;
 const getCurrentDictionary = state => state.user.currentDictionary;
 
