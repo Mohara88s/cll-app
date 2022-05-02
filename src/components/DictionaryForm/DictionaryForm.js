@@ -32,6 +32,9 @@ export default function DictionaryForm() {
   const addDictionaryError = useSelector(
     ownDictionarysSelectors.getAddDictionaryError,
   );
+  const addDictionarySuccess = useSelector(
+    ownDictionarysSelectors.getAddDictionarySuccess,
+  );
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -58,9 +61,14 @@ export default function DictionaryForm() {
         ownDictionaryTasks: wordsSet,
       }),
     );
-    setWordsSet([]);
-    setDictionaryName('');
   };
+
+  useEffect(() => {
+    if (addDictionarySuccess) {
+      setWordsSet([]);
+      setDictionaryName('');
+    }
+  }, [addDictionarySuccess]);
 
   useEffect(() => {
     if (filter) {

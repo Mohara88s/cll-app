@@ -68,6 +68,12 @@ const addDictionaryError = createReducer(null, {
   [addOwnDictionaryRequest]: () => null,
 });
 
+const addDictionarySuccess = createReducer(false, {
+  [addOwnDictionaryRequest]: () => false,
+  [addOwnDictionarySuccess]: () => true,
+  [addOwnDictionaryError]: () => false,
+});
+
 export default combineReducers({
   ownDictionarys,
   currentDictionary,
@@ -75,4 +81,5 @@ export default combineReducers({
   addDictionaryLoading,
   error,
   addDictionaryError,
+  addDictionarySuccess,
 });
