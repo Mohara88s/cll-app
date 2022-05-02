@@ -17,10 +17,8 @@ export default function QTranscriptionTrainings({ wordsArr }) {
   useEffect(() => {
     if (wordsArr[wordId].qt) {
       const index = [...wordsArr[wordId].qt].indexOf('/');
-      console.log(index);
       if (index !== -1) {
         const arr = [...wordsArr[wordId].qt].splice(0, index);
-        console.log(arr);
         setOriginalArray([...arr]);
       } else {
         setOriginalArray([...wordsArr[wordId].qt]);

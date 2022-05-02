@@ -25,7 +25,6 @@ export default function SentencesTrainings({ sentencesList }) {
   }, [sentenceId, sentencesList]);
 
   useEffect(() => {
-    console.log(originalArray);
     setMixedArray([
       ...[...originalArray].sort(() => {
         return 0.5 - Math.random();

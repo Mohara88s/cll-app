@@ -8,12 +8,14 @@ import {
   fetchOwnDictionary,
   deleteOwnDictionary,
 } from '../../redux/own-dictionarys/own-dictionarys-operaions';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './OwnDictionarys.module.css';
 
 export default function OwnDictionarys({ advancedMode = false }) {
   const dispatch = useDispatch();
   const ownDictionarys = useSelector(ownDictionarysSelectors.getOwnDictionarys);
   const loading = useSelector(ownDictionarysSelectors.getLoading);
+  const error = useSelector(ownDictionarysSelectors.getError);
 
   useEffect(() => {
     dispatch(fetchOwnDictionarys());
@@ -31,6 +33,7 @@ export default function OwnDictionarys({ advancedMode = false }) {
   };
   return (
     <div>
+      {error && <ErrorMessage message={error} />}
       {loading && <Spinner animation="border" variant="primary" />}
       {!loading && (
         <>

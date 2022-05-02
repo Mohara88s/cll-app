@@ -40,9 +40,6 @@ const loading = createReducer(false, {
   [fetchOwnDictionarysRequest]: () => true,
   [fetchOwnDictionarysSuccess]: () => false,
   [fetchOwnDictionarysError]: () => false,
-  [addOwnDictionaryRequest]: () => true,
-  [addOwnDictionarySuccess]: () => false,
-  [addOwnDictionaryError]: () => false,
   [fetchOwnDictionaryRequest]: () => true,
   [fetchOwnDictionarySuccess]: () => false,
   [fetchOwnDictionaryError]: () => false,
@@ -51,20 +48,31 @@ const loading = createReducer(false, {
   [deleteOwnDictionaryError]: () => false,
 });
 
+const addDictionaryLoading = createReducer(false, {
+  [addOwnDictionaryRequest]: () => true,
+  [addOwnDictionarySuccess]: () => false,
+  [addOwnDictionaryError]: () => false,
+});
+
 const error = createReducer(null, {
   [fetchOwnDictionarysError]: (_, { payload }) => payload,
   [fetchOwnDictionarysRequest]: () => null,
-  [addOwnDictionaryError]: (_, { payload }) => payload,
-  [addOwnDictionaryRequest]: () => null,
   [fetchOwnDictionaryError]: (_, { payload }) => payload,
   [fetchOwnDictionaryRequest]: () => null,
   [deleteOwnDictionaryError]: (_, { payload }) => payload,
   [deleteOwnDictionaryRequest]: () => null,
 });
 
+const addDictionaryError = createReducer(null, {
+  [addOwnDictionaryError]: (_, { payload }) => payload,
+  [addOwnDictionaryRequest]: () => null,
+});
+
 export default combineReducers({
   ownDictionarys,
   currentDictionary,
   loading,
+  addDictionaryLoading,
   error,
+  addDictionaryError,
 });

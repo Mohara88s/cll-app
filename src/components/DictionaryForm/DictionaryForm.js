@@ -4,6 +4,7 @@ import { Button, Form, Table, Spinner } from 'react-bootstrap';
 import { changeFilter } from '../../redux/transcription-tasks/transcription-tasks-actions';
 import transcriptionTasksSelectors from '../../redux/transcription-tasks/transcription-tasks-selectors';
 import { fetchTranscriptionTasks } from '../../redux/transcription-tasks/transcription-tasks-operaions';
+import ownDictionarysSelectors from '../../redux/own-dictionarys/own-dictionarys-selectors';
 import { addOwnDictionary } from '../../redux/own-dictionarys/own-dictionarys-operaions';
 
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
@@ -24,6 +25,12 @@ export default function DictionaryForm() {
   );
   const loading = useSelector(
     transcriptionTasksSelectors.getTranscriptionTasksLoading,
+  );
+  const addDictionaryLoading = useSelector(
+    ownDictionarysSelectors.getAddDictionaryLoading,
+  );
+  const addDictionaryError = useSelector(
+    ownDictionarysSelectors.getAddDictionaryError,
   );
 
   const handleChange = ({ target: { name, value } }) => {
@@ -138,8 +145,12 @@ export default function DictionaryForm() {
             className={styles.wordsTable__button}
             onClick={onAddSetToOwnDictionarysClick}
           >
-            Add new own dictionary
+            {!addDictionaryLoading && <span>Add new own dictionary</span>}
+            {addDictionaryLoading && (
+              <Spinner animation="border" as="span" size="sm" />
+            )}
           </Button>
+          {addDictionaryError && <ErrorMessage message={addDictionaryError} />}
         </div>
       </div>
     </div>
