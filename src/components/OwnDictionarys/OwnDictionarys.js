@@ -2,18 +2,18 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Card, Spinner } from 'react-bootstrap';
-import userSelectors from '../../redux/user/user-selectors';
+import ownDictionarysSelectors from '../../redux/own-dictionarys/own-dictionarys-selectors';
 import {
   fetchOwnDictionarys,
   fetchOwnDictionary,
   deleteOwnDictionary,
-} from '../../redux/user/user-operaions';
+} from '../../redux/own-dictionarys/own-dictionarys-operaions';
 import styles from './OwnDictionarys.module.css';
 
 export default function OwnDictionarys({ advancedMode = false }) {
   const dispatch = useDispatch();
-  const ownDictionarys = useSelector(userSelectors.getUserOwnDictionarys);
-  const userLoading = useSelector(userSelectors.getUserLoading);
+  const ownDictionarys = useSelector(ownDictionarysSelectors.getOwnDictionarys);
+  const loading = useSelector(ownDictionarysSelectors.getLoading);
 
   useEffect(() => {
     dispatch(fetchOwnDictionarys());
@@ -31,8 +31,8 @@ export default function OwnDictionarys({ advancedMode = false }) {
   };
   return (
     <div>
-      {userLoading && <Spinner animation="border" variant="primary" />}
-      {!userLoading && (
+      {loading && <Spinner animation="border" variant="primary" />}
+      {!loading && (
         <>
           {ownDictionarys.length === 0 && !advancedMode && (
             <Link to="/user/">

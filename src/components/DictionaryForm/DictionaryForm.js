@@ -4,7 +4,7 @@ import { Button, Form, Table, Spinner } from 'react-bootstrap';
 import { changeFilter } from '../../redux/transcription-tasks/transcription-tasks-actions';
 import transcriptionTasksSelectors from '../../redux/transcription-tasks/transcription-tasks-selectors';
 import { fetchTranscriptionTasks } from '../../redux/transcription-tasks/transcription-tasks-operaions';
-import { addOwnDictionary } from '../../redux/user/user-operaions';
+import { addOwnDictionary } from '../../redux/own-dictionarys/own-dictionarys-operaions';
 
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './DictionaryForm.module.css';

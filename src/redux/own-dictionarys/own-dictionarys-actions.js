@@ -1,39 +1,39 @@
 import { createAction } from '@reduxjs/toolkit';
 
 export const fetchOwnDictionarysRequest = createAction(
-  'user/fetchOwnDictionarysRequest',
+  'own-dictionarys/fetchOwnDictionarysRequest',
 );
 export const fetchOwnDictionarysSuccess = createAction(
-  'user/fetchOwnDictionarysSuccess',
+  'own-dictionarys/fetchOwnDictionarysSuccess',
 );
 export const fetchOwnDictionarysError = createAction(
-  'user/fetchOwnDictionarysError',
+  'own-dictionarys/fetchOwnDictionarysError',
 );
 
 export const addOwnDictionaryRequest = createAction(
-  'user/addOwnDictionaryRequest',
+  'own-dictionarys/addOwnDictionaryRequest',
 );
 export const addOwnDictionarySuccess = createAction(
-  'user/addOwnDictionarySuccess',
+  'own-dictionarys/addOwnDictionarySuccess',
 );
 export const addOwnDictionaryError = createAction('user/addOwnDictionaryError');
 
 export const fetchOwnDictionaryRequest = createAction(
-  'user/fetchOwnDictionaryRequest',
+  'own-dictionarys/fetchOwnDictionaryRequest',
 );
 export const fetchOwnDictionarySuccess = createAction(
-  'user/fetchOwnDictionarySuccess',
+  'own-dictionarys/fetchOwnDictionarySuccess',
 );
 export const fetchOwnDictionaryError = createAction(
-  'user/fetchOwnDictionaryError',
+  'own-dictionarys/fetchOwnDictionaryError',
 );
 
 export const deleteOwnDictionaryRequest = createAction(
-  'user/deleteOwnDictionaryRequest',
+  'own-dictionarys/deleteOwnDictionaryRequest',
 );
 export const deleteOwnDictionarySuccess = createAction(
-  'userdeletehOwnDictionarySuccess',
+  'own-dictionarys/deletehOwnDictionarySuccess',
 );
 export const deleteOwnDictionaryError = createAction(
-  'user/deleteOwnDictionaryError',
+  'own-dictionarys/deleteOwnDictionaryError',
 );

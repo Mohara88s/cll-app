@@ -4,14 +4,16 @@ import OwnDictionarys from '../OwnDictionarys/OwnDictionarys';
 import UTranscriptionTrainings from '../UTranscriptionTrainings/UTranscriptionTrainings';
 import { Button } from 'react-bootstrap';
 
-import userSelectors from '../../redux/user/user-selectors';
+import ownDictionarysSelectors from '../../redux/own-dictionarys/own-dictionarys-selectors';
 
 export default function UTranscriptionTrainingsPage() {
   useEffect(() => {
     window.scrollBy(0, -1000);
   }, []);
   const [ownDictionarysIsOpen, setOwnDictionarysIsOpen] = useState(true);
-  const currentDictionary = useSelector(userSelectors.getCurrentDictionary);
+  const currentDictionary = useSelector(
+    ownDictionarysSelectors.getCurrentDictionary,
+  );
 
   useEffect(() => {
     if (currentDictionary.ownDictionaryName) setOwnDictionarysIsOpen(false);
