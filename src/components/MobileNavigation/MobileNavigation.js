@@ -39,25 +39,15 @@ const MobileNavigation = () => {
             Sentences trainings
           </NavLink>
         </li>
-        <li className={styles.MobileNavigationList__item}>
-          <NavLink
-            exact
-            to="/q-transcription-trainings"
-            className={styles.MobileNavigationList__link}
-            activeClassName={styles.activeLink}
-          >
-            Q-transcription trainings
-          </NavLink>
-        </li>
         {isLoggedIn && (
           <li className={styles.MobileNavigationList__item}>
             <NavLink
               exact
-              to="/u-transcription-trainings"
+              to="/transcription-trainings"
               className={styles.MobileNavigationList__link}
               activeClassName={styles.activeLink}
             >
-              U-transcription trainings
+              Transcription trainings
             </NavLink>
           </li>
         )}

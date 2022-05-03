@@ -1,0 +1,139 @@
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import OwnDictionarys from '../OwnDictionarys/OwnDictionarys';
+import EngUTranscriptionTrainings from '../EngUTranscriptionTrainings/EngUTranscriptionTrainings';
+import UEngTranscriptionTrainings from '../UEngTranscriptionTrainings/UEngTranscriptionTrainings';
+import EngQTranscriptionTrainings from '../EngQTranscriptionTrainings/EngQTranscriptionTrainings';
+import QEngTranscriptionTrainings from '../QEngTranscriptionTrainings/QEngTranscriptionTrainings';
+import { Button } from 'react-bootstrap';
+import ownDictionarysSelectors from '../../redux/own-dictionarys/own-dictionarys-selectors';
+import styles from './TranscriptionTrainingsPage.module.css';
+
+const trainings = [
+  'english - u-transcription',
+  'u-transcription - english',
+  'english - q-transcription',
+  'q-transcription - english',
+];
+
+export default function TranscriptionTrainingsPage() {
+  useEffect(() => {
+    window.scrollBy(0, -1000);
+  }, []);
+  const [ownDictionarysIsOpen, setOwnDictionarysIsOpen] = useState(true);
+  const [trainingButtonsIsOpen, setTrainingButtonsIsOpen] = useState(true);
+  const [selectedTaining, setSelectedTraining] = useState('');
+
+  const onTrainingButtonClick = ({ currentTarget: { value } }) => {
+    setSelectedTraining(value);
+    setTrainingButtonsIsOpen(false);
+  };
+
+  const onChooseTrainingClick = () => {
+    setTrainingButtonsIsOpen(true);
+  };
+
+  const currentDictionary = useSelector(
+    ownDictionarysSelectors.getCurrentDictionary,
+  );
+
+  useEffect(() => {
+    if (currentDictionary.ownDictionaryName) setOwnDictionarysIsOpen(false);
+  }, [currentDictionary]);
+
+  const onChooseDictionaryClick = () => {
+    setOwnDictionarysIsOpen(true);
+  };
+
+  return (
+    <div>
+      <h2>Transcription trainings</h2>
+      <ul className={styles.optionsButtonsList}>
+        <li className={styles.optionsButtonsList__item}>
+          {!trainingButtonsIsOpen && (
+            <Button
+              name="chooseTraining"
+              onClick={onChooseTrainingClick}
+              variant="primary"
+            >
+              Choose another training
+            </Button>
+          )}
+        </li>
+        <li className={styles.optionsButtonsList__item}>
+          {!ownDictionarysIsOpen && (
+            <Button
+              name="chooseDictionary"
+              onClick={onChooseDictionaryClick}
+              variant="primary"
+            >
+              Choose another dictionary
+            </Button>
+          )}
+        </li>
+      </ul>
+
+      {trainingButtonsIsOpen && (
+        <>
+          <h3>Choose type of training:</h3>
+          <ul className={styles.trainingButtonsList}>
+            {trainings.map(training => (
+              <li key={training} className={styles.trainingButtonsList__item}>
+                <Button
+                  onClick={onTrainingButtonClick}
+                  value={training}
+                  className={
+                    training === selectedTaining
+                      ? 'btn btn-primary btn-lg'
+                      : 'btn btn-secondary'
+                  }
+                >
+                  {training}
+                </Button>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      {ownDictionarysIsOpen && (
+        <>
+          <h3>Choose own dictionary for training:</h3>
+          <OwnDictionarys />
+        </>
+      )}
+
+      {!ownDictionarysIsOpen &&
+        currentDictionary.ownDictionaryName &&
+        selectedTaining === trainings[0] && (
+          <EngUTranscriptionTrainings
+            tasksArr={currentDictionary.ownDictionaryTasks}
+          />
+        )}
+
+      {!ownDictionarysIsOpen &&
+        currentDictionary.ownDictionaryName &&
+        selectedTaining === trainings[1] && (
+          <UEngTranscriptionTrainings
+            tasksArr={currentDictionary.ownDictionaryTasks}
+          />
+        )}
+
+      {!ownDictionarysIsOpen &&
+        currentDictionary.ownDictionaryName &&
+        selectedTaining === trainings[2] && (
+          <EngQTranscriptionTrainings
+            tasksArr={currentDictionary.ownDictionaryTasks}
+          />
+        )}
+
+      {!ownDictionarysIsOpen &&
+        currentDictionary.ownDictionaryName &&
+        selectedTaining === trainings[3] && (
+          <QEngTranscriptionTrainings
+            tasksArr={currentDictionary.ownDictionaryTasks}
+          />
+        )}
+    </div>
+  );
+}

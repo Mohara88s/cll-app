@@ -1,5 +1,5 @@
 import AnecdotesTrainingsPage from '../../components/AnecdotesTrainingsPage/AnecdotesTrainingsPage';
-export default function AnecdotesTrainingsPageView() {
+export default function AnecdotesTrainingsView() {
   return (
     <>
       <AnecdotesTrainingsPage />

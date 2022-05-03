@@ -17,39 +17,43 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const HomePageView = lazy(() =>
   import(
-    './views/HomePageView/HomePageView.js' /* webpackChunkName:"HomePage" */
+    './views/HomePageView/HomePageView.js' /* webpackChunkName:"HomePageView" */
   ),
 );
-const RegisterView = lazy(() => import('./views/RegisterView/RegisterView'));
-const LoginView = lazy(() => import('./views/LoginView/LoginView'));
-const AnecdotesTrainingsPageView = lazy(() =>
+const RegisterView = lazy(() =>
   import(
-    './views/AnecdotesTrainingsPageView/AnecdotesTrainingsPageView.js' /* webpackChunkName:"AnecdotesTrainingsPage" */
+    './views/RegisterView/RegisterView' /* webpackChunkName:"RegisterView" */
   ),
 );
-const SentencesTrainingsPageView = lazy(
-  () =>
-    import(
-      './views/SentencesTrainingsPageView/SentencesTrainingsPageView.js'
-    ) /* webpackChunkName:"SentencesTrainingsPage" */,
+const LoginView = lazy(() =>
+  import('./views/LoginView/LoginView' /* webpackChunkName:"LoginView" */),
 );
-const QTranscriptionTrainingsPageView = lazy(
-  () =>
-    import(
-      './views/QTranscriptionTrainingsPageView/QTranscriptionTrainingsPageView.js'
-    ) /* webpackChunkName:"QTranscriptionTrainingsPage" */,
+const AnecdotesTrainingsView = lazy(() =>
+  import(
+    './views/AnecdotesTrainingsView/AnecdotesTrainingsView' /* webpackChunkName:"AnecdotesTrainingsView" */
+  ),
 );
-const UTranscriptionTrainingsPageView = lazy(
-  () =>
-    import(
-      './views/UTranscriptionTrainingsPageView/UTranscriptionTrainingsPageView.js'
-    ) /* webpackChunkName:"UTranscriptionTrainingsPage" */,
+const SentencesTrainingsView = lazy(() =>
+  import(
+    './views/SentencesTrainingsView/SentencesTrainingsView' /* webpackChunkName:"SentencesTrainingsView" */
+  ),
 );
-const UserView = lazy(
-  () => import('./views/UserView/UserView.js') /* webpackChunkName:"User" */,
+const TranscriptionTrainingsView = lazy(() =>
+  import(
+    './views/TranscriptionTrainingsView/TranscriptionTrainingsView.js' /* webpackChunkName:"TranscriptionTrainingsView" */
+  ),
 );
-const InfoView = lazy(() => import('./views/InfoView/InfoView'));
-const NotFoundView = lazy(() => import('./views/NotFoundView/NotFoundView'));
+const UserView = lazy(() =>
+  import('./views/UserView/UserView.js' /* webpackChunkName:"UserView" */),
+);
+const InfoView = lazy(() =>
+  import('./views/InfoView/InfoView' /* webpackChunkName:"InfoView" */),
+);
+const NotFoundView = lazy(() =>
+  import(
+    './views/NotFoundView/NotFoundView' /* webpackChunkName:"NotFoundView" */
+  ),
+);
 
 function App() {
   const dispatch = useDispatch();
@@ -81,19 +85,15 @@ function App() {
               </PublicRoute>
 
               <Route exact path="/anecdotes-trainings">
-                <AnecdotesTrainingsPageView />
+                <AnecdotesTrainingsView />
               </Route>
 
               <Route exact path="/sentences-trainings">
-                <SentencesTrainingsPageView />
+                <SentencesTrainingsView />
               </Route>
 
-              <Route exact path="/q-transcription-trainings">
-                <QTranscriptionTrainingsPageView />
-              </Route>
-
-              <PrivateRoute exact path="/u-transcription-trainings">
-                <UTranscriptionTrainingsPageView />
+              <PrivateRoute exact path="/transcription-trainings">
+                <TranscriptionTrainingsView />
               </PrivateRoute>
 
               <PrivateRoute exact path="/user">

@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import styles from './HomePage.module.css';
 import anecdotTrainingsImg from '../../public/pictures/anecdot_trainings.jpg';
 import sentencesTrainingsImg from '../../public/pictures/sentences_trainings.jpg';
-import qtranscription__trainingsImg from '../../public/pictures/qtranscription__trainings.jpg';
 import utranscription__trainingsImg from '../../public/pictures/utranscription__trainings.jpg';
 import plug__trainingsImg from '../../public/pictures/plug__trainings.jpg';
 
@@ -53,37 +52,21 @@ export default function HomePage() {
             />
           </Link>
         </li>
-        <li className={styles.LinksList__item}>
-          <Link
-            to={{
-              pathname: `${url}q-transcription-trainings/`,
-              state: { from: location },
-            }}
-          >
-            <h3 className={styles.LinksList__name}>
-              Q-transcription trainings
-            </h3>
-            <img
-              src={qtranscription__trainingsImg}
-              alt="Q-transcription trainings"
-              className={styles.LinksList__picture}
-            />
-          </Link>
-        </li>
+
         {isLoggedIn && (
           <li className={styles.LinksList__item}>
             <Link
               to={{
-                pathname: `${url}u-transcription-trainings/`,
+                pathname: `${url}transcription-trainings/`,
                 state: { from: location },
               }}
             >
               <h3 className={styles.LinksList__name}>
-                U-transcription trainings
+                Transcription trainings
               </h3>
               <img
                 src={utranscription__trainingsImg}
-                alt="U-transcription trainings"
+                alt="Transcription trainings"
                 className={styles.LinksList__picture}
               />
             </Link>

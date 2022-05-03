@@ -29,7 +29,7 @@ export default function AppBar() {
         )}
 
         {!mobileAppBarIsOpen && (
-          <Button className={styles.MenuButton}>Open Menu</Button>
+          <Button className={styles.MenuButton}>Menu</Button>
         )}
       </header>
     </div>

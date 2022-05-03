@@ -1,30 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
-import styles from './QTranscriptionTrainings.module.css';
 import PropTypes from 'prop-types';
-// import { throttle } from 'lodash';
+// import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import styles from './QEngTranscriptionTrainings.module.css';
 
-export default function QTranscriptionTrainings({ wordsArr }) {
+export default function QEngTranscriptionTrainings({ tasksArr }) {
   const [actualId, setActualId] = useState(0);
   const [losts, setLosts] = useState(0);
   const [attempts, setAttempts] = useState(0);
   const [resolved, setResolved] = useState(false);
-  const [wordId, setWordId] = useState(0);
+  const [taskId, setTaskId] = useState(0);
   const [originalArray, setOriginalArray] = useState([]);
   const [mixedArray, setMixedArray] = useState([]);
   const [resolvedArray, setResolvedArray] = useState([]);
 
   useEffect(() => {
-    if (wordsArr[wordId].qt) {
-      const index = [...wordsArr[wordId].qt].indexOf('/');
-      if (index !== -1) {
-        const arr = [...wordsArr[wordId].qt].splice(0, index);
-        setOriginalArray([...arr]);
-      } else {
-        setOriginalArray([...wordsArr[wordId].qt]);
-      }
-    }
-  }, [wordId, wordsArr]);
+    setOriginalArray([...tasksArr[taskId].eng]);
+  }, [taskId, tasksArr]);
 
   useEffect(() => {
     setMixedArray([
@@ -34,7 +26,7 @@ export default function QTranscriptionTrainings({ wordsArr }) {
     ]);
   }, [originalArray]);
 
-  const onClickSentenceButton = e => {
+  const onClickCharButton = e => {
     const buttonValue = e.currentTarget.getAttribute('value');
     const id = Number.parseInt(e.currentTarget.getAttribute('data-id'));
 
@@ -76,11 +68,12 @@ export default function QTranscriptionTrainings({ wordsArr }) {
       setResolved(true);
     }, 300);
   };
+
   const onClickButtonNext = () => {
-    if (wordId >= wordsArr.length - 1) {
-      setWordId(0);
+    if (taskId >= tasksArr.length - 1) {
+      setTaskId(0);
     } else {
-      setWordId(prevState => prevState + 1);
+      setTaskId(prevState => prevState + 1);
     }
     setActualId(0);
     setLosts(0);
@@ -90,18 +83,23 @@ export default function QTranscriptionTrainings({ wordsArr }) {
   };
 
   return (
-    <div className={styles.TranscriptionTrainings}>
-      <h3>English word:</h3>
-      {!wordsArr[wordId].eng && (
+    <>
+      <h3>Q-transcription:</h3>
+      {!tasksArr[taskId].qtrn && (
         <h3 className={styles.warning}>no available</h3>
       )}
-      <p className={styles.trainingWord}>{wordsArr[wordId].eng}</p>
+      <p className={styles.trainingWord}>{tasksArr[taskId].qtrn}</p>
+      <h3>Translation:</h3>
+      {!tasksArr[taskId].rus && (
+        <h3 className={styles.warning}>no available</h3>
+      )}
+      <p className={styles.trainslation}>{tasksArr[taskId].rus}</p>
 
-      <h3>Select Q-transcription for the following english word:</h3>
+      <h3>Make a word from the letters according to this Q-transcription:</h3>
       <ul className={styles.fealdsList}>
         <li className={styles.fealdsList__item}>
           <h4 className={styles.fealdHeader}>Unresolved field</h4>
-          {!wordsArr[wordId].qt && (
+          {!tasksArr[taskId].eng && (
             <h3 className={styles.warning}>no available</h3>
           )}
           <ul className={styles.listTags}>
@@ -110,8 +108,7 @@ export default function QTranscriptionTrainings({ wordsArr }) {
                 <Button
                   variant="primary"
                   data-id={id}
-                  // onClick={throttle(onClickButton, 500)}
-                  onClick={onClickSentenceButton}
+                  onClick={onClickCharButton}
                   value={elem}
                   className={styles.listTags__button}
                 >
@@ -149,16 +146,17 @@ export default function QTranscriptionTrainings({ wordsArr }) {
           </ul>
         </li>
       </ul>
-    </div>
+    </>
   );
 }
 
-QTranscriptionTrainings.propTypes = {
-  wordsArr: PropTypes.arrayOf(
+QEngTranscriptionTrainings.propTypes = {
+  tasksArr: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      _id: PropTypes.number.isRequired,
       eng: PropTypes.string.isRequired,
-      qt: PropTypes.string.isRequired,
+      qtrn: PropTypes.string.isRequired,
+      rus: PropTypes.string.isRequired,
     }),
   ),
 };

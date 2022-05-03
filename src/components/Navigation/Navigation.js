@@ -38,25 +38,15 @@ const Navigation = () => {
             Sentences trainings
           </NavLink>
         </li>
-        <li className={styles.NavigationList__item}>
-          <NavLink
-            exact
-            to="/q-transcription-trainings"
-            className={styles.link}
-            activeClassName={styles.activeLink}
-          >
-            Q-transcription trainings
-          </NavLink>
-        </li>
         {isLoggedIn && (
           <li className={styles.NavigationList__item}>
             <NavLink
               exact
-              to="/u-transcription-trainings"
+              to="/transcription-trainings"
               className={styles.link}
               activeClassName={styles.activeLink}
             >
-              U-transcription trainings
+              Transcription trainings
             </NavLink>
           </li>
         )}

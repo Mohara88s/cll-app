@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 // import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import styles from './UTranscriptionTrainings.module.css';
+import styles from './EngUTranscriptionTrainings.module.css';
 
-export default function UTranscriptionTrainings({ tasksArr }) {
+export default function EngUTranscriptionTrainings({ tasksArr }) {
   const [actualId, setActualId] = useState(0);
   const [losts, setLosts] = useState(0);
   const [attempts, setAttempts] = useState(0);
@@ -83,7 +83,7 @@ export default function UTranscriptionTrainings({ tasksArr }) {
   };
 
   return (
-    <div className={styles.UTranscriptionTrainings}>
+    <>
       <h3>English word:</h3>
       {!tasksArr[taskId].eng && (
         <h3 className={styles.warning}>no available</h3>
@@ -146,12 +146,12 @@ export default function UTranscriptionTrainings({ tasksArr }) {
           </ul>
         </li>
       </ul>
-    </div>
+    </>
   );
 }
 
-UTranscriptionTrainings.propTypes = {
-  wordsArr: PropTypes.arrayOf(
+EngUTranscriptionTrainings.propTypes = {
+  tasksArr: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.number.isRequired,
       eng: PropTypes.string.isRequired,

@@ -1,0 +1,22 @@
+.optionsButtonsList {
+  display: flex;
+  padding: 0;
+}
+.optionsButtonsList__item {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+.trainingButtonsList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+}
+.trainingButtonsList__item {
+  width: 250px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
