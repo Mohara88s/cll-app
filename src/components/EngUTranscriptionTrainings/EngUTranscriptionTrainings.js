@@ -93,7 +93,9 @@ export default function EngUTranscriptionTrainings({ tasksArr }) {
       {!tasksArr[taskId].rus && (
         <h3 className={styles.warning}>no available</h3>
       )}
-      <p className={styles.trainslation}>{tasksArr[taskId].rus}</p>
+      <p className={styles.trainslation}>
+        {tasksArr[taskId].rus.split('/')[0]}
+      </p>
 
       <h3>Select U-transcription for the following english word:</h3>
       <ul className={styles.fealdsList}>
