@@ -1,9 +1,10 @@
 .optionsButtonsList {
   display: flex;
+  justify-content: space-around;
   padding: 0;
 }
 .optionsButtonsList__item {
-  width: 50%;
+  width: 45%;
   display: flex;
   justify-content: center;
 }

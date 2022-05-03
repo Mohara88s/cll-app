@@ -11,7 +11,7 @@ export default function UserMenu() {
   return (
     <div className={styles.UserMenu}>
       <p className={styles.greating}>
-        Hallo
+        Hello
         <Link
           to={{
             pathname: `/user/`,
