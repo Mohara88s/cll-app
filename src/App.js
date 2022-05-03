@@ -7,6 +7,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PublicRoute from './components/PublicRoute/PublicRoute';
 
 import Container from './components/Container/Container';
+import MobileAppBar from './components/MobileAppBar/MobileAppBar';
 import AppBar from './components/AppBar/AppBar';
 
 import { authOperations, authSelectors } from './redux/auth';
@@ -63,6 +64,7 @@ function App() {
     !isFetchingCurrentUser && (
       <div>
         <AppBar />
+        <MobileAppBar />
         <Container>
           <Suspense fallback={<Spinner animation="border" variant="primary" />}>
             <Switch>

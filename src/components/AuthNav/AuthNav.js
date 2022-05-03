@@ -10,7 +10,7 @@ export default function AuthNav() {
           <NavLink
             to="/register"
             exact
-            className={styles.link}
+            className={styles.AuthNav__link}
             activeClassName={styles.activeLink}
           >
             Registation
@@ -20,7 +20,7 @@ export default function AuthNav() {
           <NavLink
             to="/login"
             exact
-            className={styles.link}
+            className={styles.AuthNav__link}
             activeClassName={styles.activeLink}
           >
             Login
