@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import styles from './HomePage.module.css';
 import anecdotTrainingsImg from '../../public/pictures/anecdot_trainings.jpg';
 import sentencesTrainingsImg from '../../public/pictures/sentences_trainings.jpg';
-import utranscription__trainingsImg from '../../public/pictures/utranscription__trainings.jpg';
+import transcription__trainingsImg from '../../public/pictures/transcription__trainings.jpg';
 import plug__trainingsImg from '../../public/pictures/plug__trainings.jpg';
 
 export default function HomePage() {
@@ -65,7 +65,7 @@ export default function HomePage() {
                 Transcription trainings
               </h3>
               <img
-                src={utranscription__trainingsImg}
+                src={transcription__trainingsImg}
                 alt="Transcription trainings"
                 className={styles.LinksList__picture}
               />

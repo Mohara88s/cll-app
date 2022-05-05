@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
+import TaskCongratulation from '../TaskCongratulation/TaskCongratulation';
+import TrainingCongratulation from '../TrainingCongratulation/TrainingCongratulation';
 import PropTypes from 'prop-types';
-// import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './EngUTranscriptionTrainings.module.css';
 
-export default function EngUTranscriptionTrainings({ tasksArr }) {
+export default function EngUTranscriptionTrainings({
+  tasksArr,
+  onResolvedTraining,
+}) {
   const [actualId, setActualId] = useState(0);
   const [losts, setLosts] = useState(0);
   const [attempts, setAttempts] = useState(0);
@@ -13,6 +17,7 @@ export default function EngUTranscriptionTrainings({ tasksArr }) {
   const [originalArray, setOriginalArray] = useState([]);
   const [mixedArray, setMixedArray] = useState([]);
   const [resolvedArray, setResolvedArray] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
     setOriginalArray([...tasksArr[taskId].utrn]);
@@ -71,7 +76,7 @@ export default function EngUTranscriptionTrainings({ tasksArr }) {
 
   const onClickButtonNext = () => {
     if (taskId >= tasksArr.length - 1) {
-      setTaskId(0);
+      setModalShow(true);
     } else {
       setTaskId(prevState => prevState + 1);
     }
@@ -80,6 +85,11 @@ export default function EngUTranscriptionTrainings({ tasksArr }) {
     setAttempts(0);
     setResolved(false);
     setResolvedArray([]);
+  };
+
+  const onCloseModal = () => {
+    setModalShow(false);
+    onResolvedTraining();
   };
 
   return (
@@ -120,19 +130,11 @@ export default function EngUTranscriptionTrainings({ tasksArr }) {
             ))}
           </ul>
           {resolved && (
-            <div className={styles.congratulations}>
-              <h3>Congratulations, you're great!!!</h3>
-              <p>Are you ready for a new test?</p>
-              <p>Then press NEXT!</p>
-              <Button variant="warning" onClick={onClickButtonNext}>
-                NEXT
-              </Button>
-              <div className={styles.statistics}>
-                <h5>Сurrent statistics:</h5>
-                <p>Attempts: {attempts}</p>
-                <p>Losts: {losts}</p>
-              </div>
-            </div>
+            <TaskCongratulation
+              attempts={attempts}
+              losts={losts}
+              onClickButtonNext={onClickButtonNext}
+            />
           )}
         </li>
         <li className={styles.fealdsList__item}>
@@ -148,6 +150,10 @@ export default function EngUTranscriptionTrainings({ tasksArr }) {
           </ul>
         </li>
       </ul>
+      <TrainingCongratulation
+        modalShow={modalShow}
+        onHandleClose={onCloseModal}
+      />
     </>
   );
 }

@@ -1,0 +1,15 @@
+.Modal__Body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  background-color: bisque;
+}
+
+.Modal__Body p {
+  text-align: center;
+}
+.Modal__trophyImg {
+  width: 75%;
+  margin-bottom: 20px;
+}

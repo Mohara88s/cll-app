@@ -60,16 +60,6 @@ h4 {
   padding-left: 1rem;
   padding-right: 1rem;
 }
-.congratulations {
-  color: red;
-  text-align: center;
-}
-.statistics {
-  color: blue;
-  display: flex;
-  justify-content: space-between;
-  padding: 5px;
-}
 .warning {
   color: red;
 }

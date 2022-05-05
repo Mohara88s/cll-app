@@ -45,6 +45,11 @@ export default function TranscriptionTrainingsPage() {
     setOwnDictionarysIsOpen(true);
   };
 
+  const onResolvedTraining = () => {
+    setOwnDictionarysIsOpen(true);
+    setTrainingButtonsIsOpen(true);
+    setSelectedTraining('');
+  };
   return (
     <div>
       <h2>Transcription trainings</h2>
@@ -108,6 +113,7 @@ export default function TranscriptionTrainingsPage() {
         selectedTaining === trainings[0] && (
           <EngUTranscriptionTrainings
             tasksArr={currentDictionary.ownDictionaryTasks}
+            onResolvedTraining={onResolvedTraining}
           />
         )}
 
@@ -116,6 +122,7 @@ export default function TranscriptionTrainingsPage() {
         selectedTaining === trainings[1] && (
           <UEngTranscriptionTrainings
             tasksArr={currentDictionary.ownDictionaryTasks}
+            onResolvedTraining={onResolvedTraining}
           />
         )}
 
@@ -124,6 +131,7 @@ export default function TranscriptionTrainingsPage() {
         selectedTaining === trainings[2] && (
           <EngQTranscriptionTrainings
             tasksArr={currentDictionary.ownDictionaryTasks}
+            onResolvedTraining={onResolvedTraining}
           />
         )}
 
@@ -132,6 +140,7 @@ export default function TranscriptionTrainingsPage() {
         selectedTaining === trainings[3] && (
           <QEngTranscriptionTrainings
             tasksArr={currentDictionary.ownDictionaryTasks}
+            onResolvedTraining={onResolvedTraining}
           />
         )}
     </div>
