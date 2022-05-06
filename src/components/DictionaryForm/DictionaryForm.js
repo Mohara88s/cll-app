@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Table, Spinner } from 'react-bootstrap';
-import { cleanTasksSet } from '../../redux/transcription-tasks/transcription-tasks-actions';
+import { updateTasksSet } from '../../redux/transcription-tasks/transcription-tasks-actions';
 import transcriptionTasksSelectors from '../../redux/transcription-tasks/transcription-tasks-selectors';
 import ownDictionarysSelectors from '../../redux/own-dictionarys/own-dictionarys-selectors';
 import { addOwnDictionary } from '../../redux/own-dictionarys/own-dictionarys-operaions';
@@ -28,6 +28,10 @@ export default function DictionaryForm() {
   const dictionaryNameHandleChange = ({ target: { value } }) => {
     setDictionaryName(value);
   };
+  const deleteTask = ({ target: { name } }) => {
+    const newTasksSet = tasksSet.filter(e => e._id !== name);
+    dispatch(updateTasksSet(newTasksSet));
+  };
 
   const onAddSetToOwnDictionarysClick = () => {
     dispatch(
@@ -40,10 +44,10 @@ export default function DictionaryForm() {
 
   useEffect(() => {
     if (addDictionarySuccess) {
-      cleanTasksSet();
+      dispatch(updateTasksSet([]));
       setDictionaryName('');
     }
-  }, [addDictionarySuccess]);
+  }, [dispatch, addDictionarySuccess]);
 
   return (
     <div className={styles.DictionaryForm}>
@@ -68,8 +72,8 @@ export default function DictionaryForm() {
           <Table striped bordered hover className={styles.tasksTable}>
             <thead>
               <tr>
-                <th>english</th>
-                <th>u-trancription</th>
+                <th>English</th>
+                <th className={styles.tasksTable__th__Button}>Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -77,7 +81,16 @@ export default function DictionaryForm() {
                 tasksSet.map(({ _id, eng, utrn }) => (
                   <tr key={_id}>
                     <td>{eng}</td>
-                    <td>{utrn}</td>
+                    <td>
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        name={_id}
+                        onClick={deleteTask}
+                      >
+                        Delete
+                      </Button>
+                    </td>
                   </tr>
                 ))}
             </tbody>

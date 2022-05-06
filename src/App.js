@@ -14,6 +14,7 @@ import { authOperations, authSelectors } from './redux/auth';
 
 import 'modern-normalize/modern-normalize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.module.css';
 
 const HomePageView = lazy(() =>
   import(

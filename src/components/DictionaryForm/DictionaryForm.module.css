@@ -3,8 +3,11 @@
   flex-flow: column-reverse;
 }
 .tasksTable {
-  border: 1px solid;
+  border: 2px solid;
   height: fit-content;
+}
+.tasksTable__th__Button {
+  width: 80px;
 }
 .tasksTable__button {
   width: 100%;

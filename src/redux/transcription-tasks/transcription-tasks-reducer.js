@@ -4,7 +4,7 @@ import {
   fetchTranscriptionTasksError,
   changeFilter,
   addToTasksSet,
-  cleanTasksSet,
+  updateTasksSet,
 } from './transcription-tasks-actions';
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
@@ -33,7 +33,9 @@ const tasksSet = createReducer([], {
   [addToTasksSet]: (state, { payload }) => {
     return [...state, payload];
   },
-  [cleanTasksSet]: () => [],
+  [updateTasksSet]: (_, { payload }) => {
+    return [...payload];
+  },
 });
 
 export default combineReducers({
