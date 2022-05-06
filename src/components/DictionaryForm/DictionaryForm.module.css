@@ -1,26 +1,20 @@
-.box {
+.DictionaryForm__box {
   display: flex;
   flex-flow: column-reverse;
 }
-
-.wordsTable {
+.tasksTable {
   border: 1px solid;
   height: fit-content;
 }
-
-.wordsTable__button {
+.tasksTable__button {
   width: 100%;
 }
-
 @media screen and (min-width: 900px) {
-  .box {
+  .DictionaryForm__box {
     justify-content: space-between;
     flex-direction: row;
   }
-  .formsBox {
-    width: 70%;
-  }
-  .wordsTableBox {
+  .tasksTableBox {
     width: 28%;
   }
 }
