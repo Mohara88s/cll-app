@@ -94,7 +94,7 @@ export default function TasksFilter() {
                 </Dropdown.Menu>
               </Dropdown>
             </td>
-            <td className={styles.Table__td__Button}>Add</td>
+            <td className={styles.Table__td__Button}></td>
           </tr>
         </thead>
         {!loading && (

@@ -72,11 +72,11 @@ export default function DictionaryForm() {
           <Table striped bordered hover className={styles.tasksTable}>
             <thead>
               <tr>
-                <th>English</th>
-                <th className={styles.tasksTable__th__Button}>Delete</th>
+                <td>Dictionary words:</td>
+                <td className={styles.tasksTable__td__Button}></td>
               </tr>
             </thead>
-            <tbody>
+            <tbody className={styles.tasksTable__tbody}>
               {tasksSet &&
                 tasksSet.map(({ _id, eng, utrn }) => (
                   <tr key={_id}>

@@ -2,12 +2,15 @@
   display: flex;
   flex-flow: column-reverse;
 }
-.tasksTable {
+/* .tasksTable {
   border: 2px solid;
   height: fit-content;
-}
-.tasksTable__th__Button {
+} */
+.tasksTable__td__Button {
   width: 80px;
+}
+.tasksTable .tasksTable__tbody {
+  border-top: 0px;
 }
 .tasksTable__button {
   width: 100%;
