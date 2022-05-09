@@ -30,7 +30,18 @@ export const addOwnDictionary = wordsSet => async dispatch => {
     const { data } = await axios.patch(`/own-dictionarys`, wordsSet);
     dispatch(addOwnDictionarySuccess(data.ownDictionarys));
   } catch (error) {
-    dispatch(addOwnDictionaryError(error.response.data.message));
+    if (
+      error.response.data.message.split(':')[0] ===
+      'E11000 duplicate key error collection'
+    ) {
+      dispatch(
+        addOwnDictionaryError(
+          'Dictionary name is already in use in the dictionary database. Try another name.',
+        ),
+      );
+    } else {
+      dispatch(addOwnDictionaryError(error.response.data.message));
+    }
   }
 };
 
