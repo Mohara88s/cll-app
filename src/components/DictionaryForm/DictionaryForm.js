@@ -104,7 +104,17 @@ export default function DictionaryForm() {
               <Spinner animation="border" as="span" size="sm" />
             )}
           </Button>
-          {addDictionaryError && <ErrorMessage message={addDictionaryError} />}
+
+          {addDictionaryError && (
+            <ErrorMessage
+              message={
+                addDictionaryError.split(':')[0] ===
+                'E11000 duplicate key error collection'
+                  ? 'Dictionary name is already in use in the dictionary database. Try another name.'
+                  : addDictionaryError
+              }
+            />
+          )}
         </div>
       </div>
     </div>
