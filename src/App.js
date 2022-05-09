@@ -29,9 +29,9 @@ const RegisterView = lazy(() =>
 const LoginView = lazy(() =>
   import('./views/LoginView/LoginView' /* webpackChunkName:"LoginView" */),
 );
-const AnecdotesTrainingsView = lazy(() =>
+const JokesTrainingsView = lazy(() =>
   import(
-    './views/AnecdotesTrainingsView/AnecdotesTrainingsView' /* webpackChunkName:"AnecdotesTrainingsView" */
+    './views/JokesTrainingsView/JokesTrainingsView' /* webpackChunkName:"JokesTrainingsView" */
   ),
 );
 const SentencesTrainingsView = lazy(() =>
@@ -85,8 +85,8 @@ function App() {
                 <LoginView />
               </PublicRoute>
 
-              <Route exact path="/anecdotes-trainings">
-                <AnecdotesTrainingsView />
+              <Route exact path="/jokes-trainings">
+                <JokesTrainingsView />
               </Route>
 
               <Route exact path="/sentences-trainings">

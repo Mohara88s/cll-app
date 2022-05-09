@@ -1,4 +1,4 @@
-import data from '../../database/anecdotes.json';
+import data from '../../database/jokes.json';
 import { useState, useEffect } from 'react';
 import SentencesTrainings from '../../components/SentencesTrainings/SentencesTrainings';
 import ChooseLanguages from '../../components/ChooseLanguages/ChooseLanguages';

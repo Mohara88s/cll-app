@@ -21,11 +21,11 @@ const Navigation = () => {
         <li className={styles.NavigationList__item}>
           <NavLink
             exact
-            to="/anecdotes-trainings"
+            to="/jokes-trainings"
             className={styles.link}
             activeClassName={styles.activeLink}
           >
-            Anecdotes trainings
+            Jokes trainings
           </NavLink>
         </li>
         <li className={styles.NavigationList__item}>

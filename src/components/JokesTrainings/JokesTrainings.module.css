@@ -1,7 +1,7 @@
-.anecdotFealdsList {
+.jokeFealdsList {
   padding-left: 0;
 }
-.anecdotFealdsList__item {
+.jokeFealdsList__item {
   min-height: 250px;
   margin-right: 5px;
   margin-left: 5px;
@@ -11,15 +11,15 @@
   border-radius: 2%;
 }
 @media screen and (min-width: 720px) {
-  .anecdotFealdsList {
+  .jokeFealdsList {
     display: flex;
   }
-  .anecdotFealdsList__item {
+  .jokeFealdsList__item {
     width: calc(100% / 2 - 20px);
     min-height: 500px;
   }
 }
-.anecdotFealdHeader {
+.jokeFealdHeader {
   border-bottom: 1px solid;
   padding-bottom: 5px;
 }

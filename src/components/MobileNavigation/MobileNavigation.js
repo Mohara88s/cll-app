@@ -22,11 +22,11 @@ const MobileNavigation = () => {
         <li className={styles.MobileNavigationList__item}>
           <NavLink
             exact
-            to="/anecdotes-trainings"
+            to="/jokes-trainings"
             className={styles.MobileNavigationList__link}
             activeClassName={styles.activeLink}
           >
-            Anecdotes trainings
+            Jokes trainings
           </NavLink>
         </li>
         <li className={styles.MobileNavigationList__item}>
