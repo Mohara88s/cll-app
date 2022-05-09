@@ -5,9 +5,9 @@ import { Button, Card, Spinner } from 'react-bootstrap';
 import ownDictionarysSelectors from '../../redux/own-dictionarys/own-dictionarys-selectors';
 import {
   fetchOwnDictionarys,
-  fetchOwnDictionary,
   deleteOwnDictionary,
 } from '../../redux/own-dictionarys/own-dictionarys-operaions';
+import { changeCurrentDictionary } from '../../redux/own-dictionarys/own-dictionarys-actions';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './OwnDictionarys.module.css';
 
@@ -22,7 +22,8 @@ export default function OwnDictionarys({ advancedMode = false }) {
   }, [dispatch]);
 
   const onGoTrainingBtn = ({ target: { name } }) => {
-    dispatch(fetchOwnDictionary(name));
+    const currentDictionary = ownDictionarys.find(e => e._id === name);
+    dispatch(changeCurrentDictionary(currentDictionary));
   };
 
   // const onEditBtn = ({ target: { name } }) => {

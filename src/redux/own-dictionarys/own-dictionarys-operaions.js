@@ -5,9 +5,6 @@ import {
   addOwnDictionaryRequest,
   addOwnDictionarySuccess,
   addOwnDictionaryError,
-  fetchOwnDictionaryRequest,
-  fetchOwnDictionarySuccess,
-  fetchOwnDictionaryError,
   deleteOwnDictionaryRequest,
   deleteOwnDictionarySuccess,
   deleteOwnDictionaryError,
@@ -30,28 +27,7 @@ export const addOwnDictionary = wordsSet => async dispatch => {
     const { data } = await axios.patch(`/own-dictionarys`, wordsSet);
     dispatch(addOwnDictionarySuccess(data.ownDictionarys));
   } catch (error) {
-    if (
-      error.response.data.message.split(':')[0] ===
-      'E11000 duplicate key error collection'
-    ) {
-      dispatch(
-        addOwnDictionaryError(
-          'Dictionary name is already in use in the dictionary database. Try another name.',
-        ),
-      );
-    } else {
-      dispatch(addOwnDictionaryError(error.response.data.message));
-    }
-  }
-};
-
-export const fetchOwnDictionary = dictionaryId => async dispatch => {
-  dispatch(fetchOwnDictionaryRequest());
-  try {
-    const { data } = await axios.get(`/own-dictionarys/${dictionaryId}`);
-    dispatch(fetchOwnDictionarySuccess(data.ownDictionary));
-  } catch (error) {
-    dispatch(fetchOwnDictionaryError(error.response.data.message));
+    dispatch(addOwnDictionaryError(error.response.data.message));
   }
 };
 

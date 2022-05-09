@@ -1,5 +1,9 @@
 import { createAction } from '@reduxjs/toolkit';
 
+export const changeCurrentDictionary = createAction(
+  'own-dictionarys/changeCurrentDictionary',
+);
+
 export const fetchOwnDictionarysRequest = createAction(
   'own-dictionarys/fetchOwnDictionarysRequest',
 );
@@ -17,16 +21,6 @@ export const addOwnDictionarySuccess = createAction(
   'own-dictionarys/addOwnDictionarySuccess',
 );
 export const addOwnDictionaryError = createAction('user/addOwnDictionaryError');
-
-export const fetchOwnDictionaryRequest = createAction(
-  'own-dictionarys/fetchOwnDictionaryRequest',
-);
-export const fetchOwnDictionarySuccess = createAction(
-  'own-dictionarys/fetchOwnDictionarySuccess',
-);
-export const fetchOwnDictionaryError = createAction(
-  'own-dictionarys/fetchOwnDictionaryError',
-);
 
 export const deleteOwnDictionaryRequest = createAction(
   'own-dictionarys/deleteOwnDictionaryRequest',
