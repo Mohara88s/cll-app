@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authOperations, authSelectors } from '../../redux/auth';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Spinner } from 'react-bootstrap';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './LoginForm.module.css';
 
@@ -14,6 +14,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const authError = useSelector(authSelectors.getAuthError);
+  const loading = useSelector(authSelectors.getLoading);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -60,7 +61,8 @@ export default function LoginForm() {
           />
         </Form.Group>
         <Button className={styles.button} type="submit">
-          Login
+          {!loading && <span>Login</span>}
+          {loading && <Spinner animation="border" as="span" size="sm" />}
         </Button>
       </Form>
 

@@ -8,29 +8,40 @@ const initialState = {
   isFetchingCurrentUser: true,
   authError: null,
   regError: null,
+  loading: false,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducers: {
+    [authOperations.signup.pending](state) {
+      state.loading = true;
+    },
     [authOperations.signup.fulfilled](state, action) {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
       state.regError = null;
+      state.loading = false;
     },
     [authOperations.signup.rejected](state, action) {
       state.regError = action.payload;
+      state.loading = false;
+    },
+    [authOperations.signin.pending](state) {
+      state.loading = true;
     },
     [authOperations.signin.fulfilled](state, action) {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
       state.authError = null;
+      state.loading = false;
     },
     [authOperations.signin.rejected](state, action) {
       state.authError = action.payload;
+      state.loading = false;
     },
     [authOperations.signout.fulfilled](state, action) {
       state.user = { name: null, email: null };

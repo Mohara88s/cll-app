@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authOperations, authSelectors } from '../../redux/auth';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Spinner } from 'react-bootstrap';
 import styles from './RegistrationForm.module.css';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
@@ -15,6 +15,7 @@ export default function RegistrationForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const regError = useSelector(authSelectors.getRegError);
+  const loading = useSelector(authSelectors.getLoading);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -79,7 +80,8 @@ export default function RegistrationForm() {
         </Form.Group>
 
         <Button className={styles.button} type="submit">
-          Registration
+          {!loading && <span>Registration</span>}
+          {loading && <Spinner animation="border" as="span" size="sm" />}
         </Button>
       </Form>
 
