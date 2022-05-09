@@ -16,11 +16,12 @@ import 'modern-normalize/modern-normalize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.module.css';
 
-const HomePageView = lazy(() =>
-  import(
-    './views/HomePageView/HomePageView.js' /* webpackChunkName:"HomePageView" */
-  ),
-);
+import HomePageView from './views/HomePageView/HomePageView.js';
+// const HomePageView = lazy(() =>
+//   import(
+//     './views/HomePageView/HomePageView.js' /* webpackChunkName:"HomePageView" */
+//   ),
+// );
 const RegisterView = lazy(() =>
   import(
     './views/RegisterView/RegisterView' /* webpackChunkName:"RegisterView" */
