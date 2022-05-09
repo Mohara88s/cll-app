@@ -56,7 +56,7 @@ export default function DictionaryForm() {
         <TasksFilter />
 
         <div className={styles.tasksTableBox}>
-          <h4>New dictionary:</h4>
+          <h5 className={styles.tasksTableBox__header}>New dictionary:</h5>
           <Form autoComplete="off">
             <Form.Group className="mb-3">
               <Form.Label>Dictionary name:</Form.Label>

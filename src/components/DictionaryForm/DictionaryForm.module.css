@@ -2,10 +2,9 @@
   display: flex;
   flex-flow: column-reverse;
 }
-/* .tasksTable {
-  border: 2px solid;
-  height: fit-content;
-} */
+.tasksTableBox__header {
+  text-align: center;
+}
 .tasksTable__td__Button {
   width: 80px;
 }
@@ -14,6 +13,7 @@
 }
 .tasksTable__button {
   width: 100%;
+  margin-bottom: 20px;
 }
 @media screen and (min-width: 900px) {
   .DictionaryForm__box {
