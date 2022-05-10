@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Table, Spinner } from 'react-bootstrap';
 import { updateTasksSet } from '../../redux/transcription-tasks/transcription-tasks-actions';
 import transcriptionTasksSelectors from '../../redux/transcription-tasks/transcription-tasks-selectors';
-import ownDictionarysSelectors from '../../redux/own-dictionarys/own-dictionarys-selectors';
-import { addOwnDictionary } from '../../redux/own-dictionarys/own-dictionarys-operaions';
+import ownDictionariesSelectors from '../../redux/own-dictionaries/own-dictionaries-selectors';
+import { addOwnDictionary } from '../../redux/own-dictionaries/own-dictionaries-operaions';
 import TasksFilter from '../TasksFilter/TasksFilter';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './DictionaryForm.module.css';
@@ -16,13 +16,13 @@ export default function DictionaryForm() {
     transcriptionTasksSelectors.getTranscriptionTasksSet,
   );
   const addDictionaryLoading = useSelector(
-    ownDictionarysSelectors.getAddDictionaryLoading,
+    ownDictionariesSelectors.getAddDictionaryLoading,
   );
   const addDictionaryError = useSelector(
-    ownDictionarysSelectors.getAddDictionaryError,
+    ownDictionariesSelectors.getAddDictionaryError,
   );
   const addDictionarySuccess = useSelector(
-    ownDictionarysSelectors.getAddDictionarySuccess,
+    ownDictionariesSelectors.getAddDictionarySuccess,
   );
 
   const dictionaryNameHandleChange = ({ target: { value } }) => {
@@ -33,7 +33,7 @@ export default function DictionaryForm() {
     dispatch(updateTasksSet(newTasksSet));
   };
 
-  const onAddSetToOwnDictionarysClick = () => {
+  const onAddSetToOwnDictionariesClick = () => {
     dispatch(
       addOwnDictionary({
         ownDictionaryName: dictionaryName,
@@ -97,7 +97,7 @@ export default function DictionaryForm() {
           </Table>
           <Button
             className={styles.tasksTable__button}
-            onClick={onAddSetToOwnDictionarysClick}
+            onClick={onAddSetToOwnDictionariesClick}
           >
             {!addDictionaryLoading && <span>Add new own dictionary</span>}
             {addDictionaryLoading && (
@@ -105,16 +105,7 @@ export default function DictionaryForm() {
             )}
           </Button>
 
-          {addDictionaryError && (
-            <ErrorMessage
-              message={
-                addDictionaryError.split(':')[0] ===
-                'E11000 duplicate key error collection'
-                  ? 'Dictionary name is already in use in the dictionary database. Try another name.'
-                  : addDictionaryError
-              }
-            />
-          )}
+          {addDictionaryError && <ErrorMessage message={addDictionaryError} />}
         </div>
       </div>
     </div>

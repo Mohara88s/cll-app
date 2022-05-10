@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import OwnDictionarys from '../OwnDictionarys/OwnDictionarys';
+import OwnDictionaries from '../OwnDictionaries/OwnDictionaries';
 import EngUTranscriptionTrainings from '../EngUTranscriptionTrainings/EngUTranscriptionTrainings';
 import UEngTranscriptionTrainings from '../UEngTranscriptionTrainings/UEngTranscriptionTrainings';
 import EngQTranscriptionTrainings from '../EngQTranscriptionTrainings/EngQTranscriptionTrainings';
 import QEngTranscriptionTrainings from '../QEngTranscriptionTrainings/QEngTranscriptionTrainings';
 import { Button } from 'react-bootstrap';
-import ownDictionarysSelectors from '../../redux/own-dictionarys/own-dictionarys-selectors';
+import ownDictionariesSelectors from '../../redux/own-dictionaries/own-dictionaries-selectors';
 import styles from './TranscriptionTrainingsPage.module.css';
 
 const trainings = [
@@ -20,7 +20,7 @@ export default function TranscriptionTrainingsPage() {
   useEffect(() => {
     window.scrollBy(0, -1000);
   }, []);
-  const [ownDictionarysIsOpen, setOwnDictionarysIsOpen] = useState(true);
+  const [ownDictionariesIsOpen, setOwnDictionariesIsOpen] = useState(true);
   const [trainingButtonsIsOpen, setTrainingButtonsIsOpen] = useState(true);
   const [selectedTaining, setSelectedTraining] = useState('');
 
@@ -34,19 +34,19 @@ export default function TranscriptionTrainingsPage() {
   };
 
   const currentDictionary = useSelector(
-    ownDictionarysSelectors.getCurrentDictionary,
+    ownDictionariesSelectors.getCurrentDictionary,
   );
 
   useEffect(() => {
-    if (currentDictionary.ownDictionaryName) setOwnDictionarysIsOpen(false);
+    if (currentDictionary.ownDictionaryName) setOwnDictionariesIsOpen(false);
   }, [currentDictionary]);
 
   const onChooseDictionaryClick = () => {
-    setOwnDictionarysIsOpen(true);
+    setOwnDictionariesIsOpen(true);
   };
 
   const onResolvedTraining = () => {
-    setOwnDictionarysIsOpen(true);
+    setOwnDictionariesIsOpen(true);
     setTrainingButtonsIsOpen(true);
     setSelectedTraining('');
   };
@@ -66,7 +66,7 @@ export default function TranscriptionTrainingsPage() {
           )}
         </li>
         <li className={styles.optionsButtonsList__item}>
-          {!ownDictionarysIsOpen && (
+          {!ownDictionariesIsOpen && (
             <Button
               name="chooseDictionary"
               onClick={onChooseDictionaryClick}
@@ -101,14 +101,14 @@ export default function TranscriptionTrainingsPage() {
         </>
       )}
 
-      {ownDictionarysIsOpen && (
+      {ownDictionariesIsOpen && (
         <>
           <h3>Choose own dictionary for training:</h3>
-          <OwnDictionarys />
+          <OwnDictionaries />
         </>
       )}
 
-      {!ownDictionarysIsOpen &&
+      {!ownDictionariesIsOpen &&
         currentDictionary.ownDictionaryName &&
         selectedTaining === trainings[0] && (
           <EngUTranscriptionTrainings
@@ -117,7 +117,7 @@ export default function TranscriptionTrainingsPage() {
           />
         )}
 
-      {!ownDictionarysIsOpen &&
+      {!ownDictionariesIsOpen &&
         currentDictionary.ownDictionaryName &&
         selectedTaining === trainings[1] && (
           <UEngTranscriptionTrainings
@@ -126,7 +126,7 @@ export default function TranscriptionTrainingsPage() {
           />
         )}
 
-      {!ownDictionarysIsOpen &&
+      {!ownDictionariesIsOpen &&
         currentDictionary.ownDictionaryName &&
         selectedTaining === trainings[2] && (
           <EngQTranscriptionTrainings
@@ -135,7 +135,7 @@ export default function TranscriptionTrainingsPage() {
           />
         )}
 
-      {!ownDictionarysIsOpen &&
+      {!ownDictionariesIsOpen &&
         currentDictionary.ownDictionaryName &&
         selectedTaining === trainings[3] && (
           <QEngTranscriptionTrainings

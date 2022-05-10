@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import OwnDictionarys from '../OwnDictionarys/OwnDictionarys';
+import OwnDictionaries from '../OwnDictionaries/OwnDictionaries';
 import DictionaryForm from '../DictionaryForm/DictionaryForm';
 import { Tabs, Tab, Spinner } from 'react-bootstrap';
 
@@ -8,8 +8,8 @@ export default function UserPage() {
     window.scrollBy(0, -1000);
   }, []);
 
-  const [keyUserTabs, setKeyUserTabs] = useState('Own dictionarys');
-  const [keyOwnDictionarysTabs, setKeyOwnDictionarysTabs] =
+  const [keyUserTabs, setKeyUserTabs] = useState('Own dictionaries');
+  const [keyOwnDictionariesTabs, setKeyOwnDictionariesTabs] =
     useState('Dictionary form');
 
   return (
@@ -21,13 +21,13 @@ export default function UserPage() {
         onSelect={k => setKeyUserTabs(k)}
         className="mb-3"
       >
-        <Tab eventKey="Own dictionarys" title="Own dictionarys">
-          <h3>Own dictionarys:</h3>
-          <OwnDictionarys advancedMode={true} />
+        <Tab eventKey="Own dictionaries" title="Own dictionaries">
+          <h3>Own dictionaries:</h3>
+          <OwnDictionaries advancedMode={true} />
           <Tabs
-            id="own-dictionarys-tabs"
-            activeKey={keyOwnDictionarysTabs}
-            onSelect={k => setKeyOwnDictionarysTabs(k)}
+            id="own-dictionaries-tabs"
+            activeKey={keyOwnDictionariesTabs}
+            onSelect={k => setKeyOwnDictionariesTabs(k)}
             className="mb-3"
           >
             <Tab eventKey="Dictionary form" title="Dictionary form">

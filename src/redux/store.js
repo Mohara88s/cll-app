@@ -10,7 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import ownDictionarysReducer from './own-dictionarys/own-dictionarys-reducer';
+import ownDictionariesReducer from './own-dictionaries/own-dictionaries-reducer';
 import transcriptionTasksReducer from './transcription-tasks/transcription-tasks-reducer';
 import { authReducer } from './auth';
 
@@ -30,7 +30,7 @@ const authPersistConfig = {
 
 export const store = configureStore({
   reducer: {
-    ownDictionarys: ownDictionarysReducer,
+    ownDictionaries: ownDictionariesReducer,
     transcriptionTasks: transcriptionTasksReducer,
     auth: persistReducer(authPersistConfig, authReducer),
   },
