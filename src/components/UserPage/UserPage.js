@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import OwnDictionaries from '../OwnDictionaries/OwnDictionaries';
 import DictionaryForm from '../DictionaryForm/DictionaryForm';
+import DictionarySearch from '../DictionarySearch/DictionarySearch';
 import { Tabs, Tab, Spinner } from 'react-bootstrap';
 
 export default function UserPage() {
@@ -35,9 +36,7 @@ export default function UserPage() {
             </Tab>
 
             <Tab eventKey="Dictionary search" title="Dictionary search">
-              <h3>Dictionary search</h3>
-              <Spinner animation="grow" />
-              <p>under development</p>
+              <DictionarySearch />
             </Tab>
           </Tabs>
         </Tab>

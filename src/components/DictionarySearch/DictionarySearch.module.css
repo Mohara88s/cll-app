@@ -1,0 +1,38 @@
+.DictionarySearch {
+  display: flex;
+  flex-wrap: wrap;
+}
+.DictionarySearchForm__box {
+  width: 100%;
+}
+.DictionarySearchForm__header {
+  text-align: center;
+}
+.DictionarySearchForm__Button {
+  width: 90px;
+  margin-bottom: 20px;
+}
+.dictionarySpecifications__box {
+  width: 100%;
+}
+.dictionarySpecifications .dictionarySpecifications__tbody {
+  border-top: 0px;
+}
+.dictionarySpecificationsForm__button {
+  width: 250px;
+}
+@media screen and (min-width: 900px) {
+  .DictionarySearch {
+    justify-content: space-between;
+  }
+  .tasksTableBox {
+    width: 28%;
+  }
+
+  .DictionarySearchForm__box {
+    width: 48%;
+  }
+  .dictionarySpecifications__box {
+    width: 48%;
+  }
+}

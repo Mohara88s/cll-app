@@ -33,3 +33,13 @@ export const deleteOwnDictionarySuccess = createAction(
 export const deleteOwnDictionaryError = createAction(
   'own-dictionaries/deleteOwnDictionaryError',
 );
+
+export const fetchOwnDictionaryRequest = createAction(
+  'own-dictionaries/fetchOwnDictionaryRequest',
+);
+export const fetchOwnDictionarySuccess = createAction(
+  'own-dictionaries/fetchOwnDictionarySuccess',
+);
+export const fetchOwnDictionaryError = createAction(
+  'own-dictionaries/fetchOwnDictionaryError',
+);

@@ -9,6 +9,9 @@ import {
   deleteOwnDictionarySuccess,
   deleteOwnDictionaryRequest,
   deleteOwnDictionaryError,
+  fetchOwnDictionaryRequest,
+  fetchOwnDictionarySuccess,
+  fetchOwnDictionaryError,
 } from './own-dictionaries-actions';
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
@@ -65,6 +68,24 @@ const addDictionarySuccess = createReducer(false, {
   [addOwnDictionaryError]: () => false,
 });
 
+const ownDictionary = createReducer(
+  {},
+  {
+    [fetchOwnDictionarySuccess]: (_, { payload }) => payload,
+    [fetchOwnDictionariesError]: () => {},
+  },
+);
+
+const ownDictionaryLoading = createReducer(false, {
+  [fetchOwnDictionaryRequest]: () => true,
+  [fetchOwnDictionarySuccess]: () => false,
+  [fetchOwnDictionaryError]: () => false,
+});
+const ownDictionaryError = createReducer(null, {
+  [fetchOwnDictionaryError]: (_, { payload }) => payload,
+  [fetchOwnDictionaryRequest]: () => null,
+});
+
 export default combineReducers({
   ownDictionaries,
   currentDictionary,
@@ -73,4 +94,7 @@ export default combineReducers({
   error,
   addDictionaryError,
   addDictionarySuccess,
+  ownDictionary,
+  ownDictionaryLoading,
+  ownDictionaryError,
 });
