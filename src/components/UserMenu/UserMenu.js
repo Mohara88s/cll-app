@@ -7,6 +7,10 @@ import styles from './UserMenu.module.css';
 export default function UserMenu() {
   const dispatch = useDispatch();
   const name = useSelector(authSelectors.getUserName);
+  const onLogoutClick = async () => {
+    await dispatch(authOperations.signout());
+    window.location.reload();
+  };
 
   return (
     <div className={styles.UserMenu}>
@@ -20,11 +24,7 @@ export default function UserMenu() {
           <span className={styles.userName}>{name}</span>
         </Link>
       </p>
-      <Button
-        className={styles.Button}
-        type="button"
-        onClick={() => dispatch(authOperations.signout())}
-      >
+      <Button className={styles.Button} type="button" onClick={onLogoutClick}>
         Logout
       </Button>
     </div>
