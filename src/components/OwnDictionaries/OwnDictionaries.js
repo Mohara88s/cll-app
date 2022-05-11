@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Card, Spinner } from 'react-bootstrap';
@@ -9,9 +9,13 @@ import {
 } from '../../redux/own-dictionaries/own-dictionaries-operaions';
 import { changeCurrentDictionary } from '../../redux/own-dictionaries/own-dictionaries-actions';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import EditDictionary from '../EditDictionary/EditDictionary';
 import styles from './OwnDictionaries.module.css';
 
 export default function OwnDictionaries({ advancedMode = false }) {
+  const [modalShow, setModalShow] = useState(false);
+  const [editableDictionary, setEditableDictionary] = useState('');
+
   const dispatch = useDispatch();
   const ownDictionaries = useSelector(
     ownDictionariesSelectors.getOwnDictionaries,
@@ -28,8 +32,14 @@ export default function OwnDictionaries({ advancedMode = false }) {
     dispatch(changeCurrentDictionary(currentDictionary));
   };
 
-  // const onEditBtn = ({ target: { name } }) => {
-  // };
+  const onEditBtn = ({ target: { name } }) => {
+    const dictionary = ownDictionaries.find(e => e._id === name);
+    setEditableDictionary(dictionary);
+    setModalShow(true);
+  };
+  const onCloseModal = () => {
+    setModalShow(false);
+  };
 
   const onDeleteBtn = ({ target: { name } }) => {
     dispatch(deleteOwnDictionary(name));
@@ -70,15 +80,15 @@ export default function OwnDictionaries({ advancedMode = false }) {
                       )}
                       {advancedMode && (
                         <>
-                          {/* <li>
-                          <Button
-                            name={_id}
-                            onClick={onEditBtn}
-                            variant="warning"
-                          >
-                            Edit
-                          </Button>
-                        </li> */}
+                          <li>
+                            <Button
+                              name={_id}
+                              onClick={onEditBtn}
+                              variant="warning"
+                            >
+                              Edit
+                            </Button>
+                          </li>
                           <li>
                             <Button
                               name={_id}
@@ -101,6 +111,12 @@ export default function OwnDictionaries({ advancedMode = false }) {
 
       {error && <ErrorMessage message={error} />}
       {loading && <Spinner animation="border" variant="primary" />}
+
+      <EditDictionary
+        modalShow={modalShow}
+        editableDictionary={editableDictionary}
+        onHandleClose={onCloseModal}
+      />
     </div>
   );
 }
