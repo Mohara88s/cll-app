@@ -55,6 +55,7 @@ export default function OwnDictionaries({ advancedMode = false }) {
                       {ownDictionaryName}
                     </Card.Title>
                     <Card.Text>words: {ownDictionaryTasks.length}</Card.Text>
+                    {advancedMode && <Card.Text>id: {_id}</Card.Text>}
                     <ul className={styles.Battons__list}>
                       {!advancedMode && (
                         <li>

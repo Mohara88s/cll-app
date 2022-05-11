@@ -68,7 +68,7 @@ export default function DictionarySearch() {
         </h5>
         <Form autoComplete="off" className={styles.DictionarySearchForm}>
           <Form.Group className="mb-3">
-            <Form.Label>Dictionary id:</Form.Label>
+            <Form.Label>Search dictionary by id:</Form.Label>
             <Form.Control
               type="text"
               name="dictionaryId"
@@ -94,65 +94,67 @@ export default function DictionarySearch() {
           />
         )}
       </div>
-      <div className={styles.dictionarySpecifications__box}>
-        {ownDictionary.ownDictionaryTasks && (
-          <div>
-            <Table
-              striped
-              bordered
-              hover
-              className={styles.dictionarySpecifications}
-            >
-              <thead>
-                <tr>
-                  <td>Specifications:</td>
-                  <td></td>
-                </tr>
-              </thead>
-              <tbody className={styles.dictionarySpecifications__tbody}>
-                <tr>
-                  <td>Dictionary name:</td>
-                  <td>{ownDictionary.ownDictionaryName}</td>
-                </tr>
-                <tr>
-                  <td>Dictionary id:</td>
-                  <td>{ownDictionary._id}</td>
-                </tr>
-                <tr>
-                  <td>Dictionary owner:</td>
-                  <td>{ownDictionary.ownDictionaryOwner.name}</td>
-                </tr>
-                <tr>
-                  <td>Words quantity:</td>
-                  <td>{ownDictionary.ownDictionaryTasks.length}</td>
-                </tr>
-              </tbody>
-            </Table>
-            <Form autoComplete="off">
-              <Form.Group className="mb-3">
-                <Form.Label>Add to own dictionaries with name:</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="dictionaryName"
-                  placeholder="Enter dictionary name"
-                  value={dictionaryName}
-                  onChange={dictionaryNameHandleChange}
-                />
-              </Form.Group>
-              <Button
-                className={styles.dictionarySpecificationsForm__button}
-                onClick={onAddDictionaryToOwnDictionariesClick}
+      {!ownDictionaryError && !ownDictionaryLoading && (
+        <div className={styles.dictionarySpecifications__box}>
+          {ownDictionary.ownDictionaryTasks && (
+            <div>
+              <Table
+                striped
+                bordered
+                hover
+                className={styles.dictionarySpecifications}
               >
-                {!addDictionaryLoading && <span>Add new own dictionary</span>}
-                {addDictionaryLoading && (
-                  <Spinner animation="border" as="span" size="sm" />
-                )}
-              </Button>
-            </Form>
-          </div>
-        )}
-        {addDictionaryError && <ErrorMessage message={addDictionaryError} />}
-      </div>
+                <thead>
+                  <tr>
+                    <td>Specifications:</td>
+                    <td></td>
+                  </tr>
+                </thead>
+                <tbody className={styles.dictionarySpecifications__tbody}>
+                  <tr>
+                    <td>Dictionary name:</td>
+                    <td>{ownDictionary.ownDictionaryName}</td>
+                  </tr>
+                  <tr>
+                    <td>Dictionary id:</td>
+                    <td>{ownDictionary._id}</td>
+                  </tr>
+                  <tr>
+                    <td>Dictionary owner:</td>
+                    <td>{ownDictionary.ownDictionaryOwner.name}</td>
+                  </tr>
+                  <tr>
+                    <td>Words quantity:</td>
+                    <td>{ownDictionary.ownDictionaryTasks.length}</td>
+                  </tr>
+                </tbody>
+              </Table>
+              <Form autoComplete="off">
+                <Form.Group className="mb-3">
+                  <Form.Label>Add to own dictionaries with name:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="dictionaryName"
+                    placeholder="Enter dictionary name"
+                    value={dictionaryName}
+                    onChange={dictionaryNameHandleChange}
+                  />
+                </Form.Group>
+                <Button
+                  className={styles.dictionarySpecificationsForm__button}
+                  onClick={onAddDictionaryToOwnDictionariesClick}
+                >
+                  {!addDictionaryLoading && <span>Add new own dictionary</span>}
+                  {addDictionaryLoading && (
+                    <Spinner animation="border" as="span" size="sm" />
+                  )}
+                </Button>
+              </Form>
+            </div>
+          )}
+          {addDictionaryError && <ErrorMessage message={addDictionaryError} />}
+        </div>
+      )}
     </div>
   );
 }
