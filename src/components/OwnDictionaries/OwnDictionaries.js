@@ -65,7 +65,7 @@ export default function OwnDictionaries({ advancedMode = false }) {
                     </Card.Title>
                     <Card.Text>words: {ownDictionaryTasks.length}</Card.Text>
                     {advancedMode && <Card.Text>id: {_id}</Card.Text>}
-                    <ul className={styles.Battons__list}>
+                    <ul className={styles.Card__buttonsList}>
                       {!advancedMode && (
                         <>
                           <li>
@@ -73,6 +73,7 @@ export default function OwnDictionaries({ advancedMode = false }) {
                               name={_id}
                               onClick={onSelectBtn}
                               variant="success"
+                              className={styles.Card__button}
                             >
                               View
                             </Button>
@@ -82,6 +83,7 @@ export default function OwnDictionaries({ advancedMode = false }) {
                               name={_id}
                               onClick={onGoTrainingBtn}
                               variant="primary"
+                              className={styles.Card__button}
                             >
                               Go training
                             </Button>

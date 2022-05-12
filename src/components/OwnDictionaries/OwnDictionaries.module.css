@@ -5,10 +5,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 0px;
 }
 .Card__item {
-  width: 30%;
+  width: 31%;
   box-sizing: border-box;
   margin-right: 10px;
   margin-left: 10px;
@@ -16,10 +15,14 @@
 }
 .Card__Title {
   overflow: hidden;
-  height: 25px;
+  max-height: 80px;
 }
-.Battons__list {
+.Card__buttonsList {
   display: flex;
   justify-content: space-around;
-  padding: 0;
+  flex-wrap: wrap;
+}
+.Card__button {
+  width: max-content;
+  margin: 5px;
 }
