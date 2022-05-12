@@ -9,12 +9,12 @@ import {
 } from '../../redux/own-dictionaries/own-dictionaries-operaions';
 import { changeCurrentDictionary } from '../../redux/own-dictionaries/own-dictionaries-actions';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import EditDictionary from '../EditDictionary/EditDictionary';
+import SelectedDictionaryModal from '../SelectedDictionaryModal/SelectedDictionaryModal';
 import styles from './OwnDictionaries.module.css';
 
 export default function OwnDictionaries({ advancedMode = false }) {
   const [modalShow, setModalShow] = useState(false);
-  const [editableDictionary, setEditableDictionary] = useState('');
+  const [selectedDictionary, setSelectedDictionary] = useState('');
 
   const dispatch = useDispatch();
   const ownDictionaries = useSelector(
@@ -32,9 +32,9 @@ export default function OwnDictionaries({ advancedMode = false }) {
     dispatch(changeCurrentDictionary(currentDictionary));
   };
 
-  const onEditBtn = ({ target: { name } }) => {
+  const onSelectBtn = ({ target: { name } }) => {
     const dictionary = ownDictionaries.find(e => e._id === name);
-    setEditableDictionary(dictionary);
+    setSelectedDictionary(dictionary);
     setModalShow(true);
   };
   const onCloseModal = () => {
@@ -68,22 +68,33 @@ export default function OwnDictionaries({ advancedMode = false }) {
                     {advancedMode && <Card.Text>id: {_id}</Card.Text>}
                     <ul className={styles.Battons__list}>
                       {!advancedMode && (
-                        <li>
-                          <Button
-                            name={_id}
-                            onClick={onGoTrainingBtn}
-                            variant="primary"
-                          >
-                            Go training
-                          </Button>
-                        </li>
+                        <>
+                          <li>
+                            <Button
+                              name={_id}
+                              onClick={onSelectBtn}
+                              variant="success"
+                            >
+                              View
+                            </Button>
+                          </li>
+                          <li>
+                            <Button
+                              name={_id}
+                              onClick={onGoTrainingBtn}
+                              variant="primary"
+                            >
+                              Go training
+                            </Button>
+                          </li>
+                        </>
                       )}
                       {advancedMode && (
                         <>
                           <li>
                             <Button
                               name={_id}
-                              onClick={onEditBtn}
+                              onClick={onSelectBtn}
                               variant="warning"
                             >
                               Edit
@@ -112,9 +123,10 @@ export default function OwnDictionaries({ advancedMode = false }) {
       {error && <ErrorMessage message={error} />}
       {loading && <Spinner animation="border" variant="primary" />}
 
-      <EditDictionary
+      <SelectedDictionaryModal
         modalShow={modalShow}
-        editableDictionary={editableDictionary}
+        selectedDictionary={selectedDictionary}
+        advancedMode={advancedMode}
         onHandleClose={onCloseModal}
       />
     </div>

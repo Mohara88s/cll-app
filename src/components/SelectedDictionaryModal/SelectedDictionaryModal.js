@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Button, Table } from 'react-bootstrap';
-import styles from './EditDictionary.module.css';
-import './EditDictionary.css';
+import styles from './SelectedDictionaryModal.module.css';
+import './SelectedDictionaryModal.css';
 
-const EditDictionary = ({ modalShow, editableDictionary, onHandleClose }) => {
+const SelectedDictionaryModal = ({
+  modalShow,
+  selectedDictionary,
+  advancedMode = false,
+  onHandleClose,
+}) => {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
 
@@ -18,8 +23,8 @@ const EditDictionary = ({ modalShow, editableDictionary, onHandleClose }) => {
   }, [modalShow]);
 
   // const deleteTask = ({ target: { name } }) => {
-  //   const newTasksSet = editableDictionary.ownDictionaryTasks.filter(task => task._id !== name);
-  //   // dispatch(updateOwnDictionary({editableDictionary._id, newTasksSet}));
+  //   const newTasksSet = selectedDictionary.ownDictionaryTasks.filter(task => task._id !== name);
+  //   // dispatch(updateOwnDictionary({selectedDictionary._id, newTasksSet}));
   // };
 
   return (
@@ -32,7 +37,7 @@ const EditDictionary = ({ modalShow, editableDictionary, onHandleClose }) => {
         dialogClassName="EditDictionaryModalDialog"
       >
         <Modal.Header closeButton className={styles.Modal__Header}>
-          <Modal.Title>{editableDictionary.ownDictionaryName}</Modal.Title>
+          <Modal.Title>{selectedDictionary.ownDictionaryName}</Modal.Title>
         </Modal.Header>
         <Modal.Body className={styles.Modal__Body}>
           <Table striped bordered hover className={styles.Table}>
@@ -42,12 +47,12 @@ const EditDictionary = ({ modalShow, editableDictionary, onHandleClose }) => {
                 <td className={styles.Table__td__translation}>Translation</td>
                 <td className={styles.Table__td__secondary}>U-transcription</td>
                 <td className={styles.Table__td__secondary}>Q-transcription</td>
-                <td className={styles.Table__td__Button}></td>
+                {advancedMode && <td className={styles.Table__td__Button}></td>}
               </tr>
             </thead>
-            {editableDictionary.ownDictionaryName && (
+            {selectedDictionary.ownDictionaryName && (
               <tbody className={styles.Table__tbody}>
-                {editableDictionary.ownDictionaryTasks.map(
+                {selectedDictionary.ownDictionaryTasks.map(
                   ({ _id, eng, utrn, qtrn, rus }) => (
                     <tr key={_id}>
                       <td className={styles.Table__td__english}>{eng}</td>
@@ -56,16 +61,18 @@ const EditDictionary = ({ modalShow, editableDictionary, onHandleClose }) => {
                       </td>
                       <td className={styles.Table__td__secondary}>{utrn}</td>
                       <td className={styles.Table__td__secondary}>{qtrn}</td>
-                      <td className={styles.Table__td__Button}>
-                        <Button
-                          variant="danger"
-                          size="sm"
-                          name={_id}
-                          // onClick={deleteTask}
-                        >
-                          Delete
-                        </Button>
-                      </td>
+                      {advancedMode && (
+                        <td className={styles.Table__td__Button}>
+                          <Button
+                            variant="danger"
+                            size="sm"
+                            name={_id}
+                            // onClick={deleteTask}
+                          >
+                            Delete
+                          </Button>
+                        </td>
+                      )}
                     </tr>
                   ),
                 )}
@@ -78,4 +85,4 @@ const EditDictionary = ({ modalShow, editableDictionary, onHandleClose }) => {
   );
 };
 
-export default EditDictionary;
+export default SelectedDictionaryModal;
