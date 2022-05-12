@@ -60,16 +60,20 @@ export default function EngUTranscriptionTrainings({
     button.classList.remove('btn-primary');
     button.classList.add('btn-success');
     setTimeout(() => {
-      mixedArray.splice(id, 1);
       resolvedArray.push(value);
       button.classList.remove('btn-success');
       button.classList.add('btn-primary');
+      button.disabled = true;
+      button.style.color = 'transparent';
+      button.style.background = 'transparent';
+      button.style.border = 'transparent';
       setActualId(prevState => prevState + 1);
     }, 300);
   };
 
   const onPositiveTrainingResult = () => {
     setTimeout(() => {
+      setMixedArray([]);
       setResolved(true);
     }, 300);
   };
