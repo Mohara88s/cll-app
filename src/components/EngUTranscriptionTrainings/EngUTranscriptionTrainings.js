@@ -66,7 +66,7 @@ export default function EngUTranscriptionTrainings({
       button.disabled = true;
       button.style.color = 'transparent';
       button.style.background = 'transparent';
-      button.style.border = 'transparent';
+      button.style.borderColor = 'transparent';
       setActualId(prevState => prevState + 1);
     }, 300);
   };
