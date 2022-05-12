@@ -97,6 +97,7 @@ export default function OwnDictionaries({ advancedMode = false }) {
                               name={_id}
                               onClick={onSelectBtn}
                               variant="warning"
+                              className={styles.Card__button}
                             >
                               Edit
                             </Button>
@@ -106,6 +107,7 @@ export default function OwnDictionaries({ advancedMode = false }) {
                               name={_id}
                               onClick={onDeleteBtn}
                               variant="danger"
+                              className={styles.Card__button}
                             >
                               Delete
                             </Button>

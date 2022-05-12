@@ -1,3 +1,6 @@
+.Modal {
+  padding-top: 60px;
+}
 .Modal__Header {
   background-color: bisque;
 }
