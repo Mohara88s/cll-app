@@ -12,6 +12,9 @@ import {
   fetchOwnDictionaryRequest,
   fetchOwnDictionarySuccess,
   fetchOwnDictionaryError,
+  updateOwnDictionaryRequest,
+  updateOwnDictionarySuccess,
+  updateOwnDictionaryError,
 } from './own-dictionaries-actions';
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
@@ -26,6 +29,9 @@ const ownDictionaries = createReducer([], {
   },
   [deleteOwnDictionarySuccess]: (state, { payload }) =>
     state.filter(({ _id }) => _id !== payload._id),
+  [updateOwnDictionarySuccess]: (state, { payload }) => {
+    return [...state.filter(({ _id }) => _id !== payload._id), payload];
+  },
 });
 
 const currentDictionary = createReducer(

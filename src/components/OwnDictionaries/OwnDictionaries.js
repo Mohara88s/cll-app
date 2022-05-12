@@ -14,7 +14,7 @@ import styles from './OwnDictionaries.module.css';
 
 export default function OwnDictionaries({ advancedMode = false }) {
   const [modalShow, setModalShow] = useState(false);
-  const [selectedDictionary, setSelectedDictionary] = useState('');
+  const [selectedDictionaryId, setSelectedDictionaryId] = useState('');
 
   const dispatch = useDispatch();
   const ownDictionaries = useSelector(
@@ -33,8 +33,7 @@ export default function OwnDictionaries({ advancedMode = false }) {
   };
 
   const onSelectBtn = ({ target: { name } }) => {
-    const dictionary = ownDictionaries.find(e => e._id === name);
-    setSelectedDictionary(dictionary);
+    setSelectedDictionaryId(name);
     setModalShow(true);
   };
   const onCloseModal = () => {
@@ -125,7 +124,7 @@ export default function OwnDictionaries({ advancedMode = false }) {
 
       <SelectedDictionaryModal
         modalShow={modalShow}
-        selectedDictionary={selectedDictionary}
+        selectedDictionaryId={selectedDictionaryId}
         advancedMode={advancedMode}
         onHandleClose={onCloseModal}
       />

@@ -11,6 +11,9 @@ import {
   fetchOwnDictionaryRequest,
   fetchOwnDictionarySuccess,
   fetchOwnDictionaryError,
+  updateOwnDictionaryRequest,
+  updateOwnDictionarySuccess,
+  updateOwnDictionaryError,
 } from './own-dictionaries-actions';
 import axios from 'axios';
 
@@ -24,10 +27,10 @@ export const fetchOwnDictionaries = () => async dispatch => {
   }
 };
 
-export const addOwnDictionary = wordsSet => async dispatch => {
+export const addOwnDictionary = dictionary => async dispatch => {
   dispatch(addOwnDictionaryRequest());
   try {
-    const { data } = await axios.patch(`/own-dictionaries`, wordsSet);
+    const { data } = await axios.patch(`/own-dictionaries`, dictionary);
     dispatch(addOwnDictionarySuccess(data.ownDictionary));
   } catch (error) {
     dispatch(addOwnDictionaryError(error.response.data.message));
@@ -53,3 +56,18 @@ export const fetchOwnDictionary = dictionaryId => async dispatch => {
     dispatch(fetchOwnDictionaryError(error.response.data.message));
   }
 };
+
+export const updateOwnDictionary =
+  ({ dictionaryId, update }) =>
+  async dispatch => {
+    dispatch(updateOwnDictionaryRequest());
+    try {
+      const { data } = await axios.patch(
+        `/own-dictionaries/${dictionaryId}`,
+        update,
+      );
+      dispatch(updateOwnDictionarySuccess(data.ownDictionary));
+    } catch (error) {
+      dispatch(updateOwnDictionaryError(error.response.data.message));
+    }
+  };
