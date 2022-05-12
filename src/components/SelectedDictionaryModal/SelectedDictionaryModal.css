@@ -1,3 +1,4 @@
 .EditDictionaryModalDialog {
   max-width: 90vw;
+  width: fit-content;
 }

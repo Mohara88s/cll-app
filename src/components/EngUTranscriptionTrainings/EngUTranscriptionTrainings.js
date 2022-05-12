@@ -154,6 +154,13 @@ export default function EngUTranscriptionTrainings({
           </ul>
         </li>
       </ul>
+      <Button
+        variant="primary"
+        onClick={onClickButtonNext}
+        className={styles.skipButton}
+      >
+        Skip task
+      </Button>
       <TrainingCongratulation
         modalShow={modalShow}
         onHandleClose={onCloseModal}

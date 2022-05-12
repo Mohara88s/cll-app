@@ -109,6 +109,7 @@ export default function TranscriptionTrainingsPage() {
       )}
 
       {!ownDictionariesIsOpen &&
+        !trainingButtonsIsOpen &&
         currentDictionary.ownDictionaryName &&
         selectedTaining === trainings[0] && (
           <EngUTranscriptionTrainings
@@ -118,6 +119,7 @@ export default function TranscriptionTrainingsPage() {
         )}
 
       {!ownDictionariesIsOpen &&
+        !trainingButtonsIsOpen &&
         currentDictionary.ownDictionaryName &&
         selectedTaining === trainings[1] && (
           <UEngTranscriptionTrainings
@@ -127,6 +129,7 @@ export default function TranscriptionTrainingsPage() {
         )}
 
       {!ownDictionariesIsOpen &&
+        !trainingButtonsIsOpen &&
         currentDictionary.ownDictionaryName &&
         selectedTaining === trainings[2] && (
           <EngQTranscriptionTrainings
@@ -136,6 +139,7 @@ export default function TranscriptionTrainingsPage() {
         )}
 
       {!ownDictionariesIsOpen &&
+        !trainingButtonsIsOpen &&
         currentDictionary.ownDictionaryName &&
         selectedTaining === trainings[3] && (
           <QEngTranscriptionTrainings

@@ -60,16 +60,20 @@ export default function UEngTranscriptionTrainings({
     button.classList.remove('btn-primary');
     button.classList.add('btn-success');
     setTimeout(() => {
-      mixedArray.splice(id, 1);
       resolvedArray.push(value);
       button.classList.remove('btn-success');
       button.classList.add('btn-primary');
+      button.disabled = true;
+      button.style.color = 'transparent';
+      button.style.background = 'transparent';
+      button.style.borderColor = 'transparent';
       setActualId(prevState => prevState + 1);
     }, 300);
   };
 
   const onPositiveTrainingResult = () => {
     setTimeout(() => {
+      setMixedArray([]);
       setResolved(true);
     }, 300);
   };
@@ -150,6 +154,13 @@ export default function UEngTranscriptionTrainings({
           </ul>
         </li>
       </ul>
+      <Button
+        variant="primary"
+        onClick={onClickButtonNext}
+        className={styles.skipButton}
+      >
+        Skip task
+      </Button>
       <TrainingCongratulation
         modalShow={modalShow}
         onHandleClose={onCloseModal}

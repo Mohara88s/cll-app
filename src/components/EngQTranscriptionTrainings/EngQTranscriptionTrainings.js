@@ -60,8 +60,11 @@ export default function EngQTranscriptionTrainings({
     button.classList.remove('btn-primary');
     button.classList.add('btn-success');
     setTimeout(() => {
-      mixedArray.splice(id, 1);
       resolvedArray.push(value);
+      button.disabled = true;
+      button.style.color = 'transparent';
+      button.style.background = 'transparent';
+      button.style.borderColor = 'transparent';
       button.classList.remove('btn-success');
       button.classList.add('btn-primary');
       setActualId(prevState => prevState + 1);
@@ -70,6 +73,7 @@ export default function EngQTranscriptionTrainings({
 
   const onPositiveTrainingResult = () => {
     setTimeout(() => {
+      setMixedArray([]);
       setResolved(true);
     }, 300);
   };
@@ -150,6 +154,13 @@ export default function EngQTranscriptionTrainings({
           </ul>
         </li>
       </ul>
+      <Button
+        variant="primary"
+        onClick={onClickButtonNext}
+        className={styles.skipButton}
+      >
+        Skip task
+      </Button>
       <TrainingCongratulation
         modalShow={modalShow}
         onHandleClose={onCloseModal}
