@@ -4,7 +4,7 @@ import { Modal, Button, Table } from 'react-bootstrap';
 import { updateOwnDictionary } from '../../redux/own-dictionaries/own-dictionaries-operaions';
 import ownDictionariesSelectors from '../../redux/own-dictionaries/own-dictionaries-selectors';
 import styles from './SelectedDictionaryModal.module.css';
-// import './SelectedDictionaryModal.css';
+import './SelectedDictionaryModal.css';
 
 const SelectedDictionaryModal = ({
   modalShow,

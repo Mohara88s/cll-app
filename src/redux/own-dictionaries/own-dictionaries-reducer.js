@@ -12,9 +12,9 @@ import {
   fetchOwnDictionaryRequest,
   fetchOwnDictionarySuccess,
   fetchOwnDictionaryError,
-  updateOwnDictionaryRequest,
+  // updateOwnDictionaryRequest,
   updateOwnDictionarySuccess,
-  updateOwnDictionaryError,
+  // updateOwnDictionaryError,
 } from './own-dictionaries-actions';
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
