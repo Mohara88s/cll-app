@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Button, Table } from 'react-bootstrap';
 import { updateOwnDictionary } from '../../redux/own-dictionaries/own-dictionaries-operaions';
 import ownDictionariesSelectors from '../../redux/own-dictionaries/own-dictionaries-selectors';
+import CopyInterfaceSymbol from '../CopyInterfaceSymbol/CopyInterfaceSymbol';
 import styles from './SelectedDictionaryModal.module.css';
 import './SelectedDictionaryModal.css';
 
@@ -61,6 +62,13 @@ const SelectedDictionaryModal = ({
             <Modal.Title>{selectedDictionary.ownDictionaryName}</Modal.Title>
           </Modal.Header>
           <Modal.Body className={styles.Modal__Body}>
+            <p
+              onClick={() => {
+                navigator.clipboard.writeText(selectedDictionary._id);
+              }}
+            >
+              Dictionary Id: {selectedDictionary._id} <CopyInterfaceSymbol />
+            </p>
             <Table striped bordered hover className={styles.Table}>
               <thead>
                 <tr>

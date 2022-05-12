@@ -61,10 +61,12 @@ export default function OwnDictionaries({ advancedMode = false }) {
                 <Card border="primary">
                   <Card.Body>
                     <Card.Title className={styles.Card__Title}>
-                      {ownDictionaryName}
+                      <p className={styles.Card__TitleText}>
+                        {ownDictionaryName}
+                      </p>
                     </Card.Title>
                     <Card.Text>words: {ownDictionaryTasks.length}</Card.Text>
-                    {advancedMode && <Card.Text>id: {_id}</Card.Text>}
+
                     <ul className={styles.Card__buttonsList}>
                       {!advancedMode && (
                         <>
