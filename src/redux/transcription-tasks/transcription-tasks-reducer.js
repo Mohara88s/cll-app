@@ -2,7 +2,6 @@ import {
   fetchTranscriptionTasksSuccess,
   fetchTranscriptionTasksRequest,
   fetchTranscriptionTasksError,
-  changeFilter,
   addToTasksSet,
   updateTasksSet,
 } from './transcription-tasks-actions';
@@ -25,10 +24,6 @@ const error = createReducer(null, {
   [fetchTranscriptionTasksRequest]: () => null,
 });
 
-const filter = createReducer('', {
-  [changeFilter]: (_, { payload }) => payload,
-});
-
 const tasksSet = createReducer([], {
   [addToTasksSet]: (state, { payload }) => {
     return [...state, payload];
@@ -42,6 +37,5 @@ export default combineReducers({
   tasks,
   loading,
   error,
-  filter,
   tasksSet,
 });

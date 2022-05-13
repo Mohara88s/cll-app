@@ -4,6 +4,10 @@ const getLoading = state => state.ownDictionaries.loading;
 const getAddDictionaryError = state => state.ownDictionaries.addDictionaryError;
 const getAddDictionaryLoading = state =>
   state.ownDictionaries.addDictionaryLoading;
+const getUpdateDictionaryError = state =>
+  state.ownDictionaries.updateDictionaryError;
+const getUpdateDictionaryLoading = state =>
+  state.ownDictionaries.updateDictionaryLoading;
 const getCurrentDictionary = state => state.ownDictionaries.currentDictionary;
 const getAddDictionarySuccess = state =>
   state.ownDictionaries.addDictionarySuccess;
@@ -18,6 +22,8 @@ const ownDictionariesSelectors = {
   getLoading,
   getAddDictionaryError,
   getAddDictionaryLoading,
+  getUpdateDictionaryLoading,
+  getUpdateDictionaryError,
   getCurrentDictionary,
   getAddDictionarySuccess,
   getOwnDictionary,

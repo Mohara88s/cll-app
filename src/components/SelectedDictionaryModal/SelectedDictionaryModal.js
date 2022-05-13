@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal, Button, Table } from 'react-bootstrap';
+import { Modal, Button, Table, Spinner } from 'react-bootstrap';
 import { updateOwnDictionary } from '../../redux/own-dictionaries/own-dictionaries-operaions';
 import ownDictionariesSelectors from '../../redux/own-dictionaries/own-dictionaries-selectors';
+import TasksFilter from '../TasksFilter/TasksFilter';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import AlertComponent from '../AlertComponent/AlertComponent';
 import CopyInterfaceSymbol from '../CopyInterfaceSymbol/CopyInterfaceSymbol';
 import styles from './SelectedDictionaryModal.module.css';
 import './SelectedDictionaryModal.css';
@@ -15,12 +18,20 @@ const SelectedDictionaryModal = ({
 }) => {
   const [show, setShow] = useState(false);
   const [selectedDictionary, setSelectedDictionary] = useState({});
+  const [errorAlreadyIncluded, setErrorAlreadyIncluded] = useState(false);
 
   const dispatch = useDispatch();
 
   const ownDictionaries = useSelector(
     ownDictionariesSelectors.getOwnDictionaries,
   );
+  const updateDictionaryError = useSelector(
+    ownDictionariesSelectors.getUpdateDictionaryError,
+  );
+  const updateDictionaryLoading = useSelector(
+    ownDictionariesSelectors.getUpdateDictionaryLoading,
+  );
+
   useEffect(() => {
     setSelectedDictionary(
       ownDictionaries.find(e => e._id === selectedDictionaryId),
@@ -47,6 +58,24 @@ const SelectedDictionaryModal = ({
       }),
     );
   };
+  const addTask = task => {
+    if (
+      selectedDictionary.ownDictionaryTasks.findIndex(
+        e => e._id === task._id,
+      ) === -1
+    ) {
+      setErrorAlreadyIncluded(false);
+      const newTasksSet = [...selectedDictionary.ownDictionaryTasks, task._id];
+      dispatch(
+        updateOwnDictionary({
+          dictionaryId: selectedDictionary._id,
+          update: { ownDictionaryTasks: newTasksSet },
+        }),
+      );
+    } else {
+      setErrorAlreadyIncluded(true);
+    }
+  };
 
   return (
     <>
@@ -63,6 +92,7 @@ const SelectedDictionaryModal = ({
           </Modal.Header>
           <Modal.Body className={styles.Modal__Body}>
             <p
+              className={styles.Modal__Id}
               onClick={() => {
                 navigator.clipboard.writeText(selectedDictionary._id);
               }}
@@ -114,6 +144,19 @@ const SelectedDictionaryModal = ({
                 </tbody>
               )}
             </Table>
+            {updateDictionaryLoading && (
+              <Spinner animation="border" variant="primary" />
+            )}
+            {errorAlreadyIncluded && (
+              <AlertComponent
+                alertClose={() => setErrorAlreadyIncluded(false)}
+                message="The word is already present in the dictionary"
+              />
+            )}
+            {updateDictionaryError && (
+              <ErrorMessage message={updateDictionaryError} />
+            )}
+            {advancedMode && <TasksFilter passUpTask={addTask} />}
           </Modal.Body>
         </Modal>
       )}

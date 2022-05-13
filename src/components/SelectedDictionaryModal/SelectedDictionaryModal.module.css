@@ -12,6 +12,9 @@
   padding-right: 20px;
   background-color: bisque;
 }
+.Modal__Id {
+  cursor: copy;
+}
 .Table .Table__tbody {
   border-top: 0px;
 }

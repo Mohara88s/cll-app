@@ -1,10 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Table, Spinner, Dropdown } from 'react-bootstrap';
-import {
-  changeFilter,
-  addToTasksSet,
-} from '../../redux/transcription-tasks/transcription-tasks-actions';
 import transcriptionTasksSelectors from '../../redux/transcription-tasks/transcription-tasks-selectors';
 import { fetchTranscriptionTasks } from '../../redux/transcription-tasks/transcription-tasks-operaions';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
@@ -12,15 +8,11 @@ import styles from './TasksFilter.module.css';
 
 const fields = ['Translation', 'U-transcription', 'Q-transcription'];
 
-export default function TasksFilter() {
-  const [dropdownValue, setDropdownValue] = useState(fields[0]);
+export default function TasksFilter({ passUpTask }) {
   const dispatch = useDispatch();
-  const filter = useSelector(
-    transcriptionTasksSelectors.getTranscriptionTasksFilter,
-  );
-  const tasksSet = useSelector(
-    transcriptionTasksSelectors.getTranscriptionTasksSet,
-  );
+  const [dropdownValue, setDropdownValue] = useState(fields[0]);
+  const [filter, setFilter] = useState('');
+
   const filtredTasks = useSelector(
     transcriptionTasksSelectors.getTranscriptionTasks,
   );
@@ -32,18 +24,16 @@ export default function TasksFilter() {
   );
 
   const filterHandleChange = ({ target: { value } }) => {
-    dispatch(changeFilter(value));
+    setFilter(value);
   };
 
   const onDropdownClick = ({ target: { name } }) => {
     setDropdownValue(name);
   };
 
-  const addTaskToSet = ({ target: { name } }) => {
-    if (tasksSet.findIndex(e => e._id === name) === -1) {
-      const task = filtredTasks.find(e => e._id === name);
-      dispatch(addToTasksSet(task));
-    }
+  const onAddBtnClick = ({ target: { name } }) => {
+    const task = filtredTasks.find(e => e._id === name);
+    passUpTask(task);
   };
 
   useEffect(() => {
@@ -84,7 +74,7 @@ export default function TasksFilter() {
                 <Dropdown.Menu>
                   <ul>
                     {fields.map(field => (
-                      <li>
+                      <li key={field}>
                         <Dropdown.Item name={field} onClick={onDropdownClick}>
                           {field}
                         </Dropdown.Item>
@@ -106,7 +96,7 @@ export default function TasksFilter() {
                 {dropdownValue === fields[1] && <td>{utrn}</td>}
                 {dropdownValue === fields[2] && <td>{qtrn}</td>}
                 <td>
-                  <Button name={_id} onClick={addTaskToSet}>
+                  <Button name={_id} onClick={onAddBtnClick}>
                     Add
                   </Button>
                 </td>

@@ -1,7 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
 
-export const changeFilter = createAction('transcription-tasks/changeFilter');
-
 export const addToTasksSet = createAction('transcription-tasks/addToTasksSet');
 export const updateTasksSet = createAction(
   'transcription-tasks/updateTasksSet',

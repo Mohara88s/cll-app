@@ -36,9 +36,6 @@ export default function OwnDictionaries({ advancedMode = false }) {
     setSelectedDictionaryId(name);
     setModalShow(true);
   };
-  const onCloseModal = () => {
-    setModalShow(false);
-  };
 
   const onDeleteBtn = ({ target: { name } }) => {
     dispatch(deleteOwnDictionary(name));
@@ -132,7 +129,7 @@ export default function OwnDictionaries({ advancedMode = false }) {
         modalShow={modalShow}
         selectedDictionaryId={selectedDictionaryId}
         advancedMode={advancedMode}
-        onHandleClose={onCloseModal}
+        onHandleClose={() => setModalShow(false)}
       />
     </div>
   );

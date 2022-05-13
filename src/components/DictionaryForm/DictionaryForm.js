@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Table, Spinner } from 'react-bootstrap';
-import { updateTasksSet } from '../../redux/transcription-tasks/transcription-tasks-actions';
+import {
+  updateTasksSet,
+  addToTasksSet,
+} from '../../redux/transcription-tasks/transcription-tasks-actions';
 import transcriptionTasksSelectors from '../../redux/transcription-tasks/transcription-tasks-selectors';
 import ownDictionariesSelectors from '../../redux/own-dictionaries/own-dictionaries-selectors';
 import { addOwnDictionary } from '../../redux/own-dictionaries/own-dictionaries-operaions';
@@ -42,6 +45,12 @@ export default function DictionaryForm() {
     );
   };
 
+  const addTaskToSet = task => {
+    if (tasksSet.findIndex(e => e._id === task._id) === -1) {
+      dispatch(addToTasksSet(task));
+    }
+  };
+
   useEffect(() => {
     if (addDictionarySuccess) {
       dispatch(updateTasksSet([]));
@@ -53,7 +62,9 @@ export default function DictionaryForm() {
     <div className={styles.DictionaryForm}>
       <h3>Let's gather words for new dictionary</h3>
       <div className={styles.DictionaryForm__box}>
-        <TasksFilter />
+        <div className={styles.DictionaryForm__TasksFilterBox}>
+          <TasksFilter passUpTask={addTaskToSet} />
+        </div>
 
         <div className={styles.tasksTableBox}>
           <h5 className={styles.tasksTableBox__header}>New dictionary:</h5>
