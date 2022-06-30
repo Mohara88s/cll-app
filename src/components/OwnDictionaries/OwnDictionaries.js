@@ -44,7 +44,14 @@ export default function OwnDictionaries({ advancedMode = false }) {
     <div>
       <>
         {ownDictionaries.length === 0 && !advancedMode && (
-          <Link to="/user/">
+          <Link
+            to={{
+              pathname: '/user',
+              state: {
+                keyUserTabs: 'own-dictionaries',
+              },
+            }}
+          >
             <Button variant="primary" className={styles.Button__noDictionaries}>
               You don't have your own dictionaries yet. Go to the user page to
               create a dictionary.

@@ -9,10 +9,9 @@ export default function UserPage() {
     window.scrollBy(0, -1000);
   }, []);
 
-  const [keyUserTabs, setKeyUserTabs] = useState('Own dictionaries');
+  const [keyUserTabs, setKeyUserTabs] = useState('User profile');
   const [keyOwnDictionariesTabs, setKeyOwnDictionariesTabs] =
-    useState('Dictionary form');
-
+    useState('Dictionaries list');
   return (
     <div>
       <h2>User page</h2>
@@ -22,16 +21,24 @@ export default function UserPage() {
         onSelect={k => setKeyUserTabs(k)}
         className="mb-3"
       >
-        <Tab eventKey="Own dictionaries" title="Own dictionaries">
+        <Tab
+          eventKey="own-dictionaries"
+          id="own-dictionaries"
+          title="Own dictionaries"
+        >
           <h3>Own dictionaries:</h3>
-          <OwnDictionaries advancedMode={true} />
+
           <Tabs
-            id="own-dictionaries-tabs"
+            id="own-dictionaries"
             activeKey={keyOwnDictionariesTabs}
             onSelect={k => setKeyOwnDictionariesTabs(k)}
             className="mb-3"
           >
-            <Tab eventKey="Dictionary form" title="Dictionary form">
+            <Tab eventKey="Dictionaries list" title="Dictionaries list">
+              <OwnDictionaries advancedMode={true} />
+            </Tab>
+
+            <Tab eventKey="dictionary-form" title="Dictionary form">
               <DictionaryForm />
             </Tab>
 

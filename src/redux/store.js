@@ -11,6 +11,8 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import ownDictionariesReducer from './own-dictionaries/own-dictionaries-reducer';
+import jokeTasksReducer from './joke-tasks/joke-tasks-reducer';
+import sentencesTasksReducer from './sentences-tasks/sentences-tasks-reducer';
 import transcriptionTasksReducer from './transcription-tasks/transcription-tasks-reducer';
 import { authReducer } from './auth';
 
@@ -31,6 +33,8 @@ const authPersistConfig = {
 export const store = configureStore({
   reducer: {
     ownDictionaries: ownDictionariesReducer,
+    jokeTasks: jokeTasksReducer,
+    sentencesTasks: sentencesTasksReducer,
     transcriptionTasks: transcriptionTasksReducer,
     auth: persistReducer(authPersistConfig, authReducer),
   },

@@ -35,6 +35,7 @@
 .listTags {
   display: flex;
   flex-wrap: wrap;
+  justify-content: left;
   padding-left: 0;
 }
 .listTags__item {
@@ -50,6 +51,7 @@
 .skipButton {
   width: 100%;
 }
+
 @media screen and (min-width: 720px) {
   .fealdsList {
     display: flex;

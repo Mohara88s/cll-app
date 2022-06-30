@@ -12,10 +12,9 @@ export default function TasksFilter({ passUpTask }) {
   const dispatch = useDispatch();
   const [dropdownValue, setDropdownValue] = useState(fields[0]);
   const [filter, setFilter] = useState('');
+  const [filtredTasks, setFiltredTasks] = useState([]);
 
-  const filtredTasks = useSelector(
-    transcriptionTasksSelectors.getTranscriptionTasks,
-  );
+  const tasks = useSelector(transcriptionTasksSelectors.getTranscriptionTasks);
   const error = useSelector(
     transcriptionTasksSelectors.getTranscriptionTasksError,
   );
@@ -39,7 +38,9 @@ export default function TasksFilter({ passUpTask }) {
   useEffect(() => {
     if (filter) {
       dispatch(fetchTranscriptionTasks(filter));
+      setFiltredTasks(tasks);
     }
+    // eslint-disable-next-line
   }, [dispatch, filter]);
 
   return (
@@ -87,7 +88,7 @@ export default function TasksFilter({ passUpTask }) {
             <td className={styles.Table__td__Button}></td>
           </tr>
         </thead>
-        {!loading && (
+        {!loading && filter && (
           <tbody className={styles.Table__tbody}>
             {filtredTasks.map(({ _id, eng, utrn, qtrn, rus }) => (
               <tr key={_id}>

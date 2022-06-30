@@ -1,49 +1,36 @@
-import data from '../../database/jokes.json';
 import { useState, useEffect } from 'react';
-import JokesTrainings from '../JokesTrainings/JokesTrainings';
 import ChooseLanguages from '../ChooseLanguages/ChooseLanguages';
-import styles from './JokesTrainingsPage.module.css';
+import JokesList from '../JokesList/JokesList';
+import JokeTraining from '../JokeTraining/JokeTraining';
 
 export default function JokesTrainingsPage() {
   useEffect(() => {
     window.scrollBy(0, -1000);
   }, []);
+  const [trainingPageOptionsIsOpen, setTrainingPageOptionsIsOpen] =
+    useState(true);
+  const [jokeTask, setJokeTask] = useState([]);
+  const trainTask = task => {
+    setJokeTask(task);
+    setTrainingPageOptionsIsOpen(false);
+  };
 
-  const languages = ['english', 'ukrainian', 'russian'];
-  const [jokesList, setJokesList] = useState([]);
-
-  const onLanguageChange = (originalLanguage, translationLanguage) => {
-    const list = [...data]
-      .map(e => {
-        return {
-          id: e.id,
-          original: e[`${originalLanguage}`],
-          translation: e[`${translationLanguage}`],
-        };
-      })
-      .sort(() => {
-        return 0.5 - Math.random();
-      });
-    setJokesList([...list]);
+  const onResolvedTraining = () => {
+    setTrainingPageOptionsIsOpen(true);
+    setJokeTask([]);
   };
 
   return (
     <div>
       <h2>Jokes trainings</h2>
-      {!languages.length && (
-        <h3 className={styles.warning}>No language found</h3>
-      )}
-      {languages.length && (
-        <ChooseLanguages
-          languages={languages}
-          onLanguageChange={onLanguageChange}
+      {trainingPageOptionsIsOpen && <ChooseLanguages />}
+      {trainingPageOptionsIsOpen && <JokesList passUpTask={trainTask} />}
+      {!trainingPageOptionsIsOpen && (
+        <JokeTraining
+          jokeTask={jokeTask}
+          onResolvedTraining={onResolvedTraining}
         />
       )}
-
-      {!jokesList.length && (
-        <h3 className={styles.warning}>Jokes are missing from the database</h3>
-      )}
-      {jokesList.length && <JokesTrainings jokesList={jokesList} />}
     </div>
   );
 }

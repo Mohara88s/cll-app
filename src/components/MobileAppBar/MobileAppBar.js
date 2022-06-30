@@ -11,7 +11,7 @@ export default function AppBar() {
   const [mobileAppBarIsOpen, setMobileAppBarIsOpen] = useState(false);
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
   const onMenuClick = ({ target: { nodeName } }) => {
-    console.dir(nodeName);
+    // console.dir(nodeName);
     if (nodeName === 'BUTTON' || nodeName === 'SPAN' || nodeName === 'A') {
       setMobileAppBarIsOpen(!mobileAppBarIsOpen);
     }

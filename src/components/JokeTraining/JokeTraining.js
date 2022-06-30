@@ -1,49 +1,70 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import styles from './JokesTrainings.module.css';
-import PropTypes from 'prop-types';
-// import { throttle } from 'lodash';
+import styles from './JokeTraining.module.css';
+import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
+import ChooseTaskLanguages from '../ChooseTaskLanguages/ChooseTaskLanguages';
+import TaskCongratulation from '../TaskCongratulation/TaskCongratulation';
 
-export default function JokesTrainings({ jokesList }) {
+export default function JokeTraining({ jokeTask, onResolvedTraining }) {
+  const [taskLanguages, setTaskLanguages] = useState([]);
+  const [originalLanguageJoke, setOriginalLanguageJoke] = useState('');
+  const [translationArray, setTranslationArray] = useState([]);
+  const [mixedArray, setMixedArray] = useState([]);
+  const [resolvedArray, setResolvedArray] = useState([]);
   const [actualId, setActualId] = useState(0);
   const [losts, setLosts] = useState(0);
   const [attempts, setAttempts] = useState(0);
   const [resolved, setResolved] = useState(false);
-  const [jokeId, setJokeId] = useState(0);
-  const [originalArray, setOriginalArray] = useState([]);
-  const [mixedArray, setMixedArray] = useState([]);
-  const [resolvedArray, setResolvedArray] = useState([]);
+
+  const originalLanguage = useSelector(jokeTasksSelectors.getOriginalLanguage);
+  const translationLanguage = useSelector(
+    jokeTasksSelectors.getTranslationLanguage,
+  );
+  useEffect(() => {
+    setTaskLanguages(
+      jokeTask.languages.map(language => language.language_name),
+    );
+  }, [jokeTask]);
 
   useEffect(() => {
-    if (jokesList[jokeId].translation) {
-      setOriginalArray([
-        ...jokesList[jokeId].translation
-          .match(/[^.?!]+[.!?]+[\])'"`’”]*|.+/g)
-          .map(e => (e[0] === ' ' ? e.slice(1) : e)),
-      ]);
-    }
-  }, [jokeId, jokesList]);
+    setOriginalLanguageJoke(
+      jokeTask.translations.find(
+        translation => translation.language.language_name === originalLanguage,
+      ).text,
+    );
+
+    setTranslationArray([
+      ...jokeTask.translations
+        .find(
+          translation =>
+            translation.language.language_name === translationLanguage,
+        )
+        .text.match(/[^.?!]+[.!?]+[\])'"`’”]*|.+/g)
+        .map(e => (e[0] === ' ' ? e.slice(1) : e)),
+    ]);
+  }, [jokeTask, originalLanguage, translationLanguage]);
 
   useEffect(() => {
     setMixedArray([
-      ...[...originalArray].sort(() => {
+      ...[...translationArray].sort(() => {
         return 0.5 - Math.random();
       }),
     ]);
     setResolvedArray([]);
-  }, [originalArray]);
+  }, [translationArray]);
 
   const onClickSentenceButton = e => {
     const buttonValue = e.currentTarget.getAttribute('value');
     const id = Number.parseInt(e.currentTarget.getAttribute('data-id'));
 
-    if (buttonValue === originalArray[actualId]) {
+    if (buttonValue === translationArray[actualId]) {
       onRightButtonClick(e.currentTarget, id, buttonValue);
     } else {
       onWrongButtonClick(e.currentTarget);
     }
     setAttempts(prevState => prevState + 1);
-    if (actualId >= originalArray.length - 1) {
+    if (actualId >= translationArray.length - 1) {
       onPositiveTrainingResult();
     }
   };
@@ -62,45 +83,45 @@ export default function JokesTrainings({ jokesList }) {
     button.classList.remove('btn-primary');
     button.classList.add('btn-success');
     setTimeout(() => {
-      mixedArray.splice(id, 1);
       resolvedArray.push(value);
       button.classList.remove('btn-success');
       button.classList.add('btn-primary');
+      button.disabled = true;
+      button.style.color = 'transparent';
+      button.style.background = 'transparent';
+      button.style.borderColor = 'transparent';
       setActualId(prevState => prevState + 1);
     }, 300);
   };
 
   const onPositiveTrainingResult = () => {
     setTimeout(() => {
+      setMixedArray([]);
       setResolved(true);
     }, 300);
   };
   const onClickButtonNext = () => {
-    if (jokeId >= jokesList.length - 1) {
-      setJokeId(0);
-    } else {
-      setJokeId(prevState => prevState + 1);
-    }
-    setActualId(0);
-    setLosts(0);
-    setAttempts(0);
-    setResolved(false);
-    setResolvedArray([]);
+    onResolvedTraining();
+  };
+
+  const onClickSkipButton = () => {
+    onResolvedTraining();
   };
 
   return (
     <div className={styles.JokesTrainings}>
+      {taskLanguages && <ChooseTaskLanguages languages={taskLanguages} />}
       <h3>Joke in original language</h3>
-      {!jokesList[jokeId].original && (
+      {!originalLanguageJoke && (
         <h3 className={styles.warning}>no original available</h3>
       )}
-      <p>{jokesList[jokeId].original}</p>
+      <p>{originalLanguageJoke}</p>
 
       <h3>Joke in translation language</h3>
       <ul className={styles.jokeFealdsList}>
         <li className={styles.jokeFealdsList__item}>
           <h4 className={styles.jokeFealdHeader}>Unresolved joke</h4>
-          {!jokesList[jokeId].translation && (
+          {!translationArray && !mixedArray && (
             <h3 className={styles.warning}>no translation available</h3>
           )}
           <ul className={styles.listTags}>
@@ -109,7 +130,6 @@ export default function JokesTrainings({ jokesList }) {
                 <Button
                   variant="primary"
                   data-id={id}
-                  // onClick={throttle(onClickButton, 500)}
                   onClick={onClickSentenceButton}
                   value={elem}
                 >
@@ -119,19 +139,11 @@ export default function JokesTrainings({ jokesList }) {
             ))}
           </ul>
           {resolved && (
-            <div className={styles.congratulations}>
-              <h3>Congratulations, you're great!!!</h3>
-              <p>Are you ready for a new test?</p>
-              <p>Then press NEXT!</p>
-              <Button variant="warning" onClick={onClickButtonNext}>
-                NEXT
-              </Button>
-              <div className={styles.statistics}>
-                <h5>Сurrent statistics:</h5>
-                <p>Attempts: {attempts}</p>
-                <p>Losts: {losts}</p>
-              </div>
-            </div>
+            <TaskCongratulation
+              attempts={attempts}
+              losts={losts}
+              onClickButtonNext={onClickButtonNext}
+            />
           )}
         </li>
         <li className={styles.jokeFealdsList__item}>
@@ -145,16 +157,13 @@ export default function JokesTrainings({ jokesList }) {
           </ul>
         </li>
       </ul>
+      <Button
+        variant="primary"
+        onClick={onClickSkipButton}
+        className={styles.skipButton}
+      >
+        Skip task
+      </Button>
     </div>
   );
 }
-
-JokesTrainings.propTypes = {
-  jokesList: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      original: PropTypes.string.isRequired,
-      translation: PropTypes.string.isRequired,
-    }),
-  ),
-};

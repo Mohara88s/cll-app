@@ -1,83 +1,63 @@
-import data from '../../database/jokes.json';
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button } from 'react-bootstrap';
+import sentencesTasksSelectors from '../../redux/sentences-tasks/sentences-tasks-selectors';
+import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
+import { fetchSentencesTasks } from '../../redux/sentences-tasks/sentences-tasks-operaions';
+import ChooseLanguages from '../ChooseLanguages/ChooseLanguages';
 import SentencesTrainings from '../../components/SentencesTrainings/SentencesTrainings';
-import ChooseLanguages from '../../components/ChooseLanguages/ChooseLanguages';
 import styles from './SentencesTrainingsPage.module.css';
 
 export default function SentencesTrainingsPage() {
+  const dispatch = useDispatch();
   useEffect(() => {
     window.scrollBy(0, -1000);
   }, []);
-
-  const languages = ['english', 'ukrainian', 'russian'];
-  const [sentencesNoIdList, setSentencesNoIdList] = useState([]);
   const [sentencesList, setSentencesList] = useState([]);
+  const originalLanguage = useSelector(jokeTasksSelectors.getOriginalLanguage);
+  const translationLanguage = useSelector(
+    jokeTasksSelectors.getTranslationLanguage,
+  );
+  const tasks = useSelector(sentencesTasksSelectors.getSentencesTasks);
+  // const error = useSelector(
+  //   sentencesTasksSelectors.getSentencesTasksError,
+  // );
+  // const loading = useSelector(
+  //   sentencesTasksSelectors.getSentencesTasksLoading,
+  // );
 
-  const onLanguageChange = (originalLanguage, translationLanguage) => {
-    setSentencesNoIdList([]);
-    [...data]
-      .map(e => {
-        return {
-          id: e.id,
-          original: e[`${originalLanguage}`],
-          translation: e[`${translationLanguage}`],
-        };
-      })
-      .map(e => {
-        const originalArr = e.original.match(/[^.?!]+[.!?]+[\])'"`’”]*|.+/g);
-        const translationArr = e.translation.match(
-          /[^.?!]+[.!?]+[\])'"`’”]*|.+/g,
-        );
-
-        if (originalArr.length === translationArr.length) {
-          const sentencesArr = originalArr.map((elem, id) => {
-            return {
-              original: elem,
-              translation: translationArr[id],
-            };
-          });
-          setSentencesNoIdList(prevState => [...sentencesArr, ...prevState]);
-        }
-        return true;
-      });
+  const onClickTrainButton = () => {
+    dispatch(fetchSentencesTasks(originalLanguage, translationLanguage, 20));
+    console.log('fetch');
   };
 
   useEffect(() => {
-    const normalizeList = [...sentencesNoIdList]
-      .map((e, id) => {
-        return {
-          id,
-          original: e.original,
-          translation: e.translation,
-        };
-      })
-      .filter(e => e.original.length > 30)
-      .sort(() => {
-        return 0.5 - Math.random();
-      });
-    setSentencesList([...normalizeList]);
-  }, [sentencesNoIdList]);
+    setSentencesList(tasks);
+  }, [tasks]);
+
+  const onResolvedTraining = () => {
+    setSentencesList([]);
+  };
 
   return (
     <div>
       <h2>Sentences trainings</h2>
-      {!languages.length && (
-        <h3 className={styles.warning}>No language found</h3>
-      )}
-      {languages.length && (
-        <ChooseLanguages
-          languages={languages}
-          onLanguageChange={onLanguageChange}
-        />
+      {!sentencesList[0] && <ChooseLanguages />}
+      {!sentencesList[0] && (
+        <Button
+          variant="primary"
+          onClick={onClickTrainButton}
+          className={styles.trainButton}
+        >
+          Press the button to generate 20 random sentences and practice it
+        </Button>
       )}
 
-      {!sentencesList.length && (
-        <h3 className={styles.warning}>
-          Sentences are missing from the database
-        </h3>
-      )}
-      {sentencesList.length && (
-        <SentencesTrainings sentencesList={sentencesList} />
+      {sentencesList[0] && (
+        <SentencesTrainings
+          sentencesList={sentencesList}
+          onResolvedTraining={onResolvedTraining}
+        />
       )}
     </div>
   );

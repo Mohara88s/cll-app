@@ -1,39 +1,18 @@
 import { Button } from 'react-bootstrap';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
-import { fetchJokeTasksLanguages } from '../../redux/joke-tasks/joke-tasks-operaions';
 import {
   setOriginalLanguage,
   setTranslationLanguage,
 } from '../../redux/joke-tasks/joke-tasks-actions';
-import styles from './ChooseLanguages.module.css';
+import styles from './ChooseTaskLanguages.module.css';
 
-export default function ChooseLanguages() {
+export default function ChooseTaskLanguages({ languages }) {
   const dispatch = useDispatch();
-
-  const languages = useSelector(jokeTasksSelectors.getJokeTasksLanguages);
-  // const languagesError = useSelector(
-  //   jokeTasksSelectors.getJokeTasksLanguagesError,
-  // );
-  // const languagesLoading = useSelector(
-  //   jokeTasksSelectors.getJokeTasksLanguagesLoading,
-  // );
   const originalLanguage = useSelector(jokeTasksSelectors.getOriginalLanguage);
   const translationLanguage = useSelector(
     jokeTasksSelectors.getTranslationLanguage,
   );
-
-  useEffect(() => {
-    dispatch(fetchJokeTasksLanguages());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (originalLanguage === null) dispatch(setOriginalLanguage(languages[0]));
-    if (translationLanguage === null)
-      dispatch(setTranslationLanguage(languages[languages.length - 1]));
-    // eslint-disable-next-line
-  }, [dispatch, languages]);
 
   const onClickButtonOriginalLanguage = e => {
     const { value } = e.currentTarget;
@@ -46,8 +25,8 @@ export default function ChooseLanguages() {
   };
 
   return (
-    <div className={styles.ChooseLanguages}>
-      <ul className={styles.ChooseLanguagesList}>
+    <div className={styles.ChooseTaskLanguages}>
+      <ul className={styles.ChooseTaskLanguagesList}>
         <li>
           <h3>Choose original language:</h3>
           <ul className={styles.languagesList}>

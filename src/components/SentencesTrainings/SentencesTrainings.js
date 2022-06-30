@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
-import styles from './SentencesTrainings.module.css';
-import PropTypes from 'prop-types';
-// import { throttle } from 'lodash';
+import TaskCongratulation from '../TaskCongratulation/TaskCongratulation';
+import TrainingCongratulation from '../TrainingCongratulation/TrainingCongratulation';
 
-export default function SentencesTrainings({ sentencesList }) {
+import styles from './SentencesTrainings.module.css';
+
+export default function SentencesTrainings({
+  sentencesList,
+  onResolvedTraining,
+}) {
   const [actualId, setActualId] = useState(0);
   const [losts, setLosts] = useState(0);
   const [attempts, setAttempts] = useState(0);
@@ -13,6 +17,7 @@ export default function SentencesTrainings({ sentencesList }) {
   const [originalArray, setOriginalArray] = useState([]);
   const [mixedArray, setMixedArray] = useState([]);
   const [resolvedArray, setResolvedArray] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
     if (sentencesList[sentenceId].translation) {
@@ -62,8 +67,11 @@ export default function SentencesTrainings({ sentencesList }) {
     button.classList.remove('btn-primary');
     button.classList.add('btn-success');
     setTimeout(() => {
-      mixedArray.splice(id, 1);
       resolvedArray.push(value);
+      button.disabled = true;
+      button.style.color = 'transparent';
+      button.style.background = 'transparent';
+      button.style.borderColor = 'transparent';
       button.classList.remove('btn-success');
       button.classList.add('btn-primary');
       setActualId(prevState => prevState + 1);
@@ -72,12 +80,13 @@ export default function SentencesTrainings({ sentencesList }) {
 
   const onPositiveTrainingResult = () => {
     setTimeout(() => {
+      setMixedArray([]);
       setResolved(true);
     }, 300);
   };
   const onClickButtonNext = () => {
     if (sentenceId >= sentencesList.length - 1) {
-      setSentenceId(0);
+      setModalShow(true);
     } else {
       setSentenceId(prevState => prevState + 1);
     }
@@ -88,18 +97,25 @@ export default function SentencesTrainings({ sentencesList }) {
     setResolvedArray([]);
   };
 
+  const onCloseModal = () => {
+    setModalShow(false);
+    onResolvedTraining();
+  };
+
   return (
     <div className={styles.SentencesTrainings}>
       <h3>Sentence in original language</h3>
       {!sentencesList[sentenceId].original && (
         <h3 className={styles.warning}>no original available</h3>
       )}
-      <p>{sentencesList[sentenceId].original}</p>
+      <p className={styles.originalSentence}>
+        {sentencesList[sentenceId].original}
+      </p>
 
       <h3>Sentence in translation language</h3>
-      <ul className={styles.sentenceFealdsList}>
-        <li className={styles.sentenceFealdsList__item}>
-          <h4 className={styles.sentenceFealdHeader}>Unresolved sentence</h4>
+      <ul className={styles.fealdsList}>
+        <li className={styles.fealdsList__item}>
+          <h4 className={styles.fealdHeader}>Unresolved sentence</h4>
           {!sentencesList[sentenceId].translation && (
             <h3 className={styles.warning}>no translation available</h3>
           )}
@@ -109,9 +125,9 @@ export default function SentencesTrainings({ sentencesList }) {
                 <Button
                   variant="primary"
                   data-id={id}
-                  // onClick={throttle(onClickButton, 500)}
                   onClick={onClickSentenceButton}
                   value={elem}
+                  className={styles.listTags__button}
                 >
                   {elem}
                 </Button>
@@ -119,42 +135,38 @@ export default function SentencesTrainings({ sentencesList }) {
             ))}
           </ul>
           {resolved && (
-            <div className={styles.congratulations}>
-              <h3>Congratulations, you're great!!!</h3>
-              <p>Are you ready for a new test?</p>
-              <p>Then press NEXT!</p>
-              <Button variant="warning" onClick={onClickButtonNext}>
-                NEXT
-              </Button>
-              <div className={styles.statistics}>
-                <h5>Сurrent statistics:</h5>
-                <p>Attempts: {attempts}</p>
-                <p>Losts: {losts}</p>
-              </div>
-            </div>
+            <TaskCongratulation
+              attempts={attempts}
+              losts={losts}
+              onClickButtonNext={onClickButtonNext}
+            />
           )}
         </li>
-        <li className={styles.sentenceFealdsList__item}>
-          <h4 className={styles.sentenceFealdHeader}>Resolved sentence </h4>
+        <li className={styles.fealdsList__item}>
+          <h4 className={styles.fealdHeader}>Resolved sentence </h4>
           <ul className={styles.listTags}>
             {resolvedArray.map((elem, id) => (
               <li key={id} className={styles.listTags__item}>
-                <Button variant="primary">{elem}</Button>
+                <Button variant="primary" className={styles.listTags__button}>
+                  {elem}
+                </Button>
               </li>
             ))}
           </ul>
         </li>
       </ul>
+      <Button
+        variant="primary"
+        onClick={onClickButtonNext}
+        className={styles.skipButton}
+      >
+        Skip task
+      </Button>
+      <TrainingCongratulation
+        modalShow={modalShow}
+        onHandleClose={onCloseModal}
+        congratulationText="Congratulations! You have practiced this set of sentences."
+      />
     </div>
   );
 }
-
-SentencesTrainings.propTypes = {
-  sentencesList: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      original: PropTypes.string.isRequired,
-      translation: PropTypes.string.isRequired,
-    }),
-  ),
-};
