@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import sentencesTasksSelectors from '../../redux/sentences-tasks/sentences-tasks-selectors';
 import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
 import {
@@ -10,6 +10,7 @@ import {
 import JokesList from '../JokesList/JokesList';
 import ChooseLanguages from '../ChooseLanguages/ChooseLanguages';
 import SentencesTrainings from '../../components/SentencesTrainings/SentencesTrainings';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './SentencesTrainingsPage.module.css';
 
 export default function SentencesTrainingsPage() {
@@ -23,12 +24,8 @@ export default function SentencesTrainingsPage() {
     jokeTasksSelectors.getTranslationLanguage,
   );
   const tasks = useSelector(sentencesTasksSelectors.getSentencesTasks);
-  // const error = useSelector(
-  //   sentencesTasksSelectors.getSentencesTasksError,
-  // );
-  // const loading = useSelector(
-  //   sentencesTasksSelectors.getSentencesTasksLoading,
-  // );
+  const error = useSelector(sentencesTasksSelectors.getSentencesTasksError);
+  const loading = useSelector(sentencesTasksSelectors.getSentencesTasksLoading);
 
   const onClickTrainButton = () => {
     dispatch(fetchSentencesTasks(originalLanguage, translationLanguage, 20));
@@ -63,7 +60,12 @@ export default function SentencesTrainingsPage() {
             onClick={onClickTrainButton}
             className={styles.trainButton}
           >
-            Press the button to generate 20 random sentences and practice it
+            {!loading && (
+              <span>
+                Press the button to generate 20 random sentences and practice it
+              </span>
+            )}
+            {loading && <Spinner animation="border" as="span" size="sm" />}
           </Button>
           <JokesList passUpTask={trainTask} />
         </>
@@ -75,6 +77,7 @@ export default function SentencesTrainingsPage() {
           onResolvedTraining={onResolvedTraining}
         />
       )}
+      {error && <ErrorMessage message={error} />}
     </div>
   );
 }
