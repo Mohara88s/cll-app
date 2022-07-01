@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import sentencesTasksSelectors from '../../redux/sentences-tasks/sentences-tasks-selectors';
 import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
-import { fetchSentencesTasks } from '../../redux/sentences-tasks/sentences-tasks-operaions';
+import {
+  fetchSentencesTasks,
+  fetchSentencesTasksByJokeTaskId,
+} from '../../redux/sentences-tasks/sentences-tasks-operaions';
+import JokesList from '../JokesList/JokesList';
 import ChooseLanguages from '../ChooseLanguages/ChooseLanguages';
 import SentencesTrainings from '../../components/SentencesTrainings/SentencesTrainings';
 import styles from './SentencesTrainingsPage.module.css';
@@ -28,7 +32,6 @@ export default function SentencesTrainingsPage() {
 
   const onClickTrainButton = () => {
     dispatch(fetchSentencesTasks(originalLanguage, translationLanguage, 20));
-    console.log('fetch');
   };
 
   useEffect(() => {
@@ -39,18 +42,31 @@ export default function SentencesTrainingsPage() {
     setSentencesList([]);
   };
 
+  const trainTask = task => {
+    dispatch(
+      fetchSentencesTasksByJokeTaskId(
+        task._id,
+        originalLanguage,
+        translationLanguage,
+      ),
+    );
+  };
+
   return (
     <div>
       <h2>Sentences trainings</h2>
-      {!sentencesList[0] && <ChooseLanguages />}
       {!sentencesList[0] && (
-        <Button
-          variant="primary"
-          onClick={onClickTrainButton}
-          className={styles.trainButton}
-        >
-          Press the button to generate 20 random sentences and practice it
-        </Button>
+        <>
+          <ChooseLanguages />
+          <Button
+            variant="primary"
+            onClick={onClickTrainButton}
+            className={styles.trainButton}
+          >
+            Press the button to generate 20 random sentences and practice it
+          </Button>
+          <JokesList passUpTask={trainTask} />
+        </>
       )}
 
       {sentencesList[0] && (

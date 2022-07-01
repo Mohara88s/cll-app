@@ -1,3 +1,9 @@
+.originalLanguageJoke {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #0d6efd;
+  margin-bottom: 5px;
+}
 .jokeFealdsList {
   padding-left: 0;
 }
@@ -35,7 +41,10 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
-
+.listTags__button {
+  font-size: 1.1rem;
+  text-align: start;
+}
 .congratulations {
   color: red;
   text-align: center;
