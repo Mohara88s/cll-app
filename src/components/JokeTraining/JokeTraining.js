@@ -159,20 +159,20 @@ export default function JokeTraining({ jokeTask, onResolvedTraining }) {
             ))}
           </ul>
           {resolved && (
-            <>
+            <div className={styles.CongratulationBox}>
               <TaskCongratulation
                 attempts={attempts}
                 losts={losts}
                 onClickButtonNext={onClickButtonNext}
               />
               <Button
-                variant="primary"
+                variant="warning"
                 onClick={onClickJokeSentencesTraningsButton}
                 value={jokeTask._id}
               >
                 Practice joke sentences in sentences trainings
               </Button>
-            </>
+            </div>
           )}
         </li>
         <li className={styles.jokeFealdsList__item}>
