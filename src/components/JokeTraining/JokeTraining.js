@@ -34,6 +34,12 @@ export default function JokeTraining({ jokeTask, onResolvedTraining }) {
       ).text,
     );
 
+    setMixedArray([]);
+    setResolvedArray([]);
+    setActualId(0);
+    setLosts(0);
+    setAttempts(0);
+
     setTranslationArray([
       ...jokeTask.translations
         .find(
@@ -51,7 +57,6 @@ export default function JokeTraining({ jokeTask, onResolvedTraining }) {
         return 0.5 - Math.random();
       }),
     ]);
-    setResolvedArray([]);
   }, [translationArray]);
 
   const onClickSentenceButton = e => {
