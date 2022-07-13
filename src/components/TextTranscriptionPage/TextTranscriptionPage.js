@@ -39,7 +39,7 @@ export default function TextTranscriptionPage() {
       dispatch(
         fetchTextTranscription({
           englishText,
-          transcriptionType: dropdownValue,
+          transcriptionType: name,
         }),
       );
     }
