@@ -45,6 +45,11 @@ const TranscriptionTrainingsView = lazy(() =>
     './views/TranscriptionTrainingsView/TranscriptionTrainingsView.js' /* webpackChunkName:"TranscriptionTrainingsView" */
   ),
 );
+const TextTranscriptionView = lazy(() =>
+  import(
+    './views/TextTranscriptionView/TextTranscriptionView.js' /* webpackChunkName:"TextTranscriptionView" */
+  ),
+);
 const UserView = lazy(() =>
   import('./views/UserView/UserView.js' /* webpackChunkName:"UserView" */),
 );
@@ -96,6 +101,10 @@ function App() {
 
               <PrivateRoute exact path="/transcription-trainings">
                 <TranscriptionTrainingsView />
+              </PrivateRoute>
+
+              <PrivateRoute exact path="/text-transcription">
+                <TextTranscriptionView />
               </PrivateRoute>
 
               <PrivateRoute exact path="/user">
