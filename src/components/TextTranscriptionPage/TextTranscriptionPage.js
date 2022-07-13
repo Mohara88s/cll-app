@@ -34,9 +34,14 @@ export default function TextTranscriptionPage() {
     );
   };
   const onDropdownClick = ({ target: { name } }) => {
-    if (dropdownValue !== name) {
-      setTaranscriptedArray([]);
-      setDropdownValue(name);
+    setDropdownValue(name);
+    if (englishText) {
+      dispatch(
+        fetchTextTranscription({
+          englishText,
+          transcriptionType: dropdownValue,
+        }),
+      );
     }
   };
 
