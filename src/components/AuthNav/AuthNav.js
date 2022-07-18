@@ -13,7 +13,7 @@ export default function AuthNav() {
             className={styles.AuthNav__link}
             activeClassName={styles.activeLink}
           >
-            Registation
+            Registration
           </NavLink>
         </li>
         <li className={styles.AuthNav__item}>
