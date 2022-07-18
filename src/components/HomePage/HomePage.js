@@ -6,6 +6,7 @@ import styles from './HomePage.module.css';
 import jokesTrainingsImg from '../../public/pictures/jokes_trainings.jpg';
 import sentencesTrainingsImg from '../../public/pictures/sentences_trainings.jpg';
 import transcription__trainingsImg from '../../public/pictures/transcription__trainings.jpg';
+import text__transcriptionImg from '../../public/pictures/text__transcription.jpg';
 import plug__trainingsImg from '../../public/pictures/plug__trainings.jpg';
 
 export default function HomePage() {
@@ -72,6 +73,25 @@ export default function HomePage() {
             </Link>
           </li>
         )}
+
+        {isLoggedIn && (
+          <li className={styles.LinksList__item}>
+            <Link
+              to={{
+                pathname: `${url}text-transcription/`,
+                state: { from: location },
+              }}
+            >
+              <h3 className={styles.LinksList__name}>Text transcription</h3>
+              <img
+                src={text__transcriptionImg}
+                alt="Text transcription"
+                className={styles.LinksList__picture}
+              />
+            </Link>
+          </li>
+        )}
+
         {!isLoggedIn && (
           <li className={styles.LinksList__item}>
             <Link

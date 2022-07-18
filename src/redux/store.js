@@ -15,6 +15,7 @@ import jokeTasksReducer from './joke-tasks/joke-tasks-reducer';
 import sentencesTasksReducer from './sentences-tasks/sentences-tasks-reducer';
 import transcriptionTasksReducer from './transcription-tasks/transcription-tasks-reducer';
 import { authReducer } from './auth';
+import textTranscriptionReducer from './text-transcription/text-transcription-reducer';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -36,6 +37,7 @@ export const store = configureStore({
     jokeTasks: jokeTasksReducer,
     sentencesTasks: sentencesTasksReducer,
     transcriptionTasks: transcriptionTasksReducer,
+    textTranscription: textTranscriptionReducer,
     auth: persistReducer(authPersistConfig, authReducer),
   },
   middleware,
