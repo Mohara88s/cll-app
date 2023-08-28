@@ -18,7 +18,11 @@ export const fetchSentencesTasks =
       );
       dispatch(fetchSentencesTasksSuccess(data.tasks));
     } catch (error) {
-      dispatch(fetchSentencesTasksError(error.response.data.message));
+      dispatch(
+        fetchSentencesTasksError(
+          error.response ? error.response.data.message : error.message,
+        ),
+      );
     }
   };
 
@@ -32,7 +36,9 @@ export const fetchSentencesTasksByJokeTaskId =
       dispatch(fetchSentencesTasksByJokeTaskIdSuccess(data.tasks));
     } catch (error) {
       dispatch(
-        fetchSentencesTasksByJokeTaskIdError(error.response.data.message),
+        fetchSentencesTasksByJokeTaskIdError(
+          error.response ? error.response.data.message : error.message,
+        ),
       );
     }
   };

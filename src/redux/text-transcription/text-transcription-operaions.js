@@ -14,6 +14,10 @@ export const fetchTextTranscription = textData => async dispatch => {
     );
     dispatch(fetchTextTranscriptionSuccess(data.text));
   } catch (error) {
-    dispatch(fetchTextTranscriptionError(error.response.data.message));
+    dispatch(
+      fetchTextTranscriptionError(
+        error.response ? error.response.data.message : error.message,
+      ),
+    );
   }
 };

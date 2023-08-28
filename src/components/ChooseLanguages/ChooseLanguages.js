@@ -1,6 +1,7 @@
 import { Button } from 'react-bootstrap';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
 import { fetchJokeTasksLanguages } from '../../redux/joke-tasks/joke-tasks-operaions';
 import {
@@ -13,9 +14,9 @@ export default function ChooseLanguages() {
   const dispatch = useDispatch();
 
   const languages = useSelector(jokeTasksSelectors.getJokeTasksLanguages);
-  // const languagesError = useSelector(
-  //   jokeTasksSelectors.getJokeTasksLanguagesError,
-  // );
+  const languagesError = useSelector(
+    jokeTasksSelectors.getJokeTasksLanguagesError,
+  );
   // const languagesLoading = useSelector(
   //   jokeTasksSelectors.getJokeTasksLanguagesLoading,
   // );
@@ -91,6 +92,7 @@ export default function ChooseLanguages() {
           </ul>
         </li>
       </ul>
+      {languagesError && <ErrorMessage message={languagesError} />}
     </div>
   );
 }

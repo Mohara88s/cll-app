@@ -23,7 +23,11 @@ export const fetchOwnDictionaries = () => async dispatch => {
     const { data } = await axios.get(`/own-dictionaries`);
     dispatch(fetchOwnDictionariesSuccess(data.ownDictionaries));
   } catch (error) {
-    dispatch(fetchOwnDictionariesError(error.response.data.message));
+    dispatch(
+      fetchOwnDictionariesError(
+        error.response ? error.response.data.message : error.message,
+      ),
+    );
   }
 };
 
@@ -33,7 +37,11 @@ export const addOwnDictionary = dictionary => async dispatch => {
     const { data } = await axios.patch(`/own-dictionaries`, dictionary);
     dispatch(addOwnDictionarySuccess(data.ownDictionary));
   } catch (error) {
-    dispatch(addOwnDictionaryError(error.response.data.message));
+    dispatch(
+      addOwnDictionaryError(
+        error.response ? error.response.data.message : error.message,
+      ),
+    );
   }
 };
 
@@ -43,7 +51,11 @@ export const deleteOwnDictionary = dictionaryId => async dispatch => {
     const { data } = await axios.delete(`/own-dictionaries/${dictionaryId}`);
     dispatch(deleteOwnDictionarySuccess(data.ownDictionary));
   } catch (error) {
-    dispatch(deleteOwnDictionaryError(error.response.data.message));
+    dispatch(
+      deleteOwnDictionaryError(
+        error.response ? error.response.data.message : error.message,
+      ),
+    );
   }
 };
 
@@ -53,7 +65,11 @@ export const fetchOwnDictionary = dictionaryId => async dispatch => {
     const { data } = await axios.get(`/own-dictionaries/${dictionaryId}`);
     dispatch(fetchOwnDictionarySuccess(data.ownDictionary));
   } catch (error) {
-    dispatch(fetchOwnDictionaryError(error.response.data.message));
+    dispatch(
+      fetchOwnDictionaryError(
+        error.response ? error.response.data.message : error.message,
+      ),
+    );
   }
 };
 
@@ -68,6 +84,10 @@ export const updateOwnDictionary =
       );
       dispatch(updateOwnDictionarySuccess(data.ownDictionary));
     } catch (error) {
-      dispatch(updateOwnDictionaryError(error.response.data.message));
+      dispatch(
+        updateOwnDictionaryError(
+          error.response ? error.response.data.message : error.message,
+        ),
+      );
     }
   };

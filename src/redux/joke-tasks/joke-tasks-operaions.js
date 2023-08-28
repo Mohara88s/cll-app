@@ -18,7 +18,11 @@ export const fetchJokeTasks =
       );
       dispatch(fetchJokeTasksSuccess(data.tasks));
     } catch (error) {
-      dispatch(fetchJokeTasksError(error.response.data.message));
+      dispatch(
+        fetchJokeTasksError(
+          error.response ? error.response.data.message : error.message,
+        ),
+      );
     }
   };
 
@@ -28,6 +32,10 @@ export const fetchJokeTasksLanguages = () => async dispatch => {
     const { data } = await axios.get(`/joke-tasks/languages`);
     dispatch(fetchJokeTasksLanguagesSuccess(data.languages));
   } catch (error) {
-    dispatch(fetchJokeTasksLanguagesError(error.response.data.message));
+    dispatch(
+      fetchJokeTasksLanguagesError(
+        error.response ? error.response.data.message : error.message,
+      ),
+    );
   }
 };

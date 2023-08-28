@@ -13,6 +13,10 @@ export const fetchTranscriptionTasks = query => async dispatch => {
     );
     dispatch(fetchTranscriptionTasksSuccess(data.tasks));
   } catch (error) {
-    dispatch(fetchTranscriptionTasksError(error.response.data.message));
+    dispatch(
+      fetchTranscriptionTasksError(
+        error.response ? error.response.data.message : error.message,
+      ),
+    );
   }
 };
