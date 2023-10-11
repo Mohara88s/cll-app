@@ -52,7 +52,11 @@ export const addJokeTask = task => async dispatch => {
     const { data } = await axios.post(`/joke-tasks`, task);
     dispatch(addJokeTaskSuccess(data));
   } catch (error) {
-    dispatch(addJokeTaskError(error.message));
+    dispatch(
+      addJokeTaskError(
+        error.response ? error.response.data.message : error.message,
+      ),
+    );
   }
 };
 

@@ -91,7 +91,7 @@ export default function JokeTaskForm() {
             type="text"
             name="jokeName"
             placeholder="Enter the name of the joke"
-            value={jokeTask.joke_title}
+            value={jokeTask.task_title}
             onChange={handleChange}
           />
         </Form.Group>
