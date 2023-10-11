@@ -1,0 +1,13 @@
+.Button {
+  margin-bottom: 10px;
+}
+.Dropdown {
+  margin-bottom: 10px;
+}
+.buttonsBox {
+  display: flex;
+  justify-content: space-between;
+}
+.JokeTitle {
+  margin-bottom: 10px;
+}

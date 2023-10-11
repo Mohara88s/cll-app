@@ -26,15 +26,14 @@ export default function JokeTraining({ jokeTask, onResolvedTraining }) {
     jokeTasksSelectors.getTranslationLanguage,
   );
   useEffect(() => {
-    setTaskLanguages(
-      jokeTask.languages.map(language => language.language_name).sort(),
-    );
+    setTaskLanguages(jokeTask.languages);
   }, [jokeTask]);
 
   useEffect(() => {
     setOriginalLanguageJoke(
       jokeTask.translations.find(
-        translation => translation.language.language_name === originalLanguage,
+        translation =>
+          translation.language.language_name === originalLanguage.language_name,
       ).text,
     );
 
@@ -48,7 +47,8 @@ export default function JokeTraining({ jokeTask, onResolvedTraining }) {
       ...jokeTask.translations
         .find(
           translation =>
-            translation.language.language_name === translationLanguage,
+            translation.language.language_name ===
+            translationLanguage.language_name,
         )
         .text.match(/[^.?!]+[.!?]+[\])'"`’”]*|.+/g)
         .map(e => (e[0] === ' ' ? e.slice(1) : e)),
@@ -121,8 +121,8 @@ export default function JokeTraining({ jokeTask, onResolvedTraining }) {
     dispatch(
       fetchSentencesTasksByJokeTaskId(
         taskId,
-        originalLanguage,
-        translationLanguage,
+        originalLanguage.language_name,
+        translationLanguage.language_name,
       ),
     );
     history.push('/sentences-trainings');

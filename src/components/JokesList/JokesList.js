@@ -30,7 +30,13 @@ export default function JokesList({ passUpTask }) {
 
   useEffect(() => {
     if (originalLanguage !== null && translationLanguage !== null) {
-      dispatch(fetchJokeTasks(filter, originalLanguage, translationLanguage));
+      dispatch(
+        fetchJokeTasks(
+          filter,
+          originalLanguage.language_name,
+          translationLanguage.language_name,
+        ),
+      );
     }
   }, [dispatch, filter, originalLanguage, translationLanguage]);
 

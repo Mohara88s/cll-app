@@ -53,8 +53,8 @@ export default function OwnDictionaries({ advancedMode = false }) {
             }}
           >
             <Button variant="primary" className={styles.Button__noDictionaries}>
-              You don't have your own dictionaries yet. Go to the user page to
-              create a dictionary.
+              You don't have your dictionary yet. Go to the user page to create
+              a dictionary.
             </Button>
           </Link>
         )}

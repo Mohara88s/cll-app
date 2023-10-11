@@ -53,6 +53,9 @@ const TextTranscriptionView = lazy(() =>
 const UserView = lazy(() =>
   import('./views/UserView/UserView.js' /* webpackChunkName:"UserView" */),
 );
+const AdminView = lazy(() =>
+  import('./views/AdminView/AdminView.js' /* webpackChunkName:"AdminView" */),
+);
 const InfoView = lazy(() =>
   import('./views/InfoView/InfoView' /* webpackChunkName:"InfoView" */),
 );
@@ -70,7 +73,7 @@ function App() {
   }, [dispatch]);
 
   const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
-
+  const userSubscription = useSelector(authSelectors.getUserSubscription);
   return (
     !isFetchingCurrentUser && (
       <div>
@@ -110,6 +113,12 @@ function App() {
               <PrivateRoute exact path="/user">
                 <UserView />
               </PrivateRoute>
+
+              {userSubscription === 'admin' && (
+                <PrivateRoute exact path="/admin">
+                  <AdminView />
+                </PrivateRoute>
+              )}
 
               <Route path="/info">
                 <InfoView />

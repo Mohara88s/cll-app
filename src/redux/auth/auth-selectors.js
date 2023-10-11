@@ -8,6 +8,8 @@ const getUserEmail = state => state.auth.user.email;
 
 const getUserName = state => state.auth.user.name;
 
+const getUserSubscription = state => state.auth.user.subscription;
+
 const getIsFetchingCurrent = state => state.auth.isFetchingCurrentUser;
 
 const getLoading = state => state.auth.loading;
@@ -18,6 +20,7 @@ const authSelectors = {
   getRegError,
   getUserEmail,
   getUserName,
+  getUserSubscription,
   getIsFetchingCurrent,
   getLoading,
 };

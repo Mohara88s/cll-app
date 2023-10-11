@@ -7,6 +7,7 @@ import styles from './UserMenu.module.css';
 export default function UserMenu() {
   const dispatch = useDispatch();
   const name = useSelector(authSelectors.getUserName);
+  const userSubscription = useSelector(authSelectors.getUserSubscription);
   const onLogoutClick = async () => {
     await dispatch(authOperations.signout());
     window.location.reload();
@@ -16,6 +17,15 @@ export default function UserMenu() {
     <div className={styles.UserMenu}>
       <p className={styles.greating}>
         Hello
+        {userSubscription === 'admin' && (
+          <Link
+            to={{
+              pathname: `/admin/`,
+            }}
+          >
+            <span className={styles.userAdmin}>administrator</span>
+          </Link>
+        )}
         <Link
           to={{
             pathname: `/user/`,

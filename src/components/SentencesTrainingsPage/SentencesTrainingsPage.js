@@ -28,7 +28,13 @@ export default function SentencesTrainingsPage() {
   const loading = useSelector(sentencesTasksSelectors.getSentencesTasksLoading);
 
   const onClickTrainButton = () => {
-    dispatch(fetchSentencesTasks(originalLanguage, translationLanguage, 20));
+    dispatch(
+      fetchSentencesTasks(
+        originalLanguage.language_name,
+        translationLanguage.language_name,
+        20,
+      ),
+    );
   };
 
   useEffect(() => {
@@ -43,8 +49,8 @@ export default function SentencesTrainingsPage() {
     dispatch(
       fetchSentencesTasksByJokeTaskId(
         task._id,
-        originalLanguage,
-        translationLanguage,
+        originalLanguage.language_name,
+        translationLanguage.language_name,
       ),
     );
   };

@@ -2,6 +2,8 @@ import { createAction } from '@reduxjs/toolkit';
 
 export const changeFilter = createAction('joke-tasks/changeFilter');
 
+export const changeJokeTask = createAction('joke-tasks/changeJokeTask');
+
 export const setOriginalLanguage = createAction(
   'joke-tasks/setOriginalLanguage',
 );
@@ -28,3 +30,15 @@ export const fetchJokeTasksLanguagesSuccess = createAction(
 export const fetchJokeTasksLanguagesError = createAction(
   'joke-tasks/fetchJokeTasksLanguagesError',
 );
+
+export const addJokeTaskRequest = createAction('contacts/addJokeTaskRequest');
+export const addJokeTaskSuccess = createAction('contacts/addJokeTaskSuccess');
+export const addJokeTaskError = createAction('contacts/addJokeTaskError');
+
+export const deleteJokeTaskRequest = createAction(
+  'contacts/deleteJokeTaskRequest',
+);
+export const deleteJokeTaskSuccess = createAction(
+  'contacts/deleteJokeTaskSuccess',
+);
+export const deleteJokeTaskError = createAction('contacts/deleteJokeTaskError');

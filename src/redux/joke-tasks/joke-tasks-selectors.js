@@ -1,7 +1,8 @@
 const getJokeTasksFilter = state => state.jokeTasks.filter;
-const getJokeTasksError = state => state.jokeTasks.error;
-const getJokeTasksLoading = state => state.jokeTasks.loading;
+const getJokeTask = state => state.jokeTasks.jokeTask;
 const getJokeTasks = state => state.jokeTasks.tasks;
+const getJokeTasksLoading = state => state.jokeTasks.loading;
+const getJokeTasksError = state => state.jokeTasks.error;
 const getJokeTasksLanguagesError = state => state.jokeTasks.languagesError;
 const getJokeTasksLanguagesLoading = state => state.jokeTasks.languagesLoading;
 const getJokeTasksLanguages = state => state.jokeTasks.languages;
@@ -10,9 +11,10 @@ const getTranslationLanguage = state => state.jokeTasks.translationLanguage;
 
 const jokeTasksSelectors = {
   getJokeTasksFilter,
-  getJokeTasksError,
-  getJokeTasksLoading,
+  getJokeTask,
   getJokeTasks,
+  getJokeTasksLoading,
+  getJokeTasksError,
   getJokeTasksLanguagesError,
   getJokeTasksLanguagesLoading,
   getJokeTasksLanguages,
