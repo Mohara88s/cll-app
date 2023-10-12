@@ -56,7 +56,7 @@ export default function ChooseLanguages() {
           {originalLanguage && (
             <ul className={styles.languagesList}>
               {languages.map(elem => (
-                <li key={elem._id + 1}>
+                <li key={elem._id + 1} className={styles.languagesList__item}>
                   <Button
                     variant="primary"
                     onClick={onClickButtonOriginalLanguage}
@@ -64,7 +64,7 @@ export default function ChooseLanguages() {
                     className={
                       elem.language_name === originalLanguage.language_name
                         ? 'btn btn-primary btn-lg'
-                        : 'btn btn-primary'
+                        : 'btn btn-secondary'
                     }
                   >
                     {elem.language_name}
@@ -79,7 +79,7 @@ export default function ChooseLanguages() {
           {translationLanguage && (
             <ul className={styles.languagesList}>
               {languages.map(elem => (
-                <li key={elem._id + 2}>
+                <li key={elem._id + 2} className={styles.languagesList__item}>
                   <Button
                     variant="primary"
                     onClick={onClickButtonTranslationLanguage}
@@ -87,7 +87,7 @@ export default function ChooseLanguages() {
                     className={
                       elem.language_name === translationLanguage.language_name
                         ? 'btn btn-primary btn-lg'
-                        : 'btn btn-primary'
+                        : 'btn btn-secondary'
                     }
                   >
                     {elem.language_name}

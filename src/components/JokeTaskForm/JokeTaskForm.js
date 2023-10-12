@@ -82,8 +82,6 @@ export default function JokeTaskForm() {
 
   return (
     <div>
-      {languagesLoading && <Spinner animation="border" as="span" size="sm" />}
-
       <Form autoComplete="off" className={styles.Form}>
         <Form.Group className="mb-3">
           <Form.Label>Enter the name of the joke in English:</Form.Label>
@@ -183,6 +181,7 @@ export default function JokeTaskForm() {
       </div>
       {error && <ErrorMessage message={error} />}
       {languagesError && <ErrorMessage message={languagesError} />}
+      {languagesLoading && <Spinner animation="border" as="span" size="sm" />}
     </div>
   );
 }

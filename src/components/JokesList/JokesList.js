@@ -5,6 +5,7 @@ import { changeFilter } from '../../redux/joke-tasks/joke-tasks-actions';
 import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
 import { fetchJokeTasks } from '../../redux/joke-tasks/joke-tasks-operaions';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import EditingJokeTaskModal from '../EditingJokeTaskModal/EditingJokeTaskModal';
 import styles from './JokesList.module.css';
 
 export default function JokesList({ passUpTask, adminMode = false }) {
@@ -18,6 +19,8 @@ export default function JokesList({ passUpTask, adminMode = false }) {
   const loading = useSelector(jokeTasksSelectors.getJokeTasksLoading);
   const filter = useSelector(jokeTasksSelectors.getJokeTasksFilter);
   const [filtredTasks, setFiltredTasks] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
+  const [selectedTask, setSelectedTask] = useState('');
 
   const filterHandleChange = ({ target: { value } }) => {
     dispatch(changeFilter(value));
@@ -27,7 +30,11 @@ export default function JokesList({ passUpTask, adminMode = false }) {
     const task = filtredTasks.find(e => e._id === name);
     passUpTask(task);
   };
-  const onEditBtnClick = ({ target: { name } }) => {};
+  const onEditBtnClick = ({ target: { name } }) => {
+    const task = filtredTasks.find(e => e._id === name);
+    setSelectedTask(task);
+    setModalShow(true);
+  };
 
   useEffect(() => {
     if (originalLanguage !== null && translationLanguage !== null) {
@@ -105,6 +112,12 @@ export default function JokesList({ passUpTask, adminMode = false }) {
       </Table>
       {error && <ErrorMessage message={error} />}
       {loading && <Spinner animation="border" variant="primary" />}
+
+      <EditingJokeTaskModal
+        modalShow={modalShow}
+        jokeTask={selectedTask}
+        onHandleClose={() => setModalShow(false)}
+      />
     </div>
   );
 }

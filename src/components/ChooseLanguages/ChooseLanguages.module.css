@@ -2,10 +2,8 @@
   display: flex;
   justify-content: space-around;
   padding-left: 0;
+  flex-wrap: wrap;
 }
-@media screen and (min-width: 720px) {
-  .ChooseLanguagesList {
-    display: flex;
-    justify-content: space-around;
-  }
+.languagesList__item {
+  margin: 5px;
 }
