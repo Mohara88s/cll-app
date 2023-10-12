@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Table, Spinner } from 'react-bootstrap';
 import { changeFilter } from '../../redux/joke-tasks/joke-tasks-actions';
 import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
+import { authSelectors } from '../../redux/auth';
 import { fetchJokeTasks } from '../../redux/joke-tasks/joke-tasks-operaions';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './JokesList.module.css';
@@ -18,6 +19,7 @@ export default function JokesList({ passUpTask }) {
   const loading = useSelector(jokeTasksSelectors.getJokeTasksLoading);
   const filter = useSelector(jokeTasksSelectors.getJokeTasksFilter);
   const [filtredTasks, setFiltredTasks] = useState([]);
+  const userSubscription = useSelector(authSelectors.getUserSubscription);
 
   const filterHandleChange = ({ target: { value } }) => {
     dispatch(changeFilter(value));
@@ -27,6 +29,7 @@ export default function JokesList({ passUpTask }) {
     const task = filtredTasks.find(e => e._id === name);
     passUpTask(task);
   };
+  const onEditBtnClick = ({ target: { name } }) => {};
 
   useEffect(() => {
     if (originalLanguage !== null && translationLanguage !== null) {
@@ -81,6 +84,11 @@ export default function JokesList({ passUpTask }) {
                   <Button name={_id} onClick={onTrainBtnClick}>
                     Train
                   </Button>
+                  {userSubscription === 'admin' && (
+                    <Button name={_id} onClick={onEditBtnClick}>
+                      Edit
+                    </Button>
+                  )}
                 </td>
               </tr>
             ))}
