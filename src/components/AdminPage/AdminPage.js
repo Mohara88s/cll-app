@@ -7,7 +7,6 @@ export default function AdminPage() {
   useEffect(() => {
     window.scrollBy(0, -1000);
   }, []);
-
   const [keyAdminTabs, setKeyAdminTabs] = useState('joke-task-form');
   return (
     <div>
