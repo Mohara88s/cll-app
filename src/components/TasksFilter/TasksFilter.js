@@ -38,10 +38,14 @@ export default function TasksFilter({ passUpTask }) {
   useEffect(() => {
     if (filter) {
       dispatch(fetchTranscriptionTasks(filter));
+    }
+  }, [dispatch, filter]);
+
+  useEffect(() => {
+    if (tasks) {
       setFiltredTasks(tasks);
     }
-    // eslint-disable-next-line
-  }, [dispatch, filter]);
+  }, [dispatch, tasks]);
 
   return (
     <div className={styles.TasksFilter}>

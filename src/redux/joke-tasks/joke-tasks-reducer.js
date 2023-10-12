@@ -27,8 +27,8 @@ const jokeTask = createReducer(
   {
     task_title: '',
     translations: [
-      { id: 0, language: '', title: '', text: '' },
-      { id: 1, language: '', title: '', text: '' },
+      { _id: 0, language: '', title: '', text: '' },
+      { _id: 1, language: '', title: '', text: '' },
     ],
   },
   {
@@ -37,8 +37,8 @@ const jokeTask = createReducer(
       return {
         task_title: '',
         translations: [
-          { id: 0, language: '', title: '', text: '' },
-          { id: 1, language: '', title: '', text: '' },
+          { _id: 0, language: '', title: '', text: '' },
+          { _id: 1, language: '', title: '', text: '' },
         ],
       };
     },

@@ -28,17 +28,17 @@ export default function JokeTaskForm() {
   const jokeTask = useSelector(jokeTasksSelectors.getJokeTask);
   const onClickButtonAddTranslation = () => {
     const newId =
-      jokeTask.translations[jokeTask.translations.length - 1].id + 1;
+      jokeTask.translations[jokeTask.translations.length - 1]._id + 1;
     const newArr = [
       ...jokeTask.translations,
-      { id: newId, language: '', title: '', text: '' },
+      { _id: newId, language: '', title: '', text: '' },
     ];
     dispatch(changeJokeTask({ ...jokeTask, translations: newArr }));
   };
   const onClickButtonDeleteTranslation = ({ target: { name } }) => {
     if (jokeTask.translations.length > 2) {
       const newArr = [...jokeTask.translations].filter(
-        e => e.id !== Number(name),
+        e => e._id !== Number(name),
       );
       dispatch(changeJokeTask({ ...jokeTask, translations: newArr }));
     }
@@ -46,7 +46,6 @@ export default function JokeTaskForm() {
 
   const onAddButtonClick = e => {
     dispatch(addJokeTask({ ...jokeTask }));
-    console.log(jokeTask);
   };
 
   const handleChange = ({ target: { name, value, type } }) => {
@@ -56,13 +55,13 @@ export default function JokeTaskForm() {
       case name:
         if (type === 'textarea') {
           const newArr = [...jokeTask.translations].map(e =>
-            e.id === Number(name) ? { ...e, text: value } : e,
+            e._id === Number(name) ? { ...e, text: value } : e,
           );
           dispatch(changeJokeTask({ ...jokeTask, translations: newArr }));
         }
         if (type === 'text') {
           const newArr = [...jokeTask.translations].map(e =>
-            e.id === Number(name) ? { ...e, title: value } : e,
+            e._id === Number(name) ? { ...e, title: value } : e,
           );
           dispatch(changeJokeTask({ ...jokeTask, translations: newArr }));
         }
@@ -74,8 +73,8 @@ export default function JokeTaskForm() {
 
   const onDropdownClick = ({ target: { name, title } }) => {
     const newLanguage = languages.find(e => e._id === name);
-    const newArr = [...jokeTask.translations].map((e, id) =>
-      id === Number(title) ? { ...e, language: newLanguage } : e,
+    const newArr = [...jokeTask.translations].map(e =>
+      e._id === Number(title) ? { ...e, language: newLanguage } : e,
     );
     dispatch(changeJokeTask({ ...jokeTask, translations: newArr }));
   };
@@ -96,7 +95,7 @@ export default function JokeTaskForm() {
         {jokeTask && (
           <ul>
             {jokeTask.translations.map(elem => (
-              <li key={elem.id}>
+              <li key={elem._id}>
                 <Form.Group className="mb-3">
                   <Form.Label>
                     Choose the language and enter the version of the joke in the
@@ -119,7 +118,7 @@ export default function JokeTaskForm() {
                           <li key={e._id}>
                             <Dropdown.Item
                               name={e._id}
-                              title={elem.id}
+                              title={elem._id}
                               onClick={onDropdownClick}
                             >
                               {e.language_name}
@@ -131,7 +130,7 @@ export default function JokeTaskForm() {
                   </Dropdown>
                   <Form.Control
                     type="text"
-                    name={elem.id}
+                    name={elem._id}
                     placeholder="Enter the name of the joke in current language"
                     value={elem.title}
                     onChange={handleChange}
@@ -140,7 +139,7 @@ export default function JokeTaskForm() {
                   <Form.Control
                     as="textarea"
                     rows={5}
-                    name={elem.id}
+                    name={elem._id}
                     placeholder="joke in current language"
                     value={elem.text}
                     onChange={handleChange}
@@ -151,7 +150,7 @@ export default function JokeTaskForm() {
                   variant="danger"
                   onClick={onClickButtonDeleteTranslation}
                   className={styles.Button}
-                  name={elem.id}
+                  name={elem._id}
                 >
                   Delete
                 </Button>

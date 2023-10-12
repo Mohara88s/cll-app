@@ -1,11 +1,10 @@
 .EditingJokeTaskModalDialog {
   max-width: 90vw;
-  width: fit-content;
   margin: auto;
 }
-body.modal-open {
+/* body.modal-open {
   padding-right: 0 !important;
 }
 body.modal-open .modal {
   padding-right: 0 !important;
-}
+} */

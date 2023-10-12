@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Table, Spinner } from 'react-bootstrap';
-import { changeFilter } from '../../redux/joke-tasks/joke-tasks-actions';
+import {
+  changeFilter,
+  changeJokeTask,
+} from '../../redux/joke-tasks/joke-tasks-actions';
 import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
 import { fetchJokeTasks } from '../../redux/joke-tasks/joke-tasks-operaions';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
@@ -20,7 +23,6 @@ export default function JokesList({ passUpTask, adminMode = false }) {
   const filter = useSelector(jokeTasksSelectors.getJokeTasksFilter);
   const [filtredTasks, setFiltredTasks] = useState([]);
   const [modalShow, setModalShow] = useState(false);
-  const [selectedTask, setSelectedTask] = useState('');
 
   const filterHandleChange = ({ target: { value } }) => {
     dispatch(changeFilter(value));
@@ -32,7 +34,7 @@ export default function JokesList({ passUpTask, adminMode = false }) {
   };
   const onEditBtnClick = ({ target: { name } }) => {
     const task = filtredTasks.find(e => e._id === name);
-    setSelectedTask(task);
+    dispatch(changeJokeTask({ ...task }));
     setModalShow(true);
   };
 
@@ -115,7 +117,6 @@ export default function JokesList({ passUpTask, adminMode = false }) {
 
       <EditingJokeTaskModal
         modalShow={modalShow}
-        jokeTask={selectedTask}
         onHandleClose={() => setModalShow(false)}
       />
     </div>
