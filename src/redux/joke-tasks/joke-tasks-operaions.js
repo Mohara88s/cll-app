@@ -11,6 +11,9 @@ import {
   deleteJokeTaskRequest,
   deleteJokeTaskSuccess,
   deleteJokeTaskError,
+  updateJokeTaskRequest,
+  updateJokeTaskSuccess,
+  updateJokeTaskError,
 } from './joke-tasks-actions';
 import axios from 'axios';
 
@@ -60,11 +63,11 @@ export const addJokeTask = task => async dispatch => {
   }
 };
 
-export const deleteJokeTask = id => async dispatch => {
+export const deleteJokeTask = taskId => async dispatch => {
   dispatch(deleteJokeTaskRequest());
   try {
-    await axios.delete(`/joke-tasks/${id}`);
-    dispatch(deleteJokeTaskSuccess(id));
+    const { data } = await axios.delete(`/joke-tasks/${taskId}`);
+    dispatch(deleteJokeTaskSuccess(data));
   } catch (error) {
     dispatch(
       deleteJokeTaskError(
@@ -73,3 +76,19 @@ export const deleteJokeTask = id => async dispatch => {
     );
   }
 };
+
+export const updateJokeTask =
+  ({ taskId, update }) =>
+  async dispatch => {
+    dispatch(updateJokeTaskRequest());
+    try {
+      const { data } = await axios.put(`/joke-tasks/${taskId}`, update);
+      dispatch(updateJokeTaskSuccess(data));
+    } catch (error) {
+      dispatch(
+        updateJokeTaskError(
+          error.response ? error.response.data.message : error.message,
+        ),
+      );
+    }
+  };

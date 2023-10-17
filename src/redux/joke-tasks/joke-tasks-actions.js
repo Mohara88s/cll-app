@@ -42,3 +42,11 @@ export const deleteJokeTaskSuccess = createAction(
   'contacts/deleteJokeTaskSuccess',
 );
 export const deleteJokeTaskError = createAction('contacts/deleteJokeTaskError');
+
+export const updateJokeTaskRequest = createAction(
+  'contacts/updateJokeTaskRequest',
+);
+export const updateJokeTaskSuccess = createAction(
+  'contacts/updateJokeTaskSuccess',
+);
+export const updateJokeTaskError = createAction('contacts/updateJokeTaskError');

@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
 import { changeJokeTask } from '../../redux/joke-tasks/joke-tasks-actions';
-
+import {
+  updateJokeTask,
+  deleteJokeTask,
+} from '../../redux/joke-tasks/joke-tasks-operaions';
 import { Form, Dropdown, Modal, Button, Spinner } from 'react-bootstrap';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './EditingJokeTaskModal.module.css';
@@ -21,10 +24,16 @@ const EditingJokeTaskModal = ({ modalShow, onHandleClose }) => {
     onHandleClose();
   };
 
-  console.log(jokeTask);
   useEffect(() => {
     setShow(modalShow);
   }, [modalShow]);
+
+  useEffect(() => {
+    if (!jokeTask.task_title) {
+      handleClose();
+    }
+    // eslint-disable-next-line
+  }, [jokeTask]);
 
   const onClickButtonAddTranslation = () => {
     const newId =
@@ -42,8 +51,11 @@ const EditingJokeTaskModal = ({ modalShow, onHandleClose }) => {
     }
   };
 
-  const onSaveButtonClick = e => {
-    // dispatch(addJokeTask({ ...jokeTask }));
+  const onSaveTaskButtonClick = e => {
+    dispatch(updateJokeTask({ taskId: jokeTask._id, update: { ...jokeTask } }));
+  };
+  const onDeleteTaskButtonClick = e => {
+    dispatch(deleteJokeTask(jokeTask._id));
   };
 
   const handleChange = ({ target: { name, value, type } }) => {
@@ -178,11 +190,18 @@ const EditingJokeTaskModal = ({ modalShow, onHandleClose }) => {
               >
                 Add one more translation of the joke
               </Button>
-
+              <Button
+                variant="danger"
+                className={styles.Button}
+                onClick={onDeleteTaskButtonClick}
+              >
+                {!loading && <span>Delete task from the database</span>}
+                {loading && <Spinner animation="border" as="span" size="sm" />}
+              </Button>
               <Button
                 variant="primary"
                 className={styles.Button}
-                onClick={onSaveButtonClick}
+                onClick={onSaveTaskButtonClick}
               >
                 {!loading && <span>Save changes to the database</span>}
                 {loading && <Spinner animation="border" as="span" size="sm" />}

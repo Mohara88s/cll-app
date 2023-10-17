@@ -27,11 +27,14 @@ export const fetchSentencesTasks =
   };
 
 export const fetchSentencesTasksByJokeTaskId =
-  (jokeTaskId, originalLanguage, translationLanguage) => async dispatch => {
+  (jokeTaskId, originalLanguage, translationLanguage, random) =>
+  async dispatch => {
     dispatch(fetchSentencesTasksByJokeTaskIdRequest());
     try {
       const { data } = await axios.get(
-        `/sentences-tasks/${jokeTaskId}?original_language=${originalLanguage}&translation_language=${translationLanguage}`,
+        `/sentences-tasks/${jokeTaskId}?original_language=${originalLanguage}&translation_language=${translationLanguage}${
+          random ? `&random=${random}` : ``
+        }`,
       );
       dispatch(fetchSentencesTasksByJokeTaskIdSuccess(data.tasks));
     } catch (error) {

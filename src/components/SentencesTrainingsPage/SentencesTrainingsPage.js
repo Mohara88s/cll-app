@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Spinner } from 'react-bootstrap';
+import { Form, Button, Spinner } from 'react-bootstrap';
 import sentencesTasksSelectors from '../../redux/sentences-tasks/sentences-tasks-selectors';
 import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
 import {
@@ -19,6 +19,7 @@ export default function SentencesTrainingsPage() {
     window.scrollBy(0, -1000);
   }, []);
   const [sentencesList, setSentencesList] = useState([]);
+  const [random, setRandom] = useState(true);
   const originalLanguage = useSelector(jokeTasksSelectors.getOriginalLanguage);
   const translationLanguage = useSelector(
     jokeTasksSelectors.getTranslationLanguage,
@@ -51,6 +52,7 @@ export default function SentencesTrainingsPage() {
         task._id,
         originalLanguage.language_name,
         translationLanguage.language_name,
+        random,
       ),
     );
   };
@@ -73,6 +75,12 @@ export default function SentencesTrainingsPage() {
             )}
             {loading && <Spinner animation="border" as="span" size="sm" />}
           </Button>
+          <Form.Check // prettier-ignore
+            type="checkbox"
+            checked={random}
+            onChange={() => setRandom(!random)}
+            label="The sentences in the task are random"
+          />
           <JokesList passUpTask={trainTask} />
         </>
       )}
