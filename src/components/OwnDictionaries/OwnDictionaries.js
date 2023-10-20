@@ -10,6 +10,7 @@ import {
 import { changeCurrentDictionary } from '../../redux/own-dictionaries/own-dictionaries-actions';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import SelectedDictionaryModal from '../SelectedDictionaryModal/SelectedDictionaryModal';
+import { confirm } from 'react-bootstrap-confirmation';
 import styles from './OwnDictionaries.module.css';
 
 export default function OwnDictionaries({ advancedMode = false }) {
@@ -37,8 +38,10 @@ export default function OwnDictionaries({ advancedMode = false }) {
     setModalShow(true);
   };
 
-  const onDeleteBtn = ({ target: { name } }) => {
-    dispatch(deleteOwnDictionary(name));
+  const onDeleteBtn = async ({ target: { name } }) => {
+    if (await confirm('Are you sure you want to delete this dictionary?')) {
+      dispatch(deleteOwnDictionary(name));
+    }
   };
   return (
     <div>

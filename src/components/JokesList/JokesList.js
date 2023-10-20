@@ -88,7 +88,7 @@ export default function JokesList({ passUpTask, adminMode = false }) {
                       e.language_name.localeCompare(i.language_name),
                     )
                     .map(({ language_name }) => (
-                      <span key={language_name}>{language_name} </span>
+                      <span key={language_name}>{language_name}/</span>
                     ))}
                 </td>
                 <td>

@@ -10,6 +10,7 @@ import ownDictionariesSelectors from '../../redux/own-dictionaries/own-dictionar
 import { addOwnDictionary } from '../../redux/own-dictionaries/own-dictionaries-operaions';
 import TasksFilter from '../TasksFilter/TasksFilter';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { confirm } from 'react-bootstrap-confirmation';
 import styles from './DictionaryForm.module.css';
 
 export default function DictionaryForm() {
@@ -36,13 +37,15 @@ export default function DictionaryForm() {
     dispatch(updateTasksSet(newTasksSet));
   };
 
-  const onAddSetToOwnDictionariesClick = () => {
-    dispatch(
-      addOwnDictionary({
-        ownDictionaryName: dictionaryName,
-        ownDictionaryTasks: tasksSet,
-      }),
-    );
+  const onAddSetToOwnDictionariesClick = async () => {
+    if (await confirm('Are you sure you want to add this dictionary?')) {
+      dispatch(
+        addOwnDictionary({
+          ownDictionaryName: dictionaryName,
+          ownDictionaryTasks: tasksSet,
+        }),
+      );
+    }
   };
 
   const addTaskToSet = task => {

@@ -7,6 +7,7 @@ import TasksFilter from '../TasksFilter/TasksFilter';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import AlertComponent from '../AlertComponent/AlertComponent';
 import CopyInterfaceSymbol from '../CopyInterfaceSymbol/CopyInterfaceSymbol';
+import { confirm } from 'react-bootstrap-confirmation';
 import styles from './SelectedDictionaryModal.module.css';
 import './SelectedDictionaryModal.css';
 
@@ -47,16 +48,18 @@ const SelectedDictionaryModal = ({
     setShow(modalShow);
   }, [modalShow]);
 
-  const deleteTask = ({ target: { name } }) => {
-    const newTasksSet = selectedDictionary.ownDictionaryTasks.filter(
-      task => task._id !== name,
-    );
-    dispatch(
-      updateOwnDictionary({
-        dictionaryId: selectedDictionary._id,
-        update: { ownDictionaryTasks: newTasksSet },
-      }),
-    );
+  const deleteTask = async ({ target: { name } }) => {
+    if (await confirm('Are you sure you want to delete this word?')) {
+      const newTasksSet = selectedDictionary.ownDictionaryTasks.filter(
+        task => task._id !== name,
+      );
+      dispatch(
+        updateOwnDictionary({
+          dictionaryId: selectedDictionary._id,
+          update: { ownDictionaryTasks: newTasksSet },
+        }),
+      );
+    }
   };
   const addTask = task => {
     if (

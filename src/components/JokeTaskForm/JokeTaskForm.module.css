@@ -1,13 +1,16 @@
-.Button {
+.JokeTitle {
   margin-bottom: 10px;
 }
 .Dropdown {
   margin-bottom: 10px;
 }
-.buttonsBox {
+.Form__DeleteButton {
+  margin-bottom: 10px;
+}
+.mainButtonsBox {
   display: flex;
   justify-content: space-between;
 }
-.JokeTitle {
-  margin-bottom: 10px;
+.mainButtonsBox__Button {
+  width: 30%;
 }

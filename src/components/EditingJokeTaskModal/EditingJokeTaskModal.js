@@ -46,7 +46,9 @@ const EditingJokeTaskModal = ({ modalShow, onHandleClose }) => {
     dispatch(changeJokeTask({ ...jokeTask, translations: newArr }));
   };
   const onClickButtonDeleteTranslation = async ({ target: { name } }) => {
-    if (await confirm('Are you sure?')) {
+    if (
+      await confirm('Are you sure you want to delete this translation field?')
+    ) {
       if (jokeTask.translations.length > 2) {
         const newArr = [...jokeTask.translations].filter(e => e._id !== name);
         dispatch(changeJokeTask({ ...jokeTask, translations: newArr }));
@@ -55,14 +57,14 @@ const EditingJokeTaskModal = ({ modalShow, onHandleClose }) => {
   };
 
   const onSaveTaskButtonClick = async () => {
-    if (await confirm('Are you sure?')) {
+    if (await confirm('Are you sure you want to save changes to this task?')) {
       dispatch(
         updateJokeTask({ taskId: jokeTask._id, update: { ...jokeTask } }),
       );
     }
   };
   const onDeleteTaskButtonClick = async () => {
-    if (await confirm('Are you sure?')) {
+    if (await confirm('Are you sure you want to delete this task?')) {
       dispatch(deleteJokeTask(jokeTask._id));
     }
   };
@@ -181,7 +183,7 @@ const EditingJokeTaskModal = ({ modalShow, onHandleClose }) => {
                       <Button
                         variant="danger"
                         onClick={onClickButtonDeleteTranslation}
-                        className={styles.Button}
+                        className={styles.Form__DeleteButton}
                         name={elem._id}
                       >
                         Delete
@@ -191,17 +193,17 @@ const EditingJokeTaskModal = ({ modalShow, onHandleClose }) => {
                 </ul>
               )}
             </Form>
-            <div className={styles.buttonsBox}>
+            <div className={styles.mainButtonsBox}>
               <Button
                 variant="success"
                 onClick={onClickButtonAddTranslation}
-                className={styles.Button}
+                className={styles.mainButtonsBox__Button}
               >
                 Add one more translation of the joke
               </Button>
               <Button
                 variant="danger"
-                className={styles.Button}
+                className={styles.mainButtonsBox__Button}
                 onClick={onDeleteTaskButtonClick}
               >
                 {!loading && <span>Delete task from the database</span>}
@@ -209,7 +211,7 @@ const EditingJokeTaskModal = ({ modalShow, onHandleClose }) => {
               </Button>
               <Button
                 variant="primary"
-                className={styles.Button}
+                className={styles.mainButtonsBox__Button}
                 onClick={onSaveTaskButtonClick}
               >
                 {!loading && <span>Save changes to the database</span>}

@@ -37,7 +37,9 @@ export default function JokeTaskForm() {
     dispatch(changeJokeTask({ ...jokeTask, translations: newArr }));
   };
   const onClickButtonDeleteTranslation = async ({ target: { name } }) => {
-    if (await confirm('Are you sure?')) {
+    if (
+      await confirm('Are you sure you want to delete this translation field?')
+    ) {
       if (jokeTask.translations.length > 2) {
         const newArr = [...jokeTask.translations].filter(
           e => e._id !== Number(name),
@@ -48,7 +50,7 @@ export default function JokeTaskForm() {
   };
 
   const onAddButtonClick = async () => {
-    if (await confirm('Are you sure?')) {
+    if (await confirm('Are you sure you want to add this task?')) {
       dispatch(addJokeTask({ ...jokeTask }));
     }
   };
@@ -154,7 +156,7 @@ export default function JokeTaskForm() {
                 <Button
                   variant="danger"
                   onClick={onClickButtonDeleteTranslation}
-                  className={styles.Button}
+                  className={styles.Form__DeleteButton}
                   name={elem._id}
                 >
                   Delete
@@ -165,18 +167,18 @@ export default function JokeTaskForm() {
         )}
       </Form>
 
-      <div className={styles.buttonsBox}>
+      <div className={styles.mainButtonsBox}>
         <Button
           variant="success"
           onClick={onClickButtonAddTranslation}
-          className={styles.Button}
+          className={styles.mainButtonsBox__Button}
         >
           Add one more translation of the joke
         </Button>
 
         <Button
           variant="primary"
-          className={styles.Button}
+          className={styles.mainButtonsBox__Button}
           onClick={onAddButtonClick}
         >
           {!loading && <span>Add this joke to the database</span>}
