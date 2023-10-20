@@ -58,13 +58,22 @@ export default function ChooseLanguages() {
               {languages.map(elem => (
                 <li key={elem._id + 1} className={styles.languagesList__item}>
                   <Button
-                    variant="primary"
+                    variant={
+                      elem.language_name === originalLanguage.language_name
+                        ? 'primary'
+                        : 'secondary'
+                    }
+                    size={
+                      elem.language_name === originalLanguage.language_name
+                        ? 'lg'
+                        : ''
+                    }
                     onClick={onClickButtonOriginalLanguage}
                     value={elem.language_name}
                     className={
                       elem.language_name === originalLanguage.language_name
-                        ? 'btn btn-primary btn-lg'
-                        : 'btn btn-secondary'
+                        ? styles.languagesList__ActiveButton
+                        : styles.languagesList__Button
                     }
                   >
                     {elem.language_name}
@@ -81,13 +90,22 @@ export default function ChooseLanguages() {
               {languages.map(elem => (
                 <li key={elem._id + 2} className={styles.languagesList__item}>
                   <Button
-                    variant="primary"
+                    variant={
+                      elem.language_name === translationLanguage.language_name
+                        ? 'primary'
+                        : 'secondary'
+                    }
+                    size={
+                      elem.language_name === translationLanguage.language_name
+                        ? 'lg'
+                        : ''
+                    }
                     onClick={onClickButtonTranslationLanguage}
                     value={elem.language_name}
                     className={
                       elem.language_name === translationLanguage.language_name
-                        ? 'btn btn-primary btn-lg'
-                        : 'btn btn-secondary'
+                        ? styles.languagesList__ActiveButton
+                        : styles.languagesList__Button
                     }
                   >
                     {elem.language_name}

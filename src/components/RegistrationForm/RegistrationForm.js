@@ -30,12 +30,10 @@ export default function RegistrationForm() {
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    dispatch(authOperations.signup({ name, email, password }));
-    // setName('');
-    // setEmail('');
-    // setPassword('');
+    await dispatch(authOperations.signup({ name, email, password }));
+    window.location.reload();
   };
 
   return (

@@ -13,7 +13,7 @@ const englishText = createReducer('', {
 
 const transcriptedText = createReducer('', {
   [fetchTextTranscriptionSuccess]: (_, { payload }) => payload,
-  [fetchTextTranscriptionError]: () => '',
+  [fetchTextTranscriptionRequest]: () => '',
 });
 
 const loading = createReducer(false, {

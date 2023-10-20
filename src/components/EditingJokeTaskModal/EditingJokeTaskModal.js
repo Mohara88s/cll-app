@@ -8,6 +8,7 @@ import {
 } from '../../redux/joke-tasks/joke-tasks-operaions';
 import { Form, Dropdown, Modal, Button, Spinner } from 'react-bootstrap';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { confirm } from 'react-bootstrap-confirmation';
 import styles from './EditingJokeTaskModal.module.css';
 import './EditingJokeTaskModal.css';
 
@@ -44,18 +45,26 @@ const EditingJokeTaskModal = ({ modalShow, onHandleClose }) => {
     ];
     dispatch(changeJokeTask({ ...jokeTask, translations: newArr }));
   };
-  const onClickButtonDeleteTranslation = ({ target: { name } }) => {
-    if (jokeTask.translations.length > 2) {
-      const newArr = [...jokeTask.translations].filter(e => e._id !== name);
-      dispatch(changeJokeTask({ ...jokeTask, translations: newArr }));
+  const onClickButtonDeleteTranslation = async ({ target: { name } }) => {
+    if (await confirm('Are you sure?')) {
+      if (jokeTask.translations.length > 2) {
+        const newArr = [...jokeTask.translations].filter(e => e._id !== name);
+        dispatch(changeJokeTask({ ...jokeTask, translations: newArr }));
+      }
     }
   };
 
-  const onSaveTaskButtonClick = e => {
-    dispatch(updateJokeTask({ taskId: jokeTask._id, update: { ...jokeTask } }));
+  const onSaveTaskButtonClick = async () => {
+    if (await confirm('Are you sure?')) {
+      dispatch(
+        updateJokeTask({ taskId: jokeTask._id, update: { ...jokeTask } }),
+      );
+    }
   };
-  const onDeleteTaskButtonClick = e => {
-    dispatch(deleteJokeTask(jokeTask._id));
+  const onDeleteTaskButtonClick = async () => {
+    if (await confirm('Are you sure?')) {
+      dispatch(deleteJokeTask(jokeTask._id));
+    }
   };
 
   const handleChange = ({ target: { name, value, type } }) => {

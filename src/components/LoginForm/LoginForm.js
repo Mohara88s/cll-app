@@ -27,11 +27,10 @@ export default function LoginForm() {
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    dispatch(authOperations.signin({ email, password }));
-    setEmail('');
-    setPassword('');
+    await dispatch(authOperations.signin({ email, password }));
+    window.location.reload();
   };
 
   return (

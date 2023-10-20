@@ -6,6 +6,7 @@ import { changeJokeTask } from '../../redux/joke-tasks/joke-tasks-actions';
 import { addJokeTask } from '../../redux/joke-tasks/joke-tasks-operaions';
 import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
 import { fetchJokeTasksLanguages } from '../../redux/joke-tasks/joke-tasks-operaions';
+import { confirm } from 'react-bootstrap-confirmation';
 import styles from './JokeTaskForm.module.css';
 
 export default function JokeTaskForm() {
@@ -35,17 +36,21 @@ export default function JokeTaskForm() {
     ];
     dispatch(changeJokeTask({ ...jokeTask, translations: newArr }));
   };
-  const onClickButtonDeleteTranslation = ({ target: { name } }) => {
-    if (jokeTask.translations.length > 2) {
-      const newArr = [...jokeTask.translations].filter(
-        e => e._id !== Number(name),
-      );
-      dispatch(changeJokeTask({ ...jokeTask, translations: newArr }));
+  const onClickButtonDeleteTranslation = async ({ target: { name } }) => {
+    if (await confirm('Are you sure?')) {
+      if (jokeTask.translations.length > 2) {
+        const newArr = [...jokeTask.translations].filter(
+          e => e._id !== Number(name),
+        );
+        dispatch(changeJokeTask({ ...jokeTask, translations: newArr }));
+      }
     }
   };
 
-  const onAddButtonClick = e => {
-    dispatch(addJokeTask({ ...jokeTask }));
+  const onAddButtonClick = async () => {
+    if (await confirm('Are you sure?')) {
+      dispatch(addJokeTask({ ...jokeTask }));
+    }
   };
 
   const handleChange = ({ target: { name, value, type } }) => {
