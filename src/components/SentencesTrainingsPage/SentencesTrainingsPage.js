@@ -19,7 +19,7 @@ export default function SentencesTrainingsPage() {
     window.scrollBy(0, -1000);
   }, []);
   const [sentencesList, setSentencesList] = useState([]);
-  const [random, setRandom] = useState(true);
+  const [random, setRandom] = useState(false);
   const originalLanguage = useSelector(jokeTasksSelectors.getOriginalLanguage);
   const translationLanguage = useSelector(
     jokeTasksSelectors.getTranslationLanguage,
@@ -79,7 +79,7 @@ export default function SentencesTrainingsPage() {
             type="checkbox"
             checked={random}
             onChange={() => setRandom(!random)}
-            label="The sentences in the task are random"
+            label="Sentences in the task are random"
           />
           <JokesList passUpTask={trainTask} />
         </>
