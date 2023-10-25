@@ -1,14 +1,14 @@
-.DictionarySearch {
+.dictionarySearch {
   display: flex;
   flex-wrap: wrap;
 }
-.DictionarySearchForm__box {
+.dictionarySearch__box {
   width: 100%;
 }
-.DictionarySearchForm__header {
+.dictionarySearch__header {
   text-align: center;
 }
-.DictionarySearchForm__Button {
+.dictionarySearchForm__button {
   width: 90px;
   margin-bottom: 20px;
 }
@@ -22,14 +22,14 @@
   width: 250px;
 }
 @media screen and (min-width: 900px) {
-  .DictionarySearch {
+  .dictionarySearch {
     justify-content: space-between;
   }
   .tasksTableBox {
     width: 28%;
   }
 
-  .DictionarySearchForm__box {
+  .dictionarySearch__box {
     width: 48%;
   }
   .dictionarySpecifications__box {

@@ -62,10 +62,10 @@ export default function DictionaryForm() {
   }, [dispatch, addDictionarySuccess]);
 
   return (
-    <div className={styles.DictionaryForm}>
+    <div className={styles.dictionaryForm}>
       <h3>Let's gather words for new dictionary</h3>
-      <div className={styles.DictionaryForm__box}>
-        <div className={styles.DictionaryForm__TasksFilterBox}>
+      <div className={styles.dictionaryForm__box}>
+        <div className={styles.dictionaryForm__tasksFilterBox}>
           <TasksFilter passUpTask={addTaskToSet} />
         </div>
 
@@ -87,7 +87,7 @@ export default function DictionaryForm() {
             <thead>
               <tr>
                 <td>Dictionary words:</td>
-                <td className={styles.tasksTable__td__Button}></td>
+                <td className={styles.tasksTable__tdButton}></td>
               </tr>
             </thead>
             <tbody className={styles.tasksTable__tbody}>

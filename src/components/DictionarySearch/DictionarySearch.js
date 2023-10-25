@@ -6,6 +6,7 @@ import {
   addOwnDictionary,
   fetchOwnDictionary,
 } from '../../redux/own-dictionaries/own-dictionaries-operaions';
+import { confirm } from 'react-bootstrap-confirmation';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './DictionarySearch.module.css';
 
@@ -43,15 +44,16 @@ export default function DictionarySearch() {
     dispatch(fetchOwnDictionary(dictionaryId));
   };
 
-  const onAddDictionaryToOwnDictionariesClick = () => {
-    dispatch(
-      addOwnDictionary({
-        ownDictionaryName: dictionaryName,
-        ownDictionaryTasks: ownDictionary.ownDictionaryTasks,
-      }),
-    );
+  const onAddDictionaryToOwnDictionariesClick = async () => {
+    if (await confirm('Are you sure you want to add this dictionary?')) {
+      dispatch(
+        addOwnDictionary({
+          ownDictionaryName: dictionaryName,
+          ownDictionaryTasks: ownDictionary.ownDictionaryTasks,
+        }),
+      );
+    }
   };
-
   useEffect(() => {
     if (addDictionarySuccess) {
       // dispatch(updateTasksSet([]));
@@ -61,12 +63,10 @@ export default function DictionarySearch() {
   }, [dispatch, addDictionarySuccess]);
 
   return (
-    <div className={styles.DictionarySearch}>
-      <div className={styles.DictionarySearchForm__box}>
-        <h5 className={styles.DictionarySearchForm__header}>
-          DictionarySearch:
-        </h5>
-        <Form autoComplete="off" className={styles.DictionarySearchForm}>
+    <div className={styles.dictionarySearch}>
+      <div className={styles.dictionarySearch__box}>
+        <h5 className={styles.dictionarySearch__header}>DictionarySearch:</h5>
+        <Form autoComplete="off" className={styles.dictionarySearchForm}>
           <Form.Group className="mb-3">
             <Form.Label>Search dictionary by id:</Form.Label>
             <Form.Control
@@ -80,7 +80,7 @@ export default function DictionarySearch() {
           <Button
             variant="primary"
             onClick={onSearchClick}
-            className={styles.DictionarySearchForm__Button}
+            className={styles.dictionarySearchForm__button}
           >
             {!ownDictionaryLoading && <span>Search</span>}
             {ownDictionaryLoading && (

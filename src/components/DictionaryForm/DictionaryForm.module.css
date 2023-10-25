@@ -1,11 +1,11 @@
-.DictionaryForm__box {
+.dictionaryForm__box {
   display: flex;
   flex-flow: column-reverse;
 }
 .tasksTableBox__header {
   text-align: center;
 }
-.tasksTable__td__Button {
+.tasksTable__tdButton {
   width: 80px;
 }
 .tasksTable .tasksTable__tbody {
@@ -16,11 +16,11 @@
   margin-bottom: 20px;
 }
 @media screen and (min-width: 900px) {
-  .DictionaryForm__box {
+  .dictionaryForm__box {
     justify-content: space-between;
     flex-direction: row;
   }
-  .DictionaryForm__TasksFilterBox {
+  .dictionaryForm__tasksFilterBox {
     width: 70%;
   }
   .tasksTableBox {

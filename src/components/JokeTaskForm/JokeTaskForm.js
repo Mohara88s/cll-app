@@ -88,7 +88,7 @@ export default function JokeTaskForm() {
 
   return (
     <div>
-      <Form autoComplete="off" className={styles.Form}>
+      <Form autoComplete="off" className={styles.form}>
         <Form.Group className="mb-3">
           <Form.Label>Enter the name of the joke in English:</Form.Label>
           <Form.Control
@@ -108,7 +108,7 @@ export default function JokeTaskForm() {
                     Choose the language and enter the version of the joke in the
                     current language:
                   </Form.Label>
-                  <Dropdown className={styles.Dropdown}>
+                  <Dropdown className={styles.dropdown}>
                     <Dropdown.Toggle
                       variant="outline-dark"
                       size="sm"
@@ -141,7 +141,7 @@ export default function JokeTaskForm() {
                     placeholder="Enter the name of the joke in current language"
                     value={elem.title}
                     onChange={handleChange}
-                    className={styles.JokeTitle}
+                    className={styles.jokeTitle}
                   />
                   <Form.Control
                     as="textarea"
@@ -156,7 +156,7 @@ export default function JokeTaskForm() {
                 <Button
                   variant="danger"
                   onClick={onClickButtonDeleteTranslation}
-                  className={styles.Form__DeleteButton}
+                  className={styles.form__deleteButton}
                   name={elem._id}
                 >
                   Delete
@@ -171,14 +171,14 @@ export default function JokeTaskForm() {
         <Button
           variant="success"
           onClick={onClickButtonAddTranslation}
-          className={styles.mainButtonsBox__Button}
+          className={styles.mainButtonsBox__button}
         >
           Add one more translation of the joke
         </Button>
 
         <Button
           variant="primary"
-          className={styles.mainButtonsBox__Button}
+          className={styles.mainButtonsBox__button}
           onClick={onAddButtonClick}
         >
           {!loading && <span>Add this joke to the database</span>}

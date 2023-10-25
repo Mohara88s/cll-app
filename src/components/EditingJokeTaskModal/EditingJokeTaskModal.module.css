@@ -1,31 +1,31 @@
-.Modal {
+.editingJokeModal {
   padding-top: 60px;
 }
-.Modal__Header {
+.editingJokeModal__header {
   background-color: bisque;
 }
-.Modal__Body {
+.editingJokeModal__body {
   padding-left: 20px;
   padding-right: 20px;
   background-color: bisque;
 }
-.Form__Label {
-  display: flex;
-}
-.JokeTitle {
-  margin-bottom: 10px;
-}
-.Dropdown {
+.editingJokeModal__dropdown {
   margin-left: 7px;
   margin-right: 7px;
 }
-.Form__DeleteButton {
+.editingJokeModalForm__label {
+  display: flex;
+}
+.editingJokeModalForm__jokeTitle {
   margin-bottom: 10px;
 }
-.mainButtonsBox {
+.editingJokeModalForm__deleteButton {
+  margin-bottom: 10px;
+}
+.editingJokeModalMainButtonsBox {
   display: flex;
   justify-content: space-between;
 }
-.mainButtonsBox__Button {
+.editingJokeModalMainButtonsBox__button {
   width: 30%;
 }

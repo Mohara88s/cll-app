@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Table, Spinner } from 'react-bootstrap';
-import { changeFilter } from '../../redux/joke-tasks/joke-tasks-actions';
+import {
+  changeFilter,
+  changeJokeTask,
+} from '../../redux/joke-tasks/joke-tasks-actions';
 import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
 import { fetchJokeTasks } from '../../redux/joke-tasks/joke-tasks-operaions';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import styles from './JokesList.module.css';
+import EditingJokeTaskModal from '../EditingJokeTaskModal/EditingJokeTaskModal';
+import styles from './AdminJokesList.module.css';
 
-export default function JokesList({ passUpTask, adminMode = false }) {
+export default function JokesList() {
   const dispatch = useDispatch();
   const originalLanguage = useSelector(jokeTasksSelectors.getOriginalLanguage);
   const translationLanguage = useSelector(
@@ -18,14 +22,16 @@ export default function JokesList({ passUpTask, adminMode = false }) {
   const loading = useSelector(jokeTasksSelectors.getJokeTasksLoading);
   const filter = useSelector(jokeTasksSelectors.getJokeTasksFilter);
   const [filtredTasks, setFiltredTasks] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
 
   const filterHandleChange = ({ target: { value } }) => {
     dispatch(changeFilter(value));
   };
 
-  const onTrainBtnClick = ({ target: { name } }) => {
+  const onEditBtnClick = ({ target: { name } }) => {
     const task = filtredTasks.find(e => e._id === name);
-    passUpTask(task);
+    dispatch(changeJokeTask({ ...task }));
+    setModalShow(true);
   };
 
   useEffect(() => {
@@ -82,12 +88,8 @@ export default function JokesList({ passUpTask, adminMode = false }) {
                     ))}
                 </td>
                 <td>
-                  <Button
-                    name={_id}
-                    onClick={onTrainBtnClick}
-                    variant="primary"
-                  >
-                    Train
+                  <Button name={_id} onClick={onEditBtnClick} variant="warning">
+                    Edit
                   </Button>
                 </td>
               </tr>
@@ -97,6 +99,11 @@ export default function JokesList({ passUpTask, adminMode = false }) {
       </Table>
       {error && <ErrorMessage message={error} />}
       {loading && <Spinner animation="border" variant="primary" />}
+
+      <EditingJokeTaskModal
+        modalShow={modalShow}
+        onHandleClose={() => setModalShow(false)}
+      />
     </div>
   );
 }

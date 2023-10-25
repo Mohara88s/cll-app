@@ -7,8 +7,8 @@ import {
   deleteJokeTask,
 } from '../../redux/joke-tasks/joke-tasks-operaions';
 import { Form, Dropdown, Modal, Button, Spinner } from 'react-bootstrap';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { confirm } from 'react-bootstrap-confirmation';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './EditingJokeTaskModal.module.css';
 import './EditingJokeTaskModal.css';
 
@@ -107,14 +107,14 @@ const EditingJokeTaskModal = ({ modalShow, onHandleClose }) => {
           show={show}
           onHide={handleClose}
           centered
-          className={styles.Modal}
+          className={styles.editingJokeModal}
           dialogClassName="EditingJokeTaskModalDialog"
         >
-          <Modal.Header closeButton className={styles.Modal__Header}>
+          <Modal.Header closeButton className={styles.editingJokeModal__header}>
             <Modal.Title>Joke task Id:{jokeTask._id}</Modal.Title>
           </Modal.Header>
-          <Modal.Body className={styles.Modal__Body}>
-            <Form autoComplete="off" className={styles.Form}>
+          <Modal.Body className={styles.editingJokeModal__body}>
+            <Form autoComplete="off" className={styles.editingJokeModalForm}>
               <Form.Group className="mb-3">
                 <Form.Label>The name of the joke in English:</Form.Label>
                 <Form.Control
@@ -130,9 +130,13 @@ const EditingJokeTaskModal = ({ modalShow, onHandleClose }) => {
                   {jokeTask.translations.map(elem => (
                     <li key={elem._id}>
                       <Form.Group className="mb-3">
-                        <Form.Label className={styles.Form__Label}>
+                        <Form.Label
+                          className={styles.editingJokeModalForm__label}
+                        >
                           The version of the joke in the
-                          <Dropdown className={styles.Dropdown}>
+                          <Dropdown
+                            className={styles.editingJokeModal__dropdown}
+                          >
                             <Dropdown.Toggle
                               variant="outline-dark"
                               size="sm"
@@ -168,7 +172,7 @@ const EditingJokeTaskModal = ({ modalShow, onHandleClose }) => {
                           placeholder="Enter the name of the joke in current language"
                           value={elem.title}
                           onChange={handleChange}
-                          className={styles.JokeTitle}
+                          className={styles.editingJokeModalForm__jokeTitle}
                         />
                         <Form.Control
                           as="textarea"
@@ -183,7 +187,7 @@ const EditingJokeTaskModal = ({ modalShow, onHandleClose }) => {
                       <Button
                         variant="danger"
                         onClick={onClickButtonDeleteTranslation}
-                        className={styles.Form__DeleteButton}
+                        className={styles.editingJokeModalForm__deleteButton}
                         name={elem._id}
                       >
                         Delete
@@ -193,17 +197,17 @@ const EditingJokeTaskModal = ({ modalShow, onHandleClose }) => {
                 </ul>
               )}
             </Form>
-            <div className={styles.mainButtonsBox}>
+            <div className={styles.editingJokeModalMainButtonsBox}>
               <Button
                 variant="success"
                 onClick={onClickButtonAddTranslation}
-                className={styles.mainButtonsBox__Button}
+                className={styles.editingJokeModalMainButtonsBox__button}
               >
                 Add one more translation of the joke
               </Button>
               <Button
                 variant="danger"
-                className={styles.mainButtonsBox__Button}
+                className={styles.editingJokeModalMainButtonsBox__button}
                 onClick={onDeleteTaskButtonClick}
               >
                 {!loading && <span>Delete task from the database</span>}
@@ -211,7 +215,7 @@ const EditingJokeTaskModal = ({ modalShow, onHandleClose }) => {
               </Button>
               <Button
                 variant="primary"
-                className={styles.mainButtonsBox__Button}
+                className={styles.editingJokeModalMainButtonsBox__button}
                 onClick={onSaveTaskButtonClick}
               >
                 {!loading && <span>Save changes to the database</span>}

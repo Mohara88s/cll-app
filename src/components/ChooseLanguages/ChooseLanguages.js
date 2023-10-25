@@ -1,13 +1,13 @@
 import { Button } from 'react-bootstrap';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
 import { fetchJokeTasksLanguages } from '../../redux/joke-tasks/joke-tasks-operaions';
 import {
   setOriginalLanguage,
   setTranslationLanguage,
 } from '../../redux/joke-tasks/joke-tasks-actions';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './ChooseLanguages.module.css';
 
 export default function ChooseLanguages() {
@@ -72,8 +72,8 @@ export default function ChooseLanguages() {
                     value={elem.language_name}
                     className={
                       elem.language_name === originalLanguage.language_name
-                        ? styles.languagesList__ActiveButton
-                        : styles.languagesList__Button
+                        ? styles.languagesList__activeButton
+                        : styles.languagesList__button
                     }
                   >
                     {elem.language_name}

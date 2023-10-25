@@ -1,11 +1,11 @@
 import ChooseLanguages from '../ChooseLanguages/ChooseLanguages';
-import JokesList from '../JokesList/JokesList';
+import AdminJokesList from '../AdminJokesList/AdminJokesList';
 
 export default function EditingJokesTasks() {
   return (
     <div>
       <ChooseLanguages />
-      <JokesList adminMode={true} />
+      <AdminJokesList />
     </div>
   );
 }

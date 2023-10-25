@@ -1,16 +1,16 @@
-.JokeTitle {
+.jokeTitle {
   margin-bottom: 10px;
 }
-.Dropdown {
+.dropdown {
   margin-bottom: 10px;
 }
-.Form__DeleteButton {
+.form__deleteButton {
   margin-bottom: 10px;
 }
 .mainButtonsBox {
   display: flex;
   justify-content: space-between;
 }
-.mainButtonsBox__Button {
+.mainButtonsBox__button {
   width: 30%;
 }

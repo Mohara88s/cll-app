@@ -87,6 +87,7 @@ const ownDictionary = createReducer(
   {},
   {
     [fetchOwnDictionarySuccess]: (_, { payload }) => payload,
+    [fetchOwnDictionaryRequest]: () => {},
     [fetchOwnDictionariesError]: () => {},
   },
 );
