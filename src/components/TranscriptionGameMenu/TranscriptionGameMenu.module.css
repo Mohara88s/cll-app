@@ -1,0 +1,19 @@
+.transcriptionGameMenu {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+.inputGroup {
+  width: 300px;
+  margin-bottom: 20px;
+}
+.inputGroup__button {
+  width: 110px;
+}
+.inputGroup__control {
+  text-align: center;
+}
+.startButton {
+  width: 200px;
+}

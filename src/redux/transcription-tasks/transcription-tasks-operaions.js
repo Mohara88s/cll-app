@@ -2,6 +2,9 @@ import {
   fetchTranscriptionTasksRequest,
   fetchTranscriptionTasksSuccess,
   fetchTranscriptionTasksError,
+  fetchRandomTranscriptionTaskRequest,
+  fetchRandomTranscriptionTaskSuccess,
+  fetchRandomTranscriptionTaskError,
 } from './transcription-tasks-actions';
 import axios from 'axios';
 
@@ -20,3 +23,20 @@ export const fetchTranscriptionTasks = query => async dispatch => {
     );
   }
 };
+
+export const fetchRandomTranscriptionTask =
+  numberOfSymbols => async dispatch => {
+    dispatch(fetchRandomTranscriptionTaskRequest());
+    try {
+      const { data } = await axios.get(
+        `/transcription-tasks/random?numberofsymbols=${numberOfSymbols}`,
+      );
+      dispatch(fetchRandomTranscriptionTaskSuccess(data.task));
+    } catch (error) {
+      dispatch(
+        fetchRandomTranscriptionTaskError(
+          error.response ? error.response.data.message : error.message,
+        ),
+      );
+    }
+  };

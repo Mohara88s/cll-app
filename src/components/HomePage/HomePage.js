@@ -92,6 +92,24 @@ export default function HomePage() {
           </li>
         )}
 
+        {isLoggedIn && (
+          <li className={styles.LinksList__item}>
+            <Link
+              to={{
+                pathname: `${url}transcription-game/`,
+                state: { from: location },
+              }}
+            >
+              <h3 className={styles.LinksList__name}>Transcription game</h3>
+              <img
+                src={transcription__trainingsImg}
+                alt="Transcription game"
+                className={styles.LinksList__picture}
+              />
+            </Link>
+          </li>
+        )}
+
         {!isLoggedIn && (
           <li className={styles.LinksList__item}>
             <Link

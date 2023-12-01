@@ -62,6 +62,18 @@ const Navigation = () => {
             </NavLink>
           </li>
         )}
+        {isLoggedIn && (
+          <li className={styles.NavigationList__item}>
+            <NavLink
+              exact
+              to="/transcription-game"
+              className={styles.link}
+              activeClassName={styles.activeLink}
+            >
+              Transcription game
+            </NavLink>
+          </li>
+        )}
         <li className={styles.NavigationList__item}>
           <NavLink
             exact
