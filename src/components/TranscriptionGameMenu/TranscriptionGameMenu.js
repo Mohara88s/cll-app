@@ -6,7 +6,7 @@ import { fetchRandomTranscriptionTask } from '../../redux/transcription-tasks/tr
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './TranscriptionGameMenu.module.css';
 
-export default function TranscriptionGameMenu() {
+export default function TranscriptionGameMenu({ reverseMode, setReverseMode }) {
   const dispatch = useDispatch();
   const [numberOfSymbols, setNumberOfSymbols] = useState(5);
 
@@ -16,7 +16,9 @@ export default function TranscriptionGameMenu() {
   const onIncreaseClick = () => {
     if (numberOfSymbols < 10) setNumberOfSymbols(numberOfSymbols + 1);
   };
-
+  const onReverseModeClick = () => {
+    setReverseMode(!reverseMode);
+  };
   const onStartGameClick = () => {
     dispatch(fetchRandomTranscriptionTask(numberOfSymbols));
   };
@@ -51,8 +53,16 @@ export default function TranscriptionGameMenu() {
         </Button>
       </InputGroup>
       <Button
+        className={styles.reverseModeButton}
+        variant={reverseMode ? 'warning' : 'secondary'}
+        onClick={onReverseModeClick}
+      >
+        {reverseMode ? 'Reverse mode ON' : 'Reverse mode OFF'}
+      </Button>
+      <Button
         className={styles.startButton}
         variant="primary"
+        size="lg"
         onClick={onStartGameClick}
       >
         {!loading && 'Start the game'}

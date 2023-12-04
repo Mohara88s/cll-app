@@ -4,11 +4,12 @@ import Button from 'react-bootstrap/Button';
 import styles from './Row.module.css';
 // import { gsap } from "gsap";
 
-export default function Row({ guess, currentGuess }) {
+export default function Row({ guess, currentGuess, solutionLength }) {
   // useLayoutEffect(() => {
   //   gsap.timeline().to(".row__button", {scale:2, duration:3} );
   // }, []);
 
+  const emptyArr = [...Array(solutionLength)];
   if (guess) {
     return (
       <div className={styles.row}>
@@ -31,7 +32,7 @@ export default function Row({ guess, currentGuess }) {
             {letter}
           </Button>
         ))}
-        {[...Array(5 - letters.length)].map((_, i) => (
+        {[...Array(solutionLength - letters.length)].map((_, i) => (
           <Button
             variant="secondary"
             key={i}
@@ -44,11 +45,13 @@ export default function Row({ guess, currentGuess }) {
 
   return (
     <div className={styles.row}>
-      <Button className={styles.row__button} variant="secondary"></Button>
-      <Button className={styles.row__button} variant="secondary"></Button>
-      <Button className={styles.row__button} variant="secondary"></Button>
-      <Button className={styles.row__button} variant="secondary"></Button>
-      <Button className={styles.row__button} variant="secondary"></Button>
+      {emptyArr.map((_, i) => (
+        <Button
+          key={i}
+          className={styles.row__button}
+          variant="secondary"
+        ></Button>
+      ))}
     </div>
   );
 }

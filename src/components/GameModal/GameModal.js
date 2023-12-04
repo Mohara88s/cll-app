@@ -43,7 +43,7 @@ const GameModal = ({ modalShow, isCorrect, turn, solution }) => {
             </div>
           )}
           <Button variant="primary" onClick={handleClose}>
-            Thanks
+            OK
           </Button>
         </Modal.Body>
       </Modal>

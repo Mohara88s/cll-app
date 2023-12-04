@@ -96,17 +96,17 @@ export default function TranscriptionGame({ original, solution }) {
     if (key === 'Enter') {
       // only add guess if turn is less than 5
       if (turn > 5) {
-        setWarning('you used all your guesses!');
+        setWarning('You used all your guesses!');
         return;
       }
       // do not allow duplicate words
       if (history.includes(currentGuess)) {
-        setWarning('you already tried that word.');
+        setWarning('You already tried that word.');
         return;
       }
       // check word is 5 chars
-      if (currentGuess.length !== 5) {
-        setWarning('word must be 5 chars.');
+      if (currentGuess.length !== solution.length) {
+        setWarning('The word must be longer.');
         return;
       }
       const formatted = formatGuess();
@@ -117,7 +117,7 @@ export default function TranscriptionGame({ original, solution }) {
       return;
     }
     if (/^[A-Za-z]$/.test(key)) {
-      if (currentGuess.length < 5) {
+      if (currentGuess.length < solution.length) {
         setCurrentGuess(prev => {
           return prev + key.toUpperCase();
         });
@@ -141,8 +141,15 @@ export default function TranscriptionGame({ original, solution }) {
 
   return (
     <div className={styles.transcriptionGame}>
-      {/* <h3>{original}</h3> */}
-      <Grid guesses={guesses} currentGuess={currentGuess} turn={turn} />
+      <h3>
+        {original} - {solution}
+      </h3>
+      <Grid
+        guesses={guesses}
+        currentGuess={currentGuess}
+        turn={turn}
+        solutionLength={solution.length}
+      />
       <Keypad
         usedKeys={usedKeys}
         handleKeyup={handleKeyup}
