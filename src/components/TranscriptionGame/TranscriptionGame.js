@@ -141,9 +141,7 @@ export default function TranscriptionGame({ original, solution }) {
 
   return (
     <div className={styles.transcriptionGame}>
-      <h3>
-        {original} - {solution}
-      </h3>
+      <h3>{original}</h3>
       <Grid
         guesses={guesses}
         currentGuess={currentGuess}
