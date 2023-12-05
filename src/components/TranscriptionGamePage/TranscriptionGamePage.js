@@ -37,7 +37,15 @@ export default function TranscriptionGamePage() {
           setReverseMode={setReverseMode}
         />
       )}
-      {task && <TranscriptionGame original={original} solution={solution} />}
+      {task && (
+        <div>
+          {!reverseMode && <h3>Transcription: {original}. Guess the word!</h3>}
+          {reverseMode && (
+            <h3>The word: {original}. Guess the transcription!</h3>
+          )}
+          <TranscriptionGame solution={solution} />
+        </div>
+      )}
     </div>
   );
 }

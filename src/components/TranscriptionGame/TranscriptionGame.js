@@ -8,7 +8,7 @@ import GameModal from '../GameModal/GameModal';
 
 import styles from './TranscriptionGame.module.css';
 
-export default function TranscriptionGame({ original, solution }) {
+export default function TranscriptionGame({ solution }) {
   const [showModal, setShowModal] = useState(false);
   const [warning, setWarning] = useState('');
   const [turn, setTurn] = useState(0);
@@ -116,7 +116,7 @@ export default function TranscriptionGame({ original, solution }) {
       setCurrentGuess(prev => prev.slice(0, -1));
       return;
     }
-    if (/^[A-Za-z]$/.test(key)) {
+    if (/^[A-Za-z'-]$/.test(key)) {
       if (currentGuess.length < solution.length) {
         setCurrentGuess(prev => {
           return prev + key.toUpperCase();
@@ -141,7 +141,6 @@ export default function TranscriptionGame({ original, solution }) {
 
   return (
     <div className={styles.transcriptionGame}>
-      <h3>{original}</h3>
       <Grid
         guesses={guesses}
         currentGuess={currentGuess}

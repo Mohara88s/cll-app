@@ -14,7 +14,7 @@ export default function TranscriptionGameMenu({ reverseMode, setReverseMode }) {
     if (numberOfSymbols > 5) setNumberOfSymbols(numberOfSymbols - 1);
   };
   const onIncreaseClick = () => {
-    if (numberOfSymbols < 10) setNumberOfSymbols(numberOfSymbols + 1);
+    if (numberOfSymbols < 12) setNumberOfSymbols(numberOfSymbols + 1);
   };
   const onReverseModeClick = () => {
     setReverseMode(!reverseMode);
@@ -32,6 +32,7 @@ export default function TranscriptionGameMenu({ reverseMode, setReverseMode }) {
   return (
     <div className={styles.transcriptionGameMenu}>
       <InputGroup className={styles.inputGroup}>
+        <h4>Choose the number of characters in the word:</h4>
         <Button
           className={styles.inputGroup__button}
           variant="outline-secondary"
@@ -57,7 +58,9 @@ export default function TranscriptionGameMenu({ reverseMode, setReverseMode }) {
         variant={reverseMode ? 'warning' : 'secondary'}
         onClick={onReverseModeClick}
       >
-        {reverseMode ? 'Reverse mode ON' : 'Reverse mode OFF'}
+        {reverseMode
+          ? 'The word - transcription mode'
+          : 'The transcription - word mode'}
       </Button>
       <Button
         className={styles.startButton}

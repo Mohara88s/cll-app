@@ -27,6 +27,8 @@ const letters = [
   { key: 'X' },
   { key: 'Y' },
   { key: 'Z' },
+  { key: '-' },
+  { key: "'" },
 ];
 export default function Keypad({ usedKeys, handleKeyup, isCorrect }) {
   const onClickButton = e => {
