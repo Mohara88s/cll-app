@@ -1,18 +1,40 @@
-// import React, {useLayoutEffect} from 'react'
+import { useLayoutEffect, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
-
+import { gsap } from 'gsap';
 import styles from './Row.module.css';
-// import { gsap } from "gsap";
 
 export default function Row({ guess, currentGuess, solutionLength }) {
-  // useLayoutEffect(() => {
-  //   gsap.timeline().to(".row__button", {scale:2, duration:3} );
-  // }, []);
+  let guessRef = useRef(null);
+  let currentGuessRef = useRef(null);
 
-  const emptyArr = [...Array(solutionLength)];
+  useLayoutEffect(() => {
+    if (guessRef.current !== null) {
+      console.dir(guessRef.current.childNodes);
+      gsap
+        .timeline()
+        .fromTo(
+          guessRef.current.childNodes,
+          { scale: 0.5 },
+          { scale: 1, duration: 0.5 },
+        );
+    }
+  }, [guess]);
+
+  useLayoutEffect(() => {
+    if (currentGuessRef.current !== null) {
+      gsap
+        .timeline()
+        .fromTo(
+          currentGuessRef.current,
+          { scale: 0.5 },
+          { scale: 1, duration: 0.5, ease: 'back.out(3)' },
+        );
+    }
+  }, [currentGuess]);
+
   if (guess) {
     return (
-      <div className={styles.row}>
+      <div ref={guessRef} className={styles.row}>
         {guess.map((l, i) => (
           <Button variant={l.color} key={i} className={styles.row__button}>
             {l.key}
@@ -28,7 +50,12 @@ export default function Row({ guess, currentGuess, solutionLength }) {
     return (
       <div className={styles.row}>
         {letters.map((letter, i) => (
-          <Button variant="dark" key={i} className={styles.row__button}>
+          <Button
+            ref={currentGuessRef}
+            variant="dark"
+            key={i}
+            className={styles.row__button}
+          >
             {letter}
           </Button>
         ))}
@@ -42,6 +69,8 @@ export default function Row({ guess, currentGuess, solutionLength }) {
       </div>
     );
   }
+
+  const emptyArr = [...Array(solutionLength)];
 
   return (
     <div className={styles.row}>

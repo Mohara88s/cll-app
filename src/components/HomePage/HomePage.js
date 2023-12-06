@@ -8,6 +8,7 @@ import sentencesTrainingsImg from '../../public/pictures/sentences_trainings.jpg
 import transcription__trainingsImg from '../../public/pictures/transcription__trainings.jpg';
 import text__transcriptionImg from '../../public/pictures/text__transcription.jpg';
 import plug__trainingsImg from '../../public/pictures/plug__trainings.jpg';
+import transcription__gameImg from '../../public/pictures/transcription__game.jpg';
 
 export default function HomePage() {
   useEffect(() => {
@@ -102,7 +103,7 @@ export default function HomePage() {
             >
               <h3 className={styles.LinksList__name}>Transcription game</h3>
               <img
-                src={transcription__trainingsImg}
+                src={transcription__gameImg}
                 alt="Transcription game"
                 className={styles.LinksList__picture}
               />

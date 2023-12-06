@@ -1,5 +1,7 @@
 import Button from 'react-bootstrap/Button';
+import { gsap } from 'gsap';
 import styles from './Keypad.module.css';
+
 const letters = [
   { key: 'A' },
   { key: 'B' },
@@ -30,11 +32,16 @@ const letters = [
   { key: '-' },
   { key: "'" },
 ];
+
 export default function Keypad({ usedKeys, handleKeyup, isCorrect }) {
   const onClickButton = e => {
     const { value } = e.currentTarget;
     if (!isCorrect) {
       handleKeyup({ key: value });
+      gsap
+        .timeline()
+        .to(e.currentTarget, { scale: 0.8, duration: 0.2 })
+        .to(e.currentTarget, { scale: 1, duration: 0.2 });
     }
   };
   return (
