@@ -107,13 +107,10 @@ const useTranscriptionGame = solution => {
       return;
     }
     if (/^[A-Za-z'-]$/.test(key)) {
-      console.log('1-', currentGuess, '2-', solution);
-      if (solution) {
-        if (currentGuess.length < solution.length) {
-          setCurrentGuess(prev => {
-            return prev + key.toUpperCase();
-          });
-        }
+      if (currentGuess.length < solution.length) {
+        setCurrentGuess(prev => {
+          return prev + key.toUpperCase();
+        });
       }
     }
   };

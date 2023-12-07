@@ -9,7 +9,6 @@ export default function Row({ guess, currentGuess, solutionLength }) {
 
   useLayoutEffect(() => {
     if (guessRef.current !== null) {
-      console.dir(guessRef.current.childNodes);
       gsap
         .timeline()
         .fromTo(
@@ -46,7 +45,6 @@ export default function Row({ guess, currentGuess, solutionLength }) {
 
   if (currentGuess) {
     let letters = currentGuess.split('');
-
     return (
       <div className={styles.row}>
         {letters.map((letter, i) => (
