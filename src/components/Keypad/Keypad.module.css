@@ -6,14 +6,36 @@
   flex-wrap: wrap;
 }
 .keypad__Button {
-  width: 50px;
-  height: 50px;
-  margin: 10px;
+  width: 42px;
+  height: 42px;
+  margin: 2px;
   text-transform: uppercase;
+  font-size: 1.4em;
+  line-height: 0;
+  padding: 0;
 }
 .keypad__ButtonEnter,
 .keypad__ButtonBackspace {
-  width: 150px;
-  height: 50px;
-  margin: 10px;
+  width: 134px;
+  height: 42px;
+  margin: 2px;
+  font-size: 1.4em;
+  line-height: 0;
+}
+
+@media screen and (min-width: 900px) {
+  .keypad {
+    max-width: 600px;
+  }
+  .keypad__Button {
+    width: 52px;
+    height: 52px;
+    margin: 4px;
+  }
+  .keypad__ButtonEnter,
+  .keypad__ButtonBackspace {
+    width: 172px;
+    height: 52px;
+    margin: 4px;
+  }
 }

@@ -63,6 +63,18 @@ const MobileNavigation = () => {
             </NavLink>
           </li>
         )}
+        {isLoggedIn && (
+          <li className={styles.MobileNavigationList__item}>
+            <NavLink
+              exact
+              to="/transcription-game"
+              className={styles.MobileNavigationList__link}
+              activeClassName={styles.activeLink}
+            >
+              Transcription game
+            </NavLink>
+          </li>
+        )}
         <li className={styles.MobileNavigationList__item}>
           <NavLink
             exact

@@ -30,7 +30,6 @@ export default function TranscriptionGamePage() {
   }, [task, reverseMode]);
   return (
     <div>
-      <h2>Transcription Game</h2>
       {!task && (
         <TranscriptionGameMenu
           reverseMode={reverseMode}
