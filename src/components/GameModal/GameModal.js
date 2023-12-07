@@ -42,7 +42,7 @@ const GameModal = ({ modalShow, isCorrect, turn, solution }) => {
               <p>Better luck next time! :)</p>
             </div>
           )}
-          <Button variant="primary" onClick={handleClose}>
+          <Button autoFocus variant="primary" onClick={handleClose}>
             OK
           </Button>
         </Modal.Body>

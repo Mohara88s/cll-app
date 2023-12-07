@@ -63,6 +63,7 @@ export default function TranscriptionGameMenu({ reverseMode, setReverseMode }) {
           : 'The transcription - word mode'}
       </Button>
       <Button
+        autoFocus
         className={styles.startButton}
         variant="primary"
         size="lg"

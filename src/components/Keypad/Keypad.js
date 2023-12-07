@@ -32,16 +32,9 @@ const letters = [
   { key: '-' },
   { key: "'" },
 ];
-var throttle = false;
 
 export default function Keypad({ usedKeys, handleKeyup, isCorrect }) {
   const onClickButton = e => {
-    if (throttle) return;
-    throttle = true;
-    setTimeout(function () {
-      throttle = false;
-    }, 500);
-
     const { value } = e.currentTarget;
     if (!isCorrect) {
       handleKeyup({ key: value });

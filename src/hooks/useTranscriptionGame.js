@@ -8,6 +8,7 @@ const useTranscriptionGame = solution => {
   const [history, setHistory] = useState([]); // each guess is a string
   const [isCorrect, setIsCorrect] = useState(false);
   const [usedKeys, setUsedKeys] = useState({}); // {a: 'grey', b: 'green', c: 'yellow'} etc
+  let throttle = false;
 
   // format a guess into an array of letter objects
   // e.g. [{key: 'a', color: 'warning'}]
@@ -107,12 +108,18 @@ const useTranscriptionGame = solution => {
       return;
     }
     if (/^[A-Za-z'-]$/.test(key)) {
+      if (throttle) return;
+      throttle = true;
       if (currentGuess.length < solution.length) {
         setCurrentGuess(prev => {
           return prev + key.toUpperCase();
         });
       }
+      setTimeout(() => {
+        throttle = false;
+      }, 0);
     }
+    return;
   };
 
   return {
