@@ -1,7 +1,7 @@
 .container {
   max-width: 1500px;
   min-height: 100vh;
-  padding: 20px;
+  padding: 5px;
   margin-left: auto;
   margin-right: auto;
   background-color: antiquewhite;
@@ -22,4 +22,9 @@ ul {
 
 .loader {
   text-align: center;
+}
+@media screen and (min-width: 900px) {
+  .container {
+    padding: 20px;
+  }
 }

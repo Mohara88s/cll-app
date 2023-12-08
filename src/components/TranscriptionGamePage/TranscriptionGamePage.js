@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import TranscriptionGame from '../TranscriptionGame/TranscriptionGame';
 import transcriptionTasksSelectors from '../../redux/transcription-tasks/transcription-tasks-selectors';
 import TranscriptionGameMenu from '../TranscriptionGameMenu/TranscriptionGameMenu';
-// import styles from './TranscriptionGamePage.module.css';
 
 export default function TranscriptionGamePage() {
   const [reverseMode, setReverseMode] = useState(false);
@@ -20,12 +19,12 @@ export default function TranscriptionGamePage() {
 
   useEffect(() => {
     if (task && reverseMode) {
-      setOriginal(task.eng.toUpperCase());
-      setSolution(task.utrn.toUpperCase());
+      setOriginal(task.eng);
+      setSolution(task.utrn);
     }
     if (task && !reverseMode) {
-      setOriginal(task.utrn.toUpperCase());
-      setSolution(task.eng.toUpperCase());
+      setOriginal(task.utrn);
+      setSolution(task.eng);
     }
   }, [task, reverseMode]);
   return (

@@ -5,18 +5,18 @@
   justify-content: center;
   flex-wrap: wrap;
 }
-.keypad__Button {
+.keypad__button {
   width: 42px;
   height: 42px;
   margin: 2px;
-  text-transform: uppercase;
   font-size: 1.4em;
   line-height: 0;
   padding: 0;
 }
-.keypad__ButtonEnter,
-.keypad__ButtonBackspace {
-  width: 134px;
+.keypad__buttonShift,
+.keypad__buttonEnter,
+.keypad__buttonBackspace {
+  width: 130px;
   height: 42px;
   margin: 2px;
   font-size: 1.4em;
@@ -27,14 +27,15 @@
   .keypad {
     max-width: 600px;
   }
-  .keypad__Button {
+  .keypad__button {
     width: 52px;
     height: 52px;
     margin: 4px;
   }
-  .keypad__ButtonEnter,
-  .keypad__ButtonBackspace {
-    width: 172px;
+  .keypad__buttonShift,
+  .keypad__buttonEnter,
+  .keypad__buttonBackspace {
+    width: 152px;
     height: 52px;
     margin: 4px;
   }

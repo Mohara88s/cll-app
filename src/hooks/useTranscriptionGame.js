@@ -112,7 +112,7 @@ const useTranscriptionGame = solution => {
       throttle = true;
       if (currentGuess.length < solution.length) {
         setCurrentGuess(prev => {
-          return prev + key.toUpperCase();
+          return prev + key;
         });
       }
       setTimeout(() => {

@@ -1,8 +1,39 @@
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { gsap } from 'gsap';
 import styles from './Keypad.module.css';
 
-const letters = [
+const lettersSet = [
+  { key: 'a' },
+  { key: 'b' },
+  { key: 'c' },
+  { key: 'd' },
+  { key: 'e' },
+  { key: 'f' },
+  { key: 'g' },
+  { key: 'h' },
+  { key: 'i' },
+  { key: 'j' },
+  { key: 'k' },
+  { key: 'l' },
+  { key: 'm' },
+  { key: 'n' },
+  { key: 'o' },
+  { key: 'p' },
+  { key: 'q' },
+  { key: 'r' },
+  { key: 's' },
+  { key: 't' },
+  { key: 'u' },
+  { key: 'v' },
+  { key: 'w' },
+  { key: 'x' },
+  { key: 'y' },
+  { key: 'z' },
+  { key: '-' },
+  { key: "'" },
+];
+const lettersSetUp = [
   { key: 'A' },
   { key: 'B' },
   { key: 'C' },
@@ -34,8 +65,13 @@ const letters = [
 ];
 
 export default function Keypad({ usedKeys, handleKeyup, isCorrect }) {
+  const [shift, setShift] = useState(false);
+
   const onClickButton = e => {
     const { value } = e.currentTarget;
+    if (value === 'Shift') {
+      setShift(!shift);
+    }
     if (!isCorrect) {
       handleKeyup({ key: value });
       gsap
@@ -46,13 +82,28 @@ export default function Keypad({ usedKeys, handleKeyup, isCorrect }) {
   };
   return (
     <div className={styles.keypad}>
-      {letters &&
-        letters.map(l => {
+      {!shift &&
+        lettersSet.map(l => {
           const color = usedKeys[l.key];
           return (
             <Button
               key={l.key}
-              className={styles.keypad__Button}
+              className={styles.keypad__button}
+              variant={color ? color : 'secondary'}
+              onClick={onClickButton}
+              value={l.key}
+            >
+              {l.key}
+            </Button>
+          );
+        })}
+      {shift &&
+        lettersSetUp.map(l => {
+          const color = usedKeys[l.key];
+          return (
+            <Button
+              key={l.key}
+              className={styles.keypad__button}
               variant={color ? color : 'secondary'}
               onClick={onClickButton}
               value={l.key}
@@ -62,8 +113,16 @@ export default function Keypad({ usedKeys, handleKeyup, isCorrect }) {
           );
         })}
       <Button
+        className={styles.keypad__buttonShift}
+        variant="secondary"
+        onClick={onClickButton}
+        value="Shift"
+      >
+        Shift
+      </Button>
+      <Button
         key="Enter"
-        className={styles.keypad__ButtonEnter}
+        className={styles.keypad__buttonEnter}
         variant="secondary"
         onClick={onClickButton}
         value="Enter"
@@ -72,7 +131,7 @@ export default function Keypad({ usedKeys, handleKeyup, isCorrect }) {
       </Button>
       <Button
         key="Backspace"
-        className={styles.keypad__ButtonBackspace}
+        className={styles.keypad__buttonBackspace}
         variant="secondary"
         onClick={onClickButton}
         value="Backspace"
