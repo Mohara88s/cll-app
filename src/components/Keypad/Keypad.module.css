@@ -22,7 +22,11 @@
   font-size: 1.4em;
   line-height: 0;
 }
-
+@media (min-width: 700px) {
+  .keypad {
+    max-width: 700px;
+  }
+}
 @media screen and (min-width: 900px) {
   .keypad {
     max-width: 600px;
