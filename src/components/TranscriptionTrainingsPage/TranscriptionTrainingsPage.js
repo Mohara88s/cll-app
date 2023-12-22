@@ -3,18 +3,11 @@ import { useSelector } from 'react-redux';
 import OwnDictionaries from '../OwnDictionaries/OwnDictionaries';
 import EngUTranscriptionTrainings from '../EngUTranscriptionTrainings/EngUTranscriptionTrainings';
 import UEngTranscriptionTrainings from '../UEngTranscriptionTrainings/UEngTranscriptionTrainings';
-import EngQTranscriptionTrainings from '../EngQTranscriptionTrainings/EngQTranscriptionTrainings';
-import QEngTranscriptionTrainings from '../QEngTranscriptionTrainings/QEngTranscriptionTrainings';
 import { Button } from 'react-bootstrap';
 import ownDictionariesSelectors from '../../redux/own-dictionaries/own-dictionaries-selectors';
 import styles from './TranscriptionTrainingsPage.module.css';
 
-const trainings = [
-  'english - u-transcription',
-  'u-transcription - english',
-  'english - q-transcription',
-  'q-transcription - english',
-];
+const trainings = ['english - u-transcription', 'u-transcription - english'];
 
 export default function TranscriptionTrainingsPage() {
   useEffect(() => {
@@ -123,26 +116,6 @@ export default function TranscriptionTrainingsPage() {
         currentDictionary.ownDictionaryName &&
         selectedTaining === trainings[1] && (
           <UEngTranscriptionTrainings
-            tasksArr={currentDictionary.ownDictionaryTasks}
-            onResolvedTraining={onResolvedTraining}
-          />
-        )}
-
-      {!ownDictionariesIsOpen &&
-        !trainingButtonsIsOpen &&
-        currentDictionary.ownDictionaryName &&
-        selectedTaining === trainings[2] && (
-          <EngQTranscriptionTrainings
-            tasksArr={currentDictionary.ownDictionaryTasks}
-            onResolvedTraining={onResolvedTraining}
-          />
-        )}
-
-      {!ownDictionariesIsOpen &&
-        !trainingButtonsIsOpen &&
-        currentDictionary.ownDictionaryName &&
-        selectedTaining === trainings[3] && (
-          <QEngTranscriptionTrainings
             tasksArr={currentDictionary.ownDictionaryTasks}
             onResolvedTraining={onResolvedTraining}
           />

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Button, Table, Spinner } from 'react-bootstrap';
-import { updateOwnDictionary } from '../../redux/own-dictionaries/own-dictionaries-operaions';
+import { updateOwnDictionary } from '../../redux/own-dictionaries/own-dictionaries-operations';
 import ownDictionariesSelectors from '../../redux/own-dictionaries/own-dictionaries-selectors';
 import TasksFilter from '../TasksFilter/TasksFilter';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
@@ -110,9 +110,6 @@ const SelectedDictionaryModal = ({
                   <td className={styles.Table__td__secondary}>
                     U-transcription
                   </td>
-                  <td className={styles.Table__td__secondary}>
-                    Q-transcription
-                  </td>
                   {advancedMode && (
                     <td className={styles.Table__td__Button}></td>
                   )}
@@ -128,7 +125,6 @@ const SelectedDictionaryModal = ({
                           {rus.split('/')[0]}
                         </td>
                         <td className={styles.Table__td__secondary}>{utrn}</td>
-                        <td className={styles.Table__td__secondary}>{qtrn}</td>
                         {advancedMode && (
                           <td className={styles.Table__td__Button}>
                             <Button

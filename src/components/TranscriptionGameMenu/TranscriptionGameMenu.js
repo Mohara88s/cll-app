@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Spinner, Form, InputGroup } from 'react-bootstrap';
 import transcriptionTasksSelectors from '../../redux/transcription-tasks/transcription-tasks-selectors';
-import { fetchRandomTranscriptionTask } from '../../redux/transcription-tasks/transcription-tasks-operaions';
+import { fetchRandomTranscriptionTask } from '../../redux/transcription-tasks/transcription-tasks-operations';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './TranscriptionGameMenu.module.css';
 

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { authSelectors, authOperations } from '../../redux/auth';
+import authSelectors from '../../redux/auth/auth-selectors';
+import { signout } from '../../redux/auth/auth-operations';
 import { Button } from 'react-bootstrap';
 import styles from './UserMenu.module.css';
 
@@ -9,7 +10,7 @@ export default function UserMenu() {
   const name = useSelector(authSelectors.getUserName);
   const userSubscription = useSelector(authSelectors.getUserSubscription);
   const onLogoutClick = async () => {
-    await dispatch(authOperations.signout());
+    await dispatch(signout());
     window.location.reload();
   };
 

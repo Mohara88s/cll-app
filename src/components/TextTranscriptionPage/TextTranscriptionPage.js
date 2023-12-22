@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Spinner, Dropdown } from 'react-bootstrap';
 import { changeEnglishText } from '../../redux/text-transcription/text-transcription-actions';
 import textTranscriptionSelectors from '../../redux/text-transcription/text-transcription-selectors';
-import { fetchTextTranscription } from '../../redux/text-transcription/text-transcription-operaions';
+import { fetchTextTranscription } from '../../redux/text-transcription/text-transcription-operations';
 
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './TextTranscriptionPage.module.css';
 
-const fields = ['U-transcription', 'Q-transcription'];
+const fields = ['U-transcription'];
 
 export default function TextTranscriptionPage() {
   const [taranscriptedArray, setTaranscriptedArray] = useState([]);

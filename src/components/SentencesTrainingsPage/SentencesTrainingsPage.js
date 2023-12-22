@@ -6,7 +6,7 @@ import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
 import {
   fetchSentencesTasks,
   fetchSentencesTasksByJokeTaskId,
-} from '../../redux/sentences-tasks/sentences-tasks-operaions';
+} from '../../redux/sentences-tasks/sentences-tasks-operations';
 import JokesList from '../JokesList/JokesList';
 import ChooseLanguages from '../ChooseLanguages/ChooseLanguages';
 import SentencesTrainings from '../../components/SentencesTrainings/SentencesTrainings';

@@ -5,7 +5,7 @@ import { changeJokeTask } from '../../redux/joke-tasks/joke-tasks-actions';
 import {
   updateJokeTask,
   deleteJokeTask,
-} from '../../redux/joke-tasks/joke-tasks-operaions';
+} from '../../redux/joke-tasks/joke-tasks-operations';
 import { Form, Dropdown, Modal, Button, Spinner } from 'react-bootstrap';
 import { confirm } from 'react-bootstrap-confirmation';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';

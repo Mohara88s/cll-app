@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Table, Spinner, Dropdown } from 'react-bootstrap';
 import transcriptionTasksSelectors from '../../redux/transcription-tasks/transcription-tasks-selectors';
-import { fetchTranscriptionTasks } from '../../redux/transcription-tasks/transcription-tasks-operaions';
+import { fetchTranscriptionTasks } from '../../redux/transcription-tasks/transcription-tasks-operations';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './TasksFilter.module.css';
 
-const fields = ['Translation', 'U-transcription', 'Q-transcription'];
+const fields = ['Translation', 'U-transcription'];
 
 export default function TasksFilter({ passUpTask }) {
   const dispatch = useDispatch();
@@ -99,7 +99,6 @@ export default function TasksFilter({ passUpTask }) {
                 <td>{eng}</td>
                 {dropdownValue === fields[0] && <td>{rus.split('/')[0]}</td>}
                 {dropdownValue === fields[1] && <td>{utrn}</td>}
-                {dropdownValue === fields[2] && <td>{qtrn}</td>}
                 <td>
                   <Button name={_id} onClick={onAddBtnClick}>
                     Add

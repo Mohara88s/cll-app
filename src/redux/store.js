@@ -14,7 +14,7 @@ import ownDictionariesReducer from './own-dictionaries/own-dictionaries-reducer'
 import jokeTasksReducer from './joke-tasks/joke-tasks-reducer';
 import sentencesTasksReducer from './sentences-tasks/sentences-tasks-reducer';
 import transcriptionTasksReducer from './transcription-tasks/transcription-tasks-reducer';
-import { authReducer } from './auth';
+import authReducer from './auth/auth-reducer';
 import textTranscriptionReducer from './text-transcription/text-transcription-reducer';
 
 const middleware = [
@@ -44,4 +44,9 @@ export const store = configureStore({
   devTools: process.env.NODE_ENV === 'development',
 });
 
-export const persistor = persistStore(store);
+export const persistor = persistStore(
+  store,
+  // , null, () => {
+  // console.log('state', store.getState());
+  // }
+);

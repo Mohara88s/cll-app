@@ -6,7 +6,7 @@ import {
   changeJokeTask,
 } from '../../redux/joke-tasks/joke-tasks-actions';
 import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
-import { fetchJokeTasks } from '../../redux/joke-tasks/joke-tasks-operaions';
+import { fetchJokeTasks } from '../../redux/joke-tasks/joke-tasks-operations';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import EditingJokeTaskModal from '../EditingJokeTaskModal/EditingJokeTaskModal';
 import styles from './AdminJokesList.module.css';

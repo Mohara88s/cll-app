@@ -5,7 +5,7 @@ import ownDictionariesSelectors from '../../redux/own-dictionaries/own-dictionar
 import {
   addOwnDictionary,
   fetchOwnDictionary,
-} from '../../redux/own-dictionaries/own-dictionaries-operaions';
+} from '../../redux/own-dictionaries/own-dictionaries-operations';
 import { confirm } from 'react-bootstrap-confirmation';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './DictionarySearch.module.css';

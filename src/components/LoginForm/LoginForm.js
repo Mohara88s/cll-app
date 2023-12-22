@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { authOperations, authSelectors } from '../../redux/auth';
+import { NavLink } from 'react-router-dom';
+import authSelectors from '../../redux/auth/auth-selectors';
+import { signin } from '../../redux/auth/auth-operations';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './LoginForm.module.css';
@@ -29,8 +31,8 @@ export default function LoginForm() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    await dispatch(authOperations.signin({ email, password }));
-    window.location.reload();
+    await dispatch(signin({ email, password }));
+    // window.location.reload();
   };
 
   return (
@@ -63,8 +65,10 @@ export default function LoginForm() {
           {!loading && <span>Login</span>}
           {loading && <Spinner animation="border" as="span" size="sm" />}
         </Button>
+        <NavLink to="/password-reset" className={styles.form__link}>
+          I have forgotten the password
+        </NavLink>
       </Form>
-
       {authError && <ErrorMessage message={authError} />}
     </div>
   );

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Table, Spinner } from 'react-bootstrap';
 import { changeFilter } from '../../redux/joke-tasks/joke-tasks-actions';
 import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
-import { fetchJokeTasks } from '../../redux/joke-tasks/joke-tasks-operaions';
+import { fetchJokeTasks } from '../../redux/joke-tasks/joke-tasks-operations';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './JokesList.module.css';
 

@@ -7,7 +7,7 @@ import {
 } from '../../redux/transcription-tasks/transcription-tasks-actions';
 import transcriptionTasksSelectors from '../../redux/transcription-tasks/transcription-tasks-selectors';
 import ownDictionariesSelectors from '../../redux/own-dictionaries/own-dictionaries-selectors';
-import { addOwnDictionary } from '../../redux/own-dictionaries/own-dictionaries-operaions';
+import { addOwnDictionary } from '../../redux/own-dictionaries/own-dictionaries-operations';
 import TasksFilter from '../TasksFilter/TasksFilter';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { confirm } from 'react-bootstrap-confirmation';

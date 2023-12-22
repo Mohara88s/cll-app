@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
-import { authSelectors } from '../../redux/auth';
 import { useSelector } from 'react-redux';
+import authSelectors from '../../redux/auth/auth-selectors';
 import styles from './HomePage.module.css';
 import jokesTrainingsImg from '../../public/pictures/jokes_trainings.jpg';
 import sentencesTrainingsImg from '../../public/pictures/sentences_trainings.jpg';

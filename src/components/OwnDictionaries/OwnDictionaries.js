@@ -6,7 +6,7 @@ import ownDictionariesSelectors from '../../redux/own-dictionaries/own-dictionar
 import {
   fetchOwnDictionaries,
   deleteOwnDictionary,
-} from '../../redux/own-dictionaries/own-dictionaries-operaions';
+} from '../../redux/own-dictionaries/own-dictionaries-operations';
 import { changeCurrentDictionary } from '../../redux/own-dictionaries/own-dictionaries-actions';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import SelectedDictionaryModal from '../SelectedDictionaryModal/SelectedDictionaryModal';

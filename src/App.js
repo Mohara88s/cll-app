@@ -10,7 +10,8 @@ import Container from './components/Container/Container';
 import MobileAppBar from './components/MobileAppBar/MobileAppBar';
 import AppBar from './components/AppBar/AppBar';
 
-import { authOperations, authSelectors } from './redux/auth';
+import authSelectors from './redux/auth/auth-selectors';
+import { fetchCurrentUser } from './redux/auth/auth-operations';
 
 import 'modern-normalize/modern-normalize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -29,6 +30,11 @@ const RegisterView = lazy(() =>
 );
 const LoginView = lazy(() =>
   import('./views/LoginView/LoginView' /* webpackChunkName:"LoginView" */),
+);
+const PasswordResetView = lazy(() =>
+  import(
+    './views/PasswordResetView/PasswordResetView' /* webpackChunkName:"PasswordReset" */
+  ),
 );
 const JokesTrainingsView = lazy(() =>
   import(
@@ -74,7 +80,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(authOperations.fetchCurrentUser());
+    dispatch(fetchCurrentUser());
   }, [dispatch]);
 
   const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
@@ -97,6 +103,10 @@ function App() {
 
               <PublicRoute path="/login" restricted>
                 <LoginView />
+              </PublicRoute>
+
+              <PublicRoute path="/password-reset" restricted>
+                <PasswordResetView />
               </PublicRoute>
 
               <Route exact path="/jokes-trainings">

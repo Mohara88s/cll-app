@@ -13,5 +13,10 @@
 .button {
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 30px;
   width: 70px;
+}
+.form__link {
+  margin-left: auto;
+  margin-right: auto;
 }

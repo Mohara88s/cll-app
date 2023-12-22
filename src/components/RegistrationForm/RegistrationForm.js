@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { authOperations, authSelectors } from '../../redux/auth';
+import authSelectors from '../../redux/auth/auth-selectors';
+import { signup } from '../../redux/auth/auth-operations';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import styles from './RegistrationForm.module.css';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
@@ -32,8 +33,8 @@ export default function RegistrationForm() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    await dispatch(authOperations.signup({ name, email, password }));
-    window.location.reload();
+    await dispatch(signup({ name, email, password }));
+    // window.location.reload();
   };
 
   return (

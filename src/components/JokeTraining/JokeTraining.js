@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import styles from './JokeTraining.module.css';
-import { fetchSentencesTasksByJokeTaskId } from '../../redux/sentences-tasks/sentences-tasks-operaions';
+import { fetchSentencesTasksByJokeTaskId } from '../../redux/sentences-tasks/sentences-tasks-operations';
 import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
 import ChooseTaskLanguages from '../ChooseTaskLanguages/ChooseTaskLanguages';
 import TaskCongratulation from '../TaskCongratulation/TaskCongratulation';

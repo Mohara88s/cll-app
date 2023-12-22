@@ -2,7 +2,7 @@ import { Button } from 'react-bootstrap';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import jokeTasksSelectors from '../../redux/joke-tasks/joke-tasks-selectors';
-import { fetchJokeTasksLanguages } from '../../redux/joke-tasks/joke-tasks-operaions';
+import { fetchJokeTasksLanguages } from '../../redux/joke-tasks/joke-tasks-operations';
 import {
   setOriginalLanguage,
   setTranslationLanguage,

@@ -4,7 +4,7 @@ import MobileNavigation from '../MobileNavigation/MobileNavigation';
 import UserMenu from '../UserMenu/UserMenu';
 import AuthNav from '../AuthNav/AuthNav';
 import { Button } from 'react-bootstrap';
-import { authSelectors } from '../../redux/auth';
+import authSelectors from '../../redux/auth/auth-selectors';
 import styles from './MobileAppBar.module.css';
 
 export default function AppBar() {
