@@ -12,6 +12,9 @@ import AppBar from './components/AppBar/AppBar';
 
 import authSelectors from './redux/auth/auth-selectors';
 import { fetchCurrentUser } from './redux/auth/auth-operations';
+import { setupIonicReact } from '@ionic/react';
+
+import '@ionic/react/css/core.css';
 
 import 'modern-normalize/modern-normalize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -75,6 +78,8 @@ const NotFoundView = lazy(() =>
     './views/NotFoundView/NotFoundView' /* webpackChunkName:"NotFoundView" */
   ),
 );
+
+setupIonicReact();
 
 function App() {
   const dispatch = useDispatch();
