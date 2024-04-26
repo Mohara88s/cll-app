@@ -2,8 +2,12 @@ import { NavLink } from 'react-router-dom';
 import styles from './Navigation.module.css';
 import { useSelector } from 'react-redux';
 import authSelectors from '../../redux/auth/auth-selectors';
+import useI18n from '../../hooks/useI18n';
+import LanguageDropdown from '../LanguageDropdown/LanguageDropdown';
+import { languages } from '../../i18n';
 
 const Navigation = () => {
+  const { i18n, setLanguage } = useI18n()
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
   return (
     <nav className={styles.Navigation}>
@@ -15,7 +19,7 @@ const Navigation = () => {
             className={styles.link}
             activeClassName={styles.activeLink}
           >
-            Home
+            {i18n.navigation.home}
           </NavLink>
         </li>
         <li className={styles.NavigationList__item}>
@@ -25,7 +29,7 @@ const Navigation = () => {
             className={styles.link}
             activeClassName={styles.activeLink}
           >
-            Jokes trainings
+            {i18n.navigation.jokesTrainings}
           </NavLink>
         </li>
         <li className={styles.NavigationList__item}>
@@ -35,7 +39,7 @@ const Navigation = () => {
             className={styles.link}
             activeClassName={styles.activeLink}
           >
-            Sentences trainings
+            {i18n.navigation.sentencesTrainings}
           </NavLink>
         </li>
         {isLoggedIn && (
@@ -46,7 +50,7 @@ const Navigation = () => {
               className={styles.link}
               activeClassName={styles.activeLink}
             >
-              Transcription trainings
+              {i18n.navigation.transcriptionTrainings}
             </NavLink>
           </li>
         )}
@@ -58,7 +62,7 @@ const Navigation = () => {
               className={styles.link}
               activeClassName={styles.activeLink}
             >
-              Text transcription
+              {i18n.navigation.textTranscription}
             </NavLink>
           </li>
         )}
@@ -70,7 +74,7 @@ const Navigation = () => {
               className={styles.link}
               activeClassName={styles.activeLink}
             >
-              Transcription game
+              {i18n.navigation.transcriptionGame}
             </NavLink>
           </li>
         )}
@@ -81,8 +85,14 @@ const Navigation = () => {
             className={styles.link}
             activeClassName={styles.activeLink}
           >
-            Info
+            {i18n.navigation.info}
           </NavLink>
+        </li>
+        <li className={styles.NavigationList__item}>
+          <LanguageDropdown
+            options={languages}
+            value={i18n._language}
+            onChange={setLanguage} />
         </li>
       </ul>
     </nav>

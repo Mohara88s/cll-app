@@ -1,4 +1,4 @@
-import { useEffect, Suspense, lazy } from 'react';
+import { useEffect, Suspense, lazy, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
@@ -12,6 +12,7 @@ import AppBar from './components/AppBar/AppBar';
 
 import authSelectors from './redux/auth/auth-selectors';
 import { fetchCurrentUser } from './redux/auth/auth-operations';
+import { ContextI18n, i18n } from './i18n'
 
 import 'modern-normalize/modern-normalize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -78,77 +79,84 @@ const NotFoundView = lazy(() =>
 
 function App() {
   const dispatch = useDispatch();
+  const [contextLang, setContextLang] = useState(i18n('en'))
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
+
+  const setContext = (i18n) => {
+    setContextLang(i18n)
+  }
 
   const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
   const userSubscription = useSelector(authSelectors.getUserSubscription);
   return (
     !isFetchingCurrentUser && (
       <div>
-        <AppBar />
-        <MobileAppBar />
-        <Container>
-          <Suspense fallback={<Spinner animation="border" variant="primary" />}>
-            <Switch>
-              <Route exact path="/">
-                <HomePageView />
-              </Route>
+        <ContextI18n.Provider value={{ ...contextLang, setContext }} >
+          <AppBar />
+          <MobileAppBar />
+          <Container>
+            <Suspense fallback={<Spinner animation="border" variant="primary" />}>
+              <Switch>
+                <Route exact path="/">
+                  <HomePageView />
+                </Route>
 
-              <PublicRoute path="/register" restricted>
-                <RegisterView />
-              </PublicRoute>
+                <PublicRoute path="/register" restricted>
+                  <RegisterView />
+                </PublicRoute>
 
-              <PublicRoute path="/login" restricted>
-                <LoginView />
-              </PublicRoute>
+                <PublicRoute path="/login" restricted>
+                  <LoginView />
+                </PublicRoute>
 
-              <PublicRoute path="/password-reset" restricted>
-                <PasswordResetView />
-              </PublicRoute>
+                <PublicRoute path="/password-reset" restricted>
+                  <PasswordResetView />
+                </PublicRoute>
 
-              <Route exact path="/jokes-trainings">
-                <JokesTrainingsView />
-              </Route>
+                <Route exact path="/jokes-trainings">
+                  <JokesTrainingsView />
+                </Route>
 
-              <Route exact path="/sentences-trainings">
-                <SentencesTrainingsView />
-              </Route>
+                <Route exact path="/sentences-trainings">
+                  <SentencesTrainingsView />
+                </Route>
 
-              <PrivateRoute exact path="/transcription-trainings">
-                <TranscriptionTrainingsView />
-              </PrivateRoute>
-
-              <PrivateRoute exact path="/text-transcription">
-                <TextTranscriptionView />
-              </PrivateRoute>
-
-              <PrivateRoute exact path="/transcription-game">
-                <TranscriptionGameView />
-              </PrivateRoute>
-
-              <PrivateRoute exact path="/user">
-                <UserView />
-              </PrivateRoute>
-
-              {userSubscription === 'admin' && (
-                <PrivateRoute exact path="/admin">
-                  <AdminView />
+                <PrivateRoute exact path="/transcription-trainings">
+                  <TranscriptionTrainingsView />
                 </PrivateRoute>
-              )}
 
-              <Route path="/info">
-                <InfoView />
-              </Route>
+                <PrivateRoute exact path="/text-transcription">
+                  <TextTranscriptionView />
+                </PrivateRoute>
 
-              <Route>
-                <NotFoundView />
-              </Route>
-            </Switch>
-          </Suspense>
-        </Container>
+                <PrivateRoute exact path="/transcription-game">
+                  <TranscriptionGameView />
+                </PrivateRoute>
+
+                <PrivateRoute exact path="/user">
+                  <UserView />
+                </PrivateRoute>
+
+                {userSubscription === 'admin' && (
+                  <PrivateRoute exact path="/admin">
+                    <AdminView />
+                  </PrivateRoute>
+                )}
+
+                <Route path="/info">
+                  <InfoView />
+                </Route>
+
+                <Route>
+                  <NotFoundView />
+                </Route>
+              </Switch>
+            </Suspense>
+          </Container>
+        </ContextI18n.Provider>
       </div>
     )
   );
