@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
 import authSelectors from '../../redux/auth/auth-selectors';
 import styles from './HomePage.module.css';
 import jokesTrainingsImg from '../../public/pictures/jokes_trainings.jpg';
@@ -9,6 +10,7 @@ import transcription__trainingsImg from '../../public/pictures/transcription__tr
 import text__transcriptionImg from '../../public/pictures/text__transcription.jpg';
 import plug__trainingsImg from '../../public/pictures/plug__trainings.jpg';
 import transcription__gameImg from '../../public/pictures/transcription__game.jpg';
+import useI18n from '../../hooks/useI18n';
 
 export default function HomePage() {
   useEffect(() => {
@@ -17,12 +19,14 @@ export default function HomePage() {
 
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
 
+  const { i18n } = useI18n()
+
   const { url } = useRouteMatch();
   const location = useLocation();
 
   return (
     <div>
-      <h2>Choose trainings:</h2>
+      <h2>{i18n.homePage.chooseTrainings}</h2>
       <ul className={styles.LinksList}>
         <li className={styles.LinksList__item}>
           <Link
@@ -31,7 +35,7 @@ export default function HomePage() {
               state: { from: location },
             }}
           >
-            <h3 className={styles.LinksList__name}>Jokes trainings</h3>
+            <h3 className={styles.LinksList__name}>{i18n.homePage.jokesTrainings}</h3>
             <img
               src={jokesTrainingsImg}
               alt="Jokes trainings"
@@ -46,7 +50,7 @@ export default function HomePage() {
               state: { from: location },
             }}
           >
-            <h3 className={styles.LinksList__name}>Sentences trainings</h3>
+            <h3 className={styles.LinksList__name}>{i18n.homePage.sentencesTrainings}</h3>
             <img
               src={sentencesTrainingsImg}
               alt="Sentences trainings"
@@ -64,7 +68,7 @@ export default function HomePage() {
               }}
             >
               <h3 className={styles.LinksList__name}>
-                Transcription trainings
+                {i18n.homePage.transcriptionTrainings}
               </h3>
               <img
                 src={transcription__trainingsImg}
@@ -83,7 +87,7 @@ export default function HomePage() {
                 state: { from: location },
               }}
             >
-              <h3 className={styles.LinksList__name}>Text transcription</h3>
+              <h3 className={styles.LinksList__name}>{i18n.homePage.textTranscription}</h3>
               <img
                 src={text__transcriptionImg}
                 alt="Text transcription"
@@ -101,7 +105,7 @@ export default function HomePage() {
                 state: { from: location },
               }}
             >
-              <h3 className={styles.LinksList__name}>Transcription game</h3>
+              <h3 className={styles.LinksList__name}>{i18n.homePage.transcriptionGame}</h3>
               <img
                 src={transcription__gameImg}
                 alt="Transcription game"
@@ -120,7 +124,7 @@ export default function HomePage() {
               }}
             >
               <h3 className={styles.LinksList__name}>
-                Login for more trainings
+                {i18n.homePage.loginForNewTrainings}
               </h3>
               <img
                 src={plug__trainingsImg}
