@@ -22,8 +22,9 @@ import {
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 
-const filter = createReducer('', {
-  [changeFilter]: (_, { payload }) => payload,
+const filter = createReducer('', (builder) => {
+  builder
+  .addCase(changeFilter, (_, { payload }) => payload)
 });
 
 const jokeTask = createReducer(
@@ -33,10 +34,10 @@ const jokeTask = createReducer(
       { _id: 0, language: '', title: '', text: '' },
       { _id: 1, language: '', title: '', text: '' },
     ],
-  },
-  {
-    [changeJokeTask]: (_, { payload }) => payload,
-    [addJokeTaskSuccess]: () => {
+  }, (builder) => {
+    builder
+    .addCase(changeJokeTask, (_, { payload }) => payload)
+    .addCase(addJokeTaskSuccess, () => {
       return {
         task_title: '',
         translations: [
@@ -44,8 +45,8 @@ const jokeTask = createReducer(
           { _id: 1, language: '', title: '', text: '' },
         ],
       };
-    },
-    [deleteJokeTaskSuccess]: () => {
+    })
+    .addCase(deleteJokeTaskSuccess, () => {
       return {
         task_title: '',
         translations: [
@@ -53,8 +54,8 @@ const jokeTask = createReducer(
           { _id: 1, language: '', title: '', text: '' },
         ],
       };
-    },
-    [updateJokeTaskSuccess]: () => {
+    })
+    .addCase(updateJokeTaskSuccess, () => {
       return {
         task_title: '',
         translations: [
@@ -62,85 +63,92 @@ const jokeTask = createReducer(
           { _id: 1, language: '', title: '', text: '' },
         ],
       };
-    },
+    })
   },
 );
 
-const tasks = createReducer([], {
-  [fetchJokeTasksSuccess]: (_, { payload }) => payload,
-  [fetchJokeTasksError]: () => [],
-  [addJokeTaskSuccess]: (state, { payload }) => {
+const tasks = createReducer([], (builder) => {
+  builder
+  .addCase(fetchJokeTasksSuccess, (_, { payload }) => payload)
+  .addCase(fetchJokeTasksError, () => [])
+  .addCase(addJokeTaskSuccess, (state, { payload }) => {
     return [...state, payload.jokeTask];
-  },
-  [updateJokeTaskSuccess]: (state, { payload }) => {
+  })
+  .addCase(updateJokeTaskSuccess, (state, { payload }) => {
     return [
       ...state.filter(({ _id }) => _id !== payload._id),
       payload.jokeTask,
     ];
-  },
-  [deleteJokeTaskSuccess]: (state, { payload }) => {
-    console.log(payload);
+  })
+  .addCase(deleteJokeTaskSuccess, (state, { payload }) => {
     return [...state.filter(({ _id }) => _id !== payload._id)];
-  },
+  })
 });
 
-const loading = createReducer(false, {
-  [fetchJokeTasksRequest]: () => true,
-  [fetchJokeTasksSuccess]: () => false,
-  [fetchJokeTasksError]: () => false,
+const loading = createReducer(false, (builder) => {
+  builder
+  .addCase(fetchJokeTasksRequest, () => true)
+  .addCase(fetchJokeTasksSuccess, () => false)
+  .addCase(fetchJokeTasksError, () => false)
 
-  [addJokeTaskRequest]: () => true,
-  [addJokeTaskSuccess]: () => false,
-  [addJokeTaskError]: () => false,
+  .addCase(addJokeTaskRequest, () => true)
+  .addCase(addJokeTaskSuccess, () => false)
+  .addCase(addJokeTaskError, () => false)
 
-  [deleteJokeTaskRequest]: () => true,
-  [deleteJokeTaskSuccess]: () => false,
-  [deleteJokeTaskError]: () => false,
+  .addCase(deleteJokeTaskRequest, () => true)
+  .addCase(deleteJokeTaskSuccess, () => false)
+  .addCase(deleteJokeTaskError, () => false)
 
-  [updateJokeTaskRequest]: () => true,
-  [updateJokeTaskSuccess]: () => false,
-  [updateJokeTaskError]: () => false,
+  .addCase(updateJokeTaskRequest, () => true)
+  .addCase(updateJokeTaskSuccess, () => false)
+  .addCase(updateJokeTaskError, () => false)
 });
 
-const error = createReducer(null, {
-  [fetchJokeTasksError]: (_, { payload }) => payload,
-  [fetchJokeTasksRequest]: () => null,
+const error = createReducer(null, (builder) => {
+  builder
+  .addCase(fetchJokeTasksError, (_, { payload }) => payload)
+  .addCase(fetchJokeTasksRequest, () => null)
 
-  [addJokeTaskError]: (_, { payload }) => payload,
-  [addJokeTaskRequest]: () => null,
+  .addCase(addJokeTaskError, (_, { payload }) => payload)
+  .addCase(addJokeTaskRequest, () => null)
 
-  [deleteJokeTaskError]: (_, { payload }) => payload,
-  [deleteJokeTaskRequest]: () => null,
+  .addCase(deleteJokeTaskError, (_, { payload }) => payload)
+  .addCase(deleteJokeTaskRequest, () => null)
 
-  [updateJokeTaskError]: (_, { payload }) => payload,
-  [updateJokeTaskRequest]: () => null,
+  .addCase(updateJokeTaskError, (_, { payload }) => payload)
+  .addCase(updateJokeTaskRequest, () => null)
 });
 
-const languages = createReducer([], {
-  [fetchJokeTasksLanguagesSuccess]: (_, { payload }) => payload,
-  [fetchJokeTasksLanguagesError]: () => [],
+const languages = createReducer([], (builder) => {
+  builder
+  .addCase(fetchJokeTasksLanguagesSuccess, (_, { payload }) => payload)
+  .addCase(fetchJokeTasksLanguagesError, () => [])
 });
 
-const languagesLoading = createReducer(false, {
-  [fetchJokeTasksLanguagesRequest]: () => true,
-  [fetchJokeTasksLanguagesSuccess]: () => false,
-  [fetchJokeTasksLanguagesError]: () => false,
+const languagesLoading = createReducer(false, (builder) => {
+  builder
+  .addCase(fetchJokeTasksLanguagesRequest, () => true)
+  .addCase(fetchJokeTasksLanguagesSuccess, () => false)
+  .addCase(fetchJokeTasksLanguagesError, () => false)
 });
 
-const languagesError = createReducer(null, {
-  [fetchJokeTasksLanguagesError]: (_, { payload }) => payload,
-  [fetchJokeTasksLanguagesRequest]: () => null,
+const languagesError = createReducer(null, (builder) => {
+  builder
+  .addCase(fetchJokeTasksLanguagesError, (_, { payload }) => payload)
+  .addCase(fetchJokeTasksLanguagesRequest, () => null)
 });
 
-const originalLanguage = createReducer(null, {
-  [setOriginalLanguage]: (state, { payload }) => {
+const originalLanguage = createReducer(null, (builder) => {
+  builder
+  .addCase(setOriginalLanguage, (state, { payload }) => {
     return payload;
-  },
+  })
 });
-const translationLanguage = createReducer(null, {
-  [setTranslationLanguage]: (state, { payload }) => {
+const translationLanguage = createReducer(null, (builder) => {
+  builder
+  .addCase(setTranslationLanguage, (state, { payload }) => {
     return payload;
-  },
+  })
 });
 
 export default combineReducers({

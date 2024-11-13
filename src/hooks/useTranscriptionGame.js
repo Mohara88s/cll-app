@@ -69,7 +69,8 @@ const useTranscriptionGame = solution => {
         }
         if (
           l.color === 'secondary' &&
-          currentColor !== ('success' || 'warning')
+          currentColor !== 'success' &&
+          currentColor !== 'warning'
         ) {
           prevUsedKeys[l.key] = 'secondary';
           return;

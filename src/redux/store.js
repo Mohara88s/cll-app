@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -17,14 +17,6 @@ import transcriptionTasksReducer from './transcription-tasks/transcription-tasks
 import authReducer from './auth/auth-reducer';
 import textTranscriptionReducer from './text-transcription/text-transcription-reducer';
 
-const middleware = [
-  ...getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }),
-];
-
 const authPersistConfig = {
   key: 'auth',
   storage,
@@ -40,13 +32,12 @@ export const store = configureStore({
     textTranscription: textTranscriptionReducer,
     auth: persistReducer(authPersistConfig, authReducer),
   },
-  middleware,
-  devTools: process.env.NODE_ENV === 'development',
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
-export const persistor = persistStore(
-  store,
-  // , null, () => {
-  // console.log('state', store.getState());
-  // }
-);
+export const persistor = persistStore(store);

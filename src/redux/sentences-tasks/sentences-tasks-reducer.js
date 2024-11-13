@@ -9,30 +9,33 @@ import {
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 
-const tasks = createReducer([], {
-  [fetchSentencesTasksSuccess]: (_, { payload }) => payload,
-  [fetchSentencesTasksError]: () => [],
+const tasks = createReducer([], (builder) => {
+  builder
+  .addCase(fetchSentencesTasksSuccess, (_, { payload }) => payload)
+  .addCase(fetchSentencesTasksError, () => [])
 
-  [fetchSentencesTasksByJokeTaskIdSuccess]: (_, { payload }) => payload,
-  [fetchSentencesTasksByJokeTaskIdError]: () => [],
+  .addCase(fetchSentencesTasksByJokeTaskIdSuccess, (_, { payload }) => payload)
+  .addCase(fetchSentencesTasksByJokeTaskIdError, () => [])
 });
 
-const loading = createReducer(false, {
-  [fetchSentencesTasksRequest]: () => true,
-  [fetchSentencesTasksSuccess]: () => false,
-  [fetchSentencesTasksError]: () => false,
+const loading = createReducer(false, (builder) => {
+  builder
+  .addCase(fetchSentencesTasksRequest, () => true)
+  .addCase(fetchSentencesTasksSuccess, () => false)
+  .addCase(fetchSentencesTasksError, () => false)
 
-  [fetchSentencesTasksByJokeTaskIdRequest]: () => true,
-  [fetchSentencesTasksByJokeTaskIdSuccess]: () => false,
-  [fetchSentencesTasksByJokeTaskIdError]: () => false,
+  .addCase(fetchSentencesTasksByJokeTaskIdRequest, () => true)
+  .addCase(fetchSentencesTasksByJokeTaskIdSuccess, () => false)
+  .addCase(fetchSentencesTasksByJokeTaskIdError, () => false)
 });
 
-const error = createReducer(null, {
-  [fetchSentencesTasksError]: (_, { payload }) => payload,
-  [fetchSentencesTasksRequest]: () => null,
+const error = createReducer(null, (builder) => {
+  builder
+  .addCase(fetchSentencesTasksError, (_, { payload }) => payload)
+  .addCase(fetchSentencesTasksRequest, () => null)
 
-  [fetchSentencesTasksByJokeTaskIdError]: (_, { payload }) => payload,
-  [fetchSentencesTasksByJokeTaskIdRequest]: () => null,
+  .addCase(fetchSentencesTasksByJokeTaskIdError, (_, { payload }) => payload)
+  .addCase(fetchSentencesTasksByJokeTaskIdRequest, () => null)
 });
 
 export default combineReducers({

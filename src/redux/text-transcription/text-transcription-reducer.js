@@ -7,24 +7,28 @@ import {
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 
-const englishText = createReducer('', {
-  [changeEnglishText]: (_, { payload }) => payload,
+const englishText = createReducer('', (builder) =>{
+  builder
+  .addCase(changeEnglishText, (_, { payload }) => payload)
 });
 
-const transcriptedText = createReducer('', {
-  [fetchTextTranscriptionSuccess]: (_, { payload }) => payload,
-  [fetchTextTranscriptionRequest]: () => '',
+const transcriptedText = createReducer('', (builder) =>{
+  builder
+  .addCase(fetchTextTranscriptionSuccess, (_, { payload }) => payload)
+  .addCase(fetchTextTranscriptionRequest, () => '')
 });
 
-const loading = createReducer(false, {
-  [fetchTextTranscriptionRequest]: () => true,
-  [fetchTextTranscriptionSuccess]: () => false,
-  [fetchTextTranscriptionError]: () => false,
+const loading = createReducer(false, (builder) =>{
+  builder
+  .addCase(fetchTextTranscriptionRequest, () => true)
+  .addCase(fetchTextTranscriptionSuccess, () => false)
+  .addCase(fetchTextTranscriptionError, () => false)
 });
 
-const error = createReducer(null, {
-  [fetchTextTranscriptionError]: (_, { payload }) => payload,
-  [fetchTextTranscriptionRequest]: () => null,
+const error = createReducer(null, (builder) =>{
+  builder
+  .addCase(fetchTextTranscriptionError, (_, { payload }) => payload)
+  .addCase(fetchTextTranscriptionRequest, () => null)
 });
 
 export default combineReducers({

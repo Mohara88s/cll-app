@@ -19,87 +19,96 @@ import {
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 
-const ownDictionaries = createReducer([], {
-  [fetchOwnDictionariesSuccess]: (_, { payload }) => {
+const ownDictionaries = createReducer([], (builder) => {
+  builder
+  .addCase(fetchOwnDictionariesSuccess, (_, { payload }) => {
     return [...payload];
-  },
-  [fetchOwnDictionariesError]: () => [],
-  [addOwnDictionarySuccess]: (state, { payload }) => {
+  })
+  .addCase(fetchOwnDictionariesError, () => [])
+  .addCase(addOwnDictionarySuccess, (state, { payload }) => {
     return [...state, payload];
-  },
-  [deleteOwnDictionarySuccess]: (state, { payload }) =>
-    state.filter(({ _id }) => _id !== payload._id),
-  [updateOwnDictionarySuccess]: (state, { payload }) => {
+  })
+  .addCase(deleteOwnDictionarySuccess, (state, { payload }) =>
+    state.filter(({ _id }) => _id !== payload._id))
+  .addCase(updateOwnDictionarySuccess, (state, { payload }) => {
     return [...state.filter(({ _id }) => _id !== payload._id), payload];
-  },
+  })
 });
 
 const currentDictionary = createReducer(
-  {},
-  {
-    [changeCurrentDictionary]: (_, { payload }) => payload,
-  },
-);
+  {}, (builder) => {
+    builder
+    .addCase(changeCurrentDictionary, (_, { payload }) => payload)
+  });
 
-const loading = createReducer(false, {
-  [fetchOwnDictionariesRequest]: () => true,
-  [fetchOwnDictionariesSuccess]: () => false,
-  [fetchOwnDictionariesError]: () => false,
-  [deleteOwnDictionaryRequest]: () => true,
-  [deleteOwnDictionarySuccess]: () => false,
-  [deleteOwnDictionaryError]: () => false,
-});
-
-const addDictionaryLoading = createReducer(false, {
-  [addOwnDictionaryRequest]: () => true,
-  [addOwnDictionarySuccess]: () => false,
-  [addOwnDictionaryError]: () => false,
-});
-const updateDictionaryLoading = createReducer(false, {
-  [updateOwnDictionaryRequest]: () => true,
-  [updateOwnDictionarySuccess]: () => false,
-  [updateOwnDictionaryError]: () => false,
+const loading = createReducer(false, (builder) => {
+  builder
+  .addCase(fetchOwnDictionariesRequest, () => true)
+  .addCase(fetchOwnDictionariesSuccess, () => false)
+  .addCase(fetchOwnDictionariesError, () => false)
+  .addCase(deleteOwnDictionaryRequest, () => true)
+  .addCase(deleteOwnDictionarySuccess, () => false)
+  .addCase(deleteOwnDictionaryError, () => false)
 });
 
-const error = createReducer(null, {
-  [fetchOwnDictionariesError]: (_, { payload }) => payload,
-  [fetchOwnDictionariesRequest]: () => null,
-  [deleteOwnDictionaryError]: (_, { payload }) => payload,
-  [deleteOwnDictionaryRequest]: () => null,
+const addDictionaryLoading = createReducer(false, (builder) => {
+  builder
+  .addCase(addOwnDictionaryRequest, () => true)
+  .addCase(addOwnDictionarySuccess, () => false)
+  .addCase(addOwnDictionaryError, () => false)
+});
+const updateDictionaryLoading = createReducer(false, (builder) => {
+  builder
+  .addCase(updateOwnDictionaryRequest, () => true)
+  .addCase(updateOwnDictionarySuccess, () => false)
+  .addCase(updateOwnDictionaryError, () => false)
 });
 
-const addDictionaryError = createReducer(null, {
-  [addOwnDictionaryError]: (_, { payload }) => payload,
-  [addOwnDictionaryRequest]: () => null,
+const error = createReducer(null, (builder) => {
+  builder
+  .addCase(fetchOwnDictionariesError, (_, { payload }) => payload)
+  .addCase(fetchOwnDictionariesRequest, () => null)
+  .addCase(deleteOwnDictionaryError, (_, { payload }) => payload)
+  .addCase(deleteOwnDictionaryRequest, () => null)
 });
 
-const updateDictionaryError = createReducer(null, {
-  [updateOwnDictionaryError]: (_, { payload }) => payload,
-  [updateOwnDictionaryRequest]: () => null,
+const addDictionaryError = createReducer(null, (builder) => {
+  builder
+  .addCase(addOwnDictionaryError, (_, { payload }) => payload)
+  .addCase(addOwnDictionaryRequest, () => null)
 });
-const addDictionarySuccess = createReducer(false, {
-  [addOwnDictionaryRequest]: () => false,
-  [addOwnDictionarySuccess]: () => true,
-  [addOwnDictionaryError]: () => false,
+
+const updateDictionaryError = createReducer(null, (builder) => {
+  builder
+  .addCase(updateOwnDictionaryError, (_, { payload }) => payload)
+  .addCase(updateOwnDictionaryRequest, () => null)
+});
+const addDictionarySuccess = createReducer(false, (builder) => {
+  builder
+  .addCase(addOwnDictionaryRequest, () => false)
+  .addCase(addOwnDictionarySuccess, () => true)
+  .addCase(addOwnDictionaryError, () => false)
 });
 
 const ownDictionary = createReducer(
-  {},
-  {
-    [fetchOwnDictionarySuccess]: (_, { payload }) => payload,
-    [fetchOwnDictionaryRequest]: () => {},
-    [fetchOwnDictionariesError]: () => {},
+  {}, (builder) => {
+    builder
+    .addCase(fetchOwnDictionarySuccess, (_, { payload }) => payload)
+    .addCase(fetchOwnDictionaryRequest, () => {})
+    .addCase(fetchOwnDictionariesError, () => {})
   },
 );
 
-const ownDictionaryLoading = createReducer(false, {
-  [fetchOwnDictionaryRequest]: () => true,
-  [fetchOwnDictionarySuccess]: () => false,
-  [fetchOwnDictionaryError]: () => false,
+const ownDictionaryLoading = createReducer(false, (builder) => {
+  builder
+  .addCase(fetchOwnDictionaryRequest, () => true)
+  .addCase(fetchOwnDictionarySuccess, () => false)
+  .addCase(fetchOwnDictionaryError, () => false)
 });
-const ownDictionaryError = createReducer(null, {
-  [fetchOwnDictionaryError]: (_, { payload }) => payload,
-  [fetchOwnDictionaryRequest]: () => null,
+const ownDictionaryError = createReducer(null, (builder) => {
+  builder
+  .addCase(fetchOwnDictionaryError, (_, { payload }) => payload)
+  .addCase(fetchOwnDictionaryRequest, () => null)
 });
 
 export default combineReducers({

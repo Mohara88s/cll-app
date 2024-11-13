@@ -6,12 +6,16 @@
   padding-left: 0;
 }
 .MobileNavigationList__link {
-  text-decoration: none;
   color: black;
+  text-decoration: none;
   padding: 5px;
   font-size: 20px;
   font-weight: 900;
 }
-.activeLink {
+.MobileNavigationList__activeLink {
   color: #0b5ed7;
+  text-decoration: none;
+  padding: 5px;
+  font-size: 20px;
+  font-weight: 900;
 }
